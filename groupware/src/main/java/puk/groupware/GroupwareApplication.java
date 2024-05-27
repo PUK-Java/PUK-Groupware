@@ -10,4 +10,7 @@ public class GroupwareApplication {
 		SpringApplication.run(GroupwareApplication.class, args);
 	}
 
+	public void test() {
+		
+	}
 }
