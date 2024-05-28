@@ -47,12 +47,12 @@
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
         <h4 class="mb-3">프로젝트 생성</h4>
-        <form class="validation-form" novalidate action="/">
+        <form class="validation-form" novalidate action="/regRequest" method="post">
           <div class="row">
 
             <div class="col-md-3 mb-3">
               <label for="CATEGORY">카테고리</label>
-              <select class="custom-select d-block w-100" id="CATEGORY">
+              <select class="custom-select d-block w-100" id="CATEGORY" name="category">
                 <option>전자제품</option>
                 <option>푸드</option>
                 <option>굿즈</option>
@@ -62,7 +62,7 @@
             
             <div class="col-md-9 mb-3">
               <label for="TITLE">프로젝트 명</label>
-              <input type="text" class="form-control" id="TITLE" placeholder="프로젝트 명" value="" required>
+              <input type="text" class="form-control" id="TITLE" placeholder="프로젝트 명" name="title" required>
               <div class="invalid-feedback">
                 프로젝트명을 입력해주세요.
               </div>
@@ -70,7 +70,7 @@
 
             <div class="col-md-12 mb-3">
               <label for="DESCRIPTION">상세 정보</label>
-              <textarea class="form-control" id="DESCRIPTION"  required rows="10" cols="20" style="resize: none;"></textarea>
+              <textarea class="form-control" id="DESCRIPTION"  required rows="10" cols="20" style="resize: none;" name="description"></textarea>
               <div class="invalid-feedback">
                 상세정보를 입력해주세요.
               </div>
@@ -81,7 +81,7 @@
 
           <div class="mb-3">
             <label for="TARGET_COST">목표 금액</label>
-            <input type="text" class="form-control" id="TARGET_COST" placeholder="목표 금액" required>
+            <input type="text" class="form-control" id="TARGET_COST" placeholder="목표 금액" name="targetCost" required>
             <div class="invalid-feedback">
               목표 금액을 입력해주세요.
             </div>
@@ -89,7 +89,7 @@
 
           <div class="mb-3">
             <label for="END_DATE">종료일자</label>
-            <input type="date" class="form-control" id="END_DATE"  required>
+            <input type="date" class="form-control" id="END_DATE"  name="strEndDate"required>
             <div class="invalid-feedback">
               종료일자를 선택해주세요.
             </div>
@@ -97,7 +97,7 @@
 
           <div class="mb-12">
             <label for="image">이미지 파일</label>
-            <input type="file" class="form-control" id="image" accept="image/*" required/>
+            <input type="file" class="form-control" id="image" name="image" accept="image/*" required/>
             <span class="text-muted"> *이미지 파일만 업로드 가능합니다.</span>
           </div>
 

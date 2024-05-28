@@ -1,6 +1,6 @@
 package puk.groupware.domain.project;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
@@ -48,11 +48,11 @@ public class Project_info {
 
     @CreationTimestamp
     @Column(name="START_DATE")
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
     @DateTimeFormat
     @Column(name="END_DATE")
-    private LocalDateTime endDate;
+    private LocalDate endDate;
 
     @Column(name="IMAGE")
     private String image;

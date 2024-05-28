@@ -28,7 +28,7 @@ public class User_info {
 
     @Column(name="EMAIL")
     private String email;
-    
+
     @Column(name="ADDRESS")
     private String address;
 
