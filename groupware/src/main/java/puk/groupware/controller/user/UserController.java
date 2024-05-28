@@ -38,7 +38,7 @@ public class UserController {
     
 
     @PostMapping("/signupRequest")
-    public String signUpRequest(@ModelAttribute User_info uInfo,@RequestParam String address1, @RequestParam String address2) {
+    public String signUpRequest(@ModelAttribute User_info uInfo,@RequestParam(name="address1") String address1, @RequestParam(name = "address2") String address2) {
         uInfo.setAddress(address1 + " " + address2);
         uJpaRepository.save(uInfo);
         return "redirect:";

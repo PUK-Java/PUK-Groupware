@@ -47,7 +47,7 @@
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
         <h4 class="mb-3">프로젝트 생성</h4>
-        <form class="validation-form" novalidate action="/regRequest" method="post">
+        <form class="validation-form" novalidate action="/regRequest" method="post" enctype="multipart/form-data">
           <div class="row">
 
             <div class="col-md-3 mb-3">
@@ -96,7 +96,7 @@
 
           <div class="mb-12">
             <label for="image">이미지 파일</label>
-            <input type="file" class="form-control" id="image" name="image" accept="image/*" required/>
+            <input type="file" class="form-control" id="image" name="imageFile" accept="image/*" required/>
             <span class="text-muted"> *이미지 파일만 업로드 가능합니다.</span>
           </div>
 
