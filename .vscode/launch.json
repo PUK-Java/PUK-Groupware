@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-GroupwareApplication<groupware>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "puk.groupware.GroupwareApplication",
+            "projectName": "groupware",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
