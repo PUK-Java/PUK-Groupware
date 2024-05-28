@@ -1,4 +1,4 @@
-package puk.groupware.service.user;
+package puk.groupware.repository.user;
 
 
 

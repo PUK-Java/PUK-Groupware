@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jakarta.servlet.http.HttpSession;
 import puk.groupware.domain.project.Project_info;
 import puk.groupware.domain.user.User_info;
-import puk.groupware.service.project.Project_info_jpaRepository;
+import puk.groupware.repository.project.Project_info_jpaRepository;
 
 @Controller
 public class ProjectController {

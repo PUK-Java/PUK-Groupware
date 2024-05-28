@@ -20,7 +20,7 @@ public class User_info {
     @Column(name = "USER_ID")
     private String userId;
 
-    @Column(name = "USER_NAME")
+    @Column(name = "USER_NAME" )
     private String userName;
     
     @Column(name="USER_PW")
@@ -43,4 +43,6 @@ public class User_info {
 
     @Column(name="ADMIN")
     private String admin;
+
+
 }

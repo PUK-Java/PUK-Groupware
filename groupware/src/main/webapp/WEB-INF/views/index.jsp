@@ -1,6 +1,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,8 +17,18 @@
         로고 위치
     </h1>
     <div class="col-md-3 text-end">
-        <button type="button" class="btn btn-outline-primary" onclick="location.href='/loginform'">로그인</button>
-        <button type="button" class="btn btn-primary" onclick="location.href='/signUpform'">회원가입</button>
+        <c:choose>
+            <c:when test="${loginedUser == null}">
+                <button type="button" class="btn btn-outline-primary" onclick="location.href='/loginform'">로그인</button>
+                <button type="button" class="btn btn-primary" onclick="location.href='/signUpform'">회원가입</button>
+                </c:when>
+            <c:when test="${loginedUser != null}">
+                ${loginedUser.userName}님 반갑습니다!
+                <button type="button" class="btn btn-outline-primary" onclick="location.href='/logout'">로그아웃</button>
+            </c:when>
+        </c:choose>
+        
+        
         <button type="button" class="btn btn-info" onclick="location.href='/projectreg'">프로젝트 생성</button>
     </div>
 </div>

@@ -77,7 +77,6 @@
             </div>
           </div>
 
-         
 
           <div class="mb-3">
             <label for="TARGET_COST">목표 금액</label>

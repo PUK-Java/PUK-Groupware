@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
 import puk.groupware.domain.user.User_info;
-import puk.groupware.service.user.User_info_jpaRepository;
+import puk.groupware.repository.user.User_info_jpaRepository;
 
 
 
@@ -53,5 +53,10 @@ public class UserController {
         return "redirect:";
     }
     
+    @GetMapping("/logout")
+    public String logout() {
+        httpSession.removeAttribute("loginedUser");
+        return "redirect:";
+    }
     
 }

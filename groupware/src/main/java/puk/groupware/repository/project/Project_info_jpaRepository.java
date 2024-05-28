@@ -1,4 +1,4 @@
-package puk.groupware.service.project;
+package puk.groupware.repository.project;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

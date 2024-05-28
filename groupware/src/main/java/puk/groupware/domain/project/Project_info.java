@@ -28,7 +28,7 @@ public class Project_info {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PROJECT_NO")
-    private Long ProjectNo;
+    private Long projectNo;
     
 
     @ManyToOne(fetch = FetchType.LAZY)
