@@ -3,8 +3,8 @@
 <head>
     <title>Test Result</title>
 </head>
-<body>
-    <h1>Form Submission Result</h1>
+<body style="text-align: center;">
+    <h1>회원가입에 성공하셨습니다.</h1>
     <p>ID: ${userForm.ID}</p>
     <p>Name: ${userForm.NAME}</p>
     <p>Password: ${userForm.PW}</p>

@@ -46,18 +46,18 @@
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
         <h4 class="mb-3">회원가입</h4>
-        <form class="validation-form" novalidate action="/submitForm" method="post">
+        <form class="validation-form" novalidate action="/signupRequest" method="post">
           <div class="row">
             <div class="col-md-6 mb-3">
-              <label for="ID">아이디</label>
-              <input type="text" class="form-control" id="ID" placeholder="id" value="" required>
+              <label for="id">아이디</label>
+              <input type="text" class="form-control" name = "userId" id="userId" placeholder="id"  required>
               <div class="invalid-feedback">
                 아이디를 입력해주세요.
               </div>
             </div>
             <div class="col-md-6 mb-3">
-              <label for="PW">비밀번호</label>
-              <input type="text" class="form-control" id="PW" placeholder="password" value="" required>
+              <label for="password">비밀번호</label>
+              <input type="text" class="form-control" id="userPw" name="userPw" placeholder="password"  required>
               <div class="invalid-feedback">
                 비밀번호를 입력해주세요.
               </div>
@@ -65,24 +65,24 @@
           </div>
 
           <div class="mb-3">
-            <label for="NAME">이름</label>
-            <input type="text" class="form-control" id="NAME" placeholder="홍길동" required>
+            <label for="name">이름</label>
+            <input type="text" class="form-control" id="USER_NAME" name="userName" placeholder="홍길동" required>
             <div class="invalid-feedback">
               이름을 입력해주세요.
             </div>
           </div>
 
           <div class="mb-3">
-            <label for="EMAIL">이메일</label>
-            <input type="email" class="form-control" id="EMAIL" placeholder="you@naver.com" required>
+            <label for="email">이메일</label>
+            <input type="email" class="form-control" id="EMAIL" name="email" placeholder="you@naver.com" required>
             <div class="invalid-feedback">
               이메일을 입력해주세요.
             </div>
           </div>
 
           <div class="mb-3">
-            <label for="ADDRESS">주소</label>
-            <input type="text" class="form-control" id="ADDRESS" placeholder="부산광역시 남구" required>
+            <label for="address">주소</label>
+            <input type="text" class="form-control" id="ADDRESS1"name="address1" placeholder="부산광역시 남구" required>
             <div class="invalid-feedback">
               주소를 입력해주세요.
             </div>
@@ -90,23 +90,39 @@
 
           <div class="mb-3">
             <label for="address2">상세주소<span class="text-muted">&nbsp;(필수 아님)</span></label>
-            <input type="text" class="form-control" id="address2" placeholder="용호동">
+            <input type="text" class="form-control" id="ADDRESS2" name="address2" placeholder="용호동">
+          </div>
+
+          <div class="mb-3">
+            <label for="address2">휴대폰 번호</label>
+            <input type="text" class="form-control" id="PHONE_NUMBER" name="phoneNumber"placeholder="휴대폰 번호" required>
+            <div class="invalid-feedback">
+              휴대폰 번호를 입력해주세요.
+            </div>
           </div>
 
           <div class="row">
             <div class="col-md-5 mb-3">
-              <label for="ADMIN">가입 유형</label>
-              <select class="custom-select d-block w-100" id="ADMIN">
-                <option>후원자</option>
-                <option>제작자</option>
-              </select>
+              <label for="BIRTH">생년월일</label>
+              <input type="text" class="form-control" id="BIRTH" name="birth" placeholder="생년월일" required>
+              <div class="invalid-feedback">
+                생년월일을 입력해주세요.
+              </div>
             </div>
+
             <div class="col-md-7 mb-3">
               <label for="ACCOUNT">계좌 번호</label>
-              <input type="text" class="form-control" id="ACCOUNT" placeholder="계좌 번호" required>
+              <input type="text" class="form-control" id="ACCOUNT" name="account" placeholder="계좌 번호" required>
               <div class="invalid-feedback">
                 계좌 번호를 입력해주세요.
               </div>
+            </div>
+            <div class="col-md-12 mb-3">
+              <label for="ADMIN">가입 유형</label>
+              <select class="custom-select d-block w-100" id="ADMIN" name="admin">
+                <option value="후원자">후원자</option>
+                <option value="제작자">제작자</option>
+              </select>
             </div>
           </div>
           <hr class="mb-4">
