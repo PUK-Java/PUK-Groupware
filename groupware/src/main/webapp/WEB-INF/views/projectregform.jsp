@@ -49,16 +49,28 @@
         <h4 class="mb-3">프로젝트 생성</h4>
         <form class="validation-form" novalidate action="/">
           <div class="row">
-            <div class="col-md-12 mb-3">
-              <label for="projectName">프로젝트 명</label>
-              <input type="text" class="form-control" id="projectNAme" placeholder="프로젝트 명" value="" required>
+
+            <div class="col-md-3 mb-3">
+              <label for="CATEGORY">카테고리</label>
+              <select class="custom-select d-block w-100" id="CATEGORY">
+                <option>전자제품</option>
+                <option>푸드</option>
+                <option>굿즈</option>
+
+              </select>
+            </div>
+            
+            <div class="col-md-9 mb-3">
+              <label for="TITLE">프로젝트 명</label>
+              <input type="text" class="form-control" id="TITLE" placeholder="프로젝트 명" value="" required>
               <div class="invalid-feedback">
                 프로젝트명을 입력해주세요.
               </div>
             </div>
+
             <div class="col-md-12 mb-3">
-              <label for="detail">상세 정보</label>
-              <textarea class="form-control" id="detail"  required rows="10" cols="20" style="resize: none;"></textarea>
+              <label for="DESCRIPTION">상세 정보</label>
+              <textarea class="form-control" id="DESCRIPTION"  required rows="10" cols="20" style="resize: none;"></textarea>
               <div class="invalid-feedback">
                 상세정보를 입력해주세요.
               </div>
@@ -68,22 +80,29 @@
          
 
           <div class="mb-3">
-            <label for="amount">목표 금액</label>
-            <input type="text" class="form-control" id="amount" placeholder="목표 금액" required>
+            <label for="TARGET_COST">목표 금액</label>
+            <input type="text" class="form-control" id="TARGET_COST" placeholder="목표 금액" required>
             <div class="invalid-feedback">
               목표 금액을 입력해주세요.
             </div>
           </div>
+
+          <div class="mb-3">
+            <label for="END_DATE">종료일자</label>
+            <input type="date" class="form-control" id="END_DATE"  required>
+            <div class="invalid-feedback">
+              종료일자를 선택해주세요.
+            </div>
+          </div>
+
           <div class="mb-12">
             <label for="image">이미지 파일</label>
             <input type="file" class="form-control" id="image" accept="image/*" required/>
             <span class="text-muted"> *이미지 파일만 업로드 가능합니다.</span>
           </div>
-          <hr class="mb-4">
-          <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="aggrement" required>
-            <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
-          </div>
+
+
+
           <div class="mb-4"></div>
           <button class="btn btn-primary btn-lg btn-block" type="submit">등록 완료</button>
         </form>
