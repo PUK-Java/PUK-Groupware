@@ -2,6 +2,7 @@ package puk.groupware.domain.project;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -16,12 +17,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Getter;
 import lombok.Setter;
 import puk.groupware.domain.user.User_info;
 
 @Entity
-@Table
+@Table(name="PROJECT_INFO")
 @Getter
 @Setter
 public class Project_info {
@@ -32,8 +35,8 @@ public class Project_info {
     
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "USER_ID")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "USER_ID",referencedColumnName = "USER_ID")
     private User_info userId;
 
     @Column(name="TITLE")
@@ -50,7 +53,7 @@ public class Project_info {
     @Column(name="START_DATE")
     private LocalDate startDate;
 
-    @DateTimeFormat
+    @Temporal(TemporalType.DATE)
     @Column(name="END_DATE")
     private LocalDate endDate;
 
@@ -58,6 +61,7 @@ public class Project_info {
     private String image;
 
     @Column(name="STATE")
+    @ColumnDefault("1")
     private String state;
 
     @Column(name="CATEGORY")

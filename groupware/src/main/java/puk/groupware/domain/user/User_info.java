@@ -1,23 +1,26 @@
 package puk.groupware.domain.user;
 
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+
 @Entity
-@Table
+@Table(name="USER_INFO")
 @Getter
 @ToString
 @Setter
 public class User_info {
 
     @Id
-    @Column(name = "USER_ID")
+    @Column(name = "USER_ID", nullable = false)
     private String userId;
 
     @Column(name = "USER_NAME" )
@@ -35,7 +38,7 @@ public class User_info {
     @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
 
-    @Column(name="ACCOUNT",length =30)
+    @Column(name="ACCOUNT")
     private long account;
 
     @Column(name="BIRTH")
@@ -43,6 +46,4 @@ public class User_info {
 
     @Column(name="ADMIN")
     private String admin;
-
-
 }
