@@ -31,4 +31,17 @@ public class UserService {
         User_info loginedUser = uJpaRepository.findByUserIdAndUserPw(userId, userPw);
         httpSession.setAttribute("loginedUser", loginedUser);
     }
+
+    //로그인체크
+    public boolean loginCheck(){
+        if(httpSession.getAttribute("loginedUser") == null){
+            return false;
+        }
+        return true;
+    }
+
+    //로그아웃
+    public void logout(){
+        httpSession.removeAttribute("loginedUser");
+    }
 }

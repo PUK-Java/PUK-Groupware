@@ -17,12 +17,10 @@ import puk.groupware.service.user.UserService;
 @Controller
 public class UserController {
     private final UserService userService;
-    private final HttpSession httpSession;
     
     @Autowired
-    public UserController(UserService userService, HttpSession httpSession){
+    public UserController(UserService userService){
         this.userService = userService;
-        this.httpSession = httpSession;
     };
     
 
@@ -51,7 +49,7 @@ public class UserController {
     
     @GetMapping("/logout")
     public String logout() {
-        httpSession.removeAttribute("loginedUser");
+        userService.logout();
         return "redirect:";
     }
     

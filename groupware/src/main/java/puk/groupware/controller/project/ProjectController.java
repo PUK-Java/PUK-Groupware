@@ -10,25 +10,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
-import jakarta.servlet.http.HttpSession;
 import puk.groupware.domain.project.Project_info;
 import puk.groupware.service.project.ProjectService;
+import puk.groupware.service.user.UserService;
 
 @Controller
 public class ProjectController {
-    private final HttpSession httpSession;
     private final ProjectService projectService;
+    private final UserService userService;
 
     @Autowired
-    ProjectController(ProjectService projectService, HttpSession httpSession){
-        this.httpSession = httpSession;
+    ProjectController(ProjectService projectService,UserService userService){
+
+        this.userService = userService;
         this.projectService = projectService;
     }
     @GetMapping("/projectreg")
     public String projectreg() {
          //로그인하지 않았더라면
-        if(httpSession.getAttribute("loginedUser") == null){
+        if(!userService.loginCheck()){
             return "redirect:";
         }
         return "projectregform";
