@@ -26,14 +26,17 @@ public class User_info {
     @Column(name="USER_PW")
     private String userPw;
 
+    @Column(name="EMAIL")
+    private String email;
+    
     @Column(name="ADDRESS")
     private String address;
 
     @Column(name = "PHONE_NUMBER")
-    private int phoneNumber;
+    private String phoneNumber;
 
-    @Column(name="ACCOUNT")
-    private int account;
+    @Column(name="ACCOUNT",length =30)
+    private long account;
 
     @Column(name="BIRTH")
     private int birth;

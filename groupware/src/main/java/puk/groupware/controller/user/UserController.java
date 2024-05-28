@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpSession;
@@ -33,8 +34,10 @@ public class UserController {
 
     @ResponseBody
     @PostMapping("/signupRequest")
-    public String signUpRequest(@ModelAttribute User_info uInfo) {
-        return uInfo.toString();
+    public String signUpRequest(@ModelAttribute User_info uInfo,@RequestParam String address1, @RequestParam String address2) {
+        uInfo.setAddress(address1 + " " + address2);
+        uJpaRepository.save(uInfo);
+        return "성공";
     }
     
 }
