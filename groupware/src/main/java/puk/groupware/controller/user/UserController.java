@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
 import puk.groupware.domain.user.User_info;
-import puk.groupware.repository.user.User_info_jpaRepository;
+import puk.groupware.service.user.UserService;
 
 
 
 
 @Controller
 public class UserController {
-    private final User_info_jpaRepository uJpaRepository;
+    private final UserService userService;
     private final HttpSession httpSession;
     
     @Autowired
-    public UserController(User_info_jpaRepository uJpaRepository, HttpSession httpSession){
-        this.uJpaRepository = uJpaRepository;
+    public UserController(UserService userService, HttpSession httpSession){
+        this.userService = userService;
         this.httpSession = httpSession;
     };
     
@@ -39,17 +39,13 @@ public class UserController {
 
     @PostMapping("/signupRequest")
     public String signUpRequest(@ModelAttribute User_info uInfo,@RequestParam(name="address1") String address1, @RequestParam(name = "address2") String address2) {
-        uInfo.setAddress(address1 + " " + address2);
-        uJpaRepository.save(uInfo);
+        userService.signUp(uInfo, address1, address2);
         return "redirect:";
     }
 
     @PostMapping("/loginRequest")
     public String loginRequest(@ModelAttribute User_info user) {
-        String userId = user.getUserId();
-        String userPw = user.getUserPw();
-        User_info loginedUser = uJpaRepository.findByUserIdAndUserPw(userId, userPw);
-        httpSession.setAttribute("loginedUser", loginedUser);
+        userService.login(user);
         return "redirect:";
     }
     
