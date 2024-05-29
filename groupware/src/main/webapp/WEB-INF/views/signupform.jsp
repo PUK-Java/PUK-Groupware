@@ -164,5 +164,9 @@
     }, false);
 
   </script>
+  <script th:inline="javascript">
+    var test01 = '${userForm.getId}';
+    console.log(test01);
+  </script>
 </body>
 </html>
