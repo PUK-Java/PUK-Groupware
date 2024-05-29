@@ -45,4 +45,11 @@ public class LoginController {
             return "loginform";
         }
     }
+
+    @GetMapping("/logout")
+    public String getlogout() {
+        httpSession.removeAttribute("user");
+        return "redirect:/";
+    }
+    
 }
