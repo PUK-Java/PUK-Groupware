@@ -68,7 +68,7 @@
 <div class="row row-cols-2 row-cols-md-3 g-10 mx-5 mt-5">
 <c:forEach var="project" items="${projects}">
     <div class="col">
-        <a href="/projectDetail?projectNo=${project.projectNo}">
+        <a href="/projectDetail/${project.projectNo}">
             <div class="card h-100">
                 <img src="images/projectThumbnails/${project.image}" class="card-img-top" alt="...">
                 <div class="card-body">
