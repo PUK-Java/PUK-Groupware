@@ -16,6 +16,7 @@
  
     <h1 class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         로고 위치
+        
     </h1>
     <div class="col-md-3 text-end">
 
@@ -58,88 +59,19 @@
         </div>
     </div>
 </nav>
+
 <div class="row row-cols-2 row-cols-md-3 g-10 mx-5 mt-5">
+<c:forEach var="project" items="${projects}">
     <div class="col">
         <div class="card h-100">
-            <img src="${pageContext.request.contextPath}/images/project/tech/t_ex_06.jpg" class="card-img-top" alt="...">
+            <img src="images/projectThumbnails/${project.image}" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <h5 class="card-title">${project.title}</h5>
+                <p class="card-text">${project.description}</p>
             </div>
         </div>
     </div>
-    <div class="col">
-        <div class="card h-100">
-            <img src="${pageContext.request.contextPath}/images/project/goods/g_ex_01.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a short card.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card h-100">
-            <img src="${pageContext.request.contextPath}/images/project/foods/f_ex_02.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card h-100">
-            <img src="${pageContext.request.contextPath}/images/project/foods/f_ex_07.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card h-100">
-            <img src="${pageContext.request.contextPath}/images/project/foods/f_ex_07.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card h-100">
-            <img src="${pageContext.request.contextPath}/images/project/foods/f_ex_07.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card h-100">
-            <img src="${pageContext.request.contextPath}/images/project/foods/f_ex_07.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card h-100">
-            <img src="${pageContext.request.contextPath}/images/project/foods/f_ex_07.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card h-100">
-            <img src="${pageContext.request.contextPath}/images/project/foods/f_ex_07.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-        </div>
-    </div>
+</c:forEach>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

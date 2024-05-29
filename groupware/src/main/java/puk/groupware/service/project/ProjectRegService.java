@@ -29,17 +29,15 @@ public class ProjectRegService {
         //이미지에 대한 처리
         if(!imageFile.isEmpty()){
             String imgName = UUID.randomUUID().toString() + "_" + imageFile.getOriginalFilename();
-            Path uploadPath = Paths.get("src","main","resources","images","projectThumbnails");
+            Path uploadPath = Paths.get("src","main","resources","static","images","projectThumbnails");
             if(!Files.exists(uploadPath)){
                 Files.createDirectories(uploadPath);
             }
             Path filePath = uploadPath.resolve(imgName);
             Files.copy(imageFile.getInputStream(),filePath);
 
-        //문자열로 변환해서 저장
-        String originalPath = filePath.toString();
-        String convertPath = originalPath.replace("src\\main\\", "");
-        prjInfo.setImage(convertPath);
+        //이미지명 저장
+        prjInfo.setImage(imgName);
         }
         
         
@@ -62,4 +60,6 @@ public class ProjectRegService {
         //저장하기
         pRepository.save(prjInfo);
     }
+
+
 }
