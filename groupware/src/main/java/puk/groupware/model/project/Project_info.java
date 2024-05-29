@@ -20,7 +20,7 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Getter;
 import lombok.Setter;
-import puk.groupware.model.user.User_info;
+import puk.groupware.model.user.User_Info;
 
 @Entity
 @Table(name="PROJECT_INFO")
@@ -36,7 +36,7 @@ public class Project_info {
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "USER_ID",referencedColumnName = "USER_ID")
-    private User_info userId;
+    private User_Info userId;
 
     @Column(name="TITLE")
     private String title;
