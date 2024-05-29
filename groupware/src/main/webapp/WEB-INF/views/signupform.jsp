@@ -46,18 +46,22 @@
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
         <h4 class="mb-3">회원가입</h4>
+
         <form class="validation-form" action="/submitForm" method="post">
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="ID">아이디</label>
               <input type="text" class="form-control" name = "userId" id="userId" placeholder="id" value="${userForm.userId}" required>
+
               <div class="invalid-feedback">
                 아이디를 입력해주세요.
               </div>
             </div>
             <div class="col-md-6 mb-3">
+
               <label for="PW">비밀번호</label>
               <input type="text" class="form-control" id="PW" name="userPw" placeholder="password" value="${userForm.userPw}" required>
+
               <div class="invalid-feedback">
                 비밀번호를 입력해주세요.
               </div>
@@ -69,6 +73,7 @@
           <div class="mb-3">
             <label for="NAME">이름</label>
             <input type="text" class="form-control" id="NAME" name="userName" placeholder="홍길동" value="${userForm.userName}">
+
             <div class="invalid-feedback">
               이름을 입력해주세요.
             </div>
@@ -77,6 +82,7 @@
           <div class="mb-3">
             <label for="EMAIL">이메일</label>
             <input type="email" class="form-control" id="EMAIL" name="email" placeholder="you@naver.com" value="${userForm.email}" required>
+
             <div class="invalid-feedback">
               이메일을 입력해주세요.
             </div>
@@ -85,6 +91,8 @@
           <div class="mb-3">
             <label for="ADDRESS">주소</label>
             <input type="text" class="form-control" id="ADDRESS"name="address" placeholder="부산광역시 남구" value="${userForm.address}" required>
+
+
             <div class="invalid-feedback">
               주소를 입력해주세요.
             </div>
@@ -103,6 +111,7 @@
             <div class="col-md-5 mb-3">
               <label for="BIRTH">생년월일</label>
               <input type="text" class="form-control" id="BIRTH" name="birth" placeholder="생년월일" value="${userForm.birth}" required>
+
               <div class="invalid-feedback">
                 생년월일을 입력해주세요.
               </div>
@@ -111,6 +120,7 @@
             <div class="col-md-7 mb-3">
               <label for="ACCOUNT">계좌 번호</label>
               <input type="text" class="form-control" id="ACCOUNT" name="account" placeholder="계좌 번호" value="${userForm.account}" required>
+
               <div class="invalid-feedback">
                 계좌 번호를 입력해주세요.
               </div>
@@ -130,6 +140,7 @@
           </div>
           <div class="mb-4"></div>
           <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="ck">가입 완료</button>
+
         </form>
       </div>
     </div>
@@ -153,7 +164,6 @@
       });
     }, false);
 
-    
   </script>
 </body>
 </html>

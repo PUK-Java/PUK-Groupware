@@ -1,4 +1,6 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
 <!DOCTYPE html>
@@ -16,6 +18,7 @@
         로고 위치
     </h1>
     <div class="col-md-3 text-end">
+
         <button type="button" class="btn btn-outline-primary" onclick="location.href='/login'">로그인</button>
         <button type="button" class="btn btn-primary" onclick="location.href='/signupform'">회원가입</button>
         <button type="button" class="btn btn-info" onclick="location.href='/projectregform'">프로젝트 생성</button>
