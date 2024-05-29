@@ -49,7 +49,6 @@
         <h4 class="mb-3">프로젝트 생성</h4>
         <form class="validation-form" novalidate action="/regRequest" method="post" enctype="multipart/form-data">
           <div class="row">
-
             <div class="col-md-3 mb-3">
               <label for="CATEGORY">카테고리</label>
               <select class="custom-select d-block w-100" id="CATEGORY" name="category">

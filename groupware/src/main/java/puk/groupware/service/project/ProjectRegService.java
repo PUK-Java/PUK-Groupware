@@ -26,6 +26,8 @@ public class ProjectRegService {
 
         //상품 등록 서비스
         public void registerProject(Project_info prjInfo, String strEndDate, MultipartFile imageFile) throws Exception {
+
+
         //이미지에 대한 처리
         if(!imageFile.isEmpty()){
             String imgName = UUID.randomUUID().toString() + "_" + imageFile.getOriginalFilename();
