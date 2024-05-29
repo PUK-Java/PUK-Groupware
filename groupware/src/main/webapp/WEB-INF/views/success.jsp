@@ -6,7 +6,7 @@
 </head>
 <body style="text-align: center;">
     <script>
-        alert("회원가입에 성공하셨습니다.")
+        alert("성공하셨습니다.")
         window.location='/'
     </script>
 </body>

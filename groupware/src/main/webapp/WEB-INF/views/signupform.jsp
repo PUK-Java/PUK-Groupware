@@ -110,8 +110,7 @@
           <div class="row">
             <div class="col-md-5 mb-3">
               <label for="BIRTH">생년월일</label>
-              <input type="text" class="form-control" id="BIRTH" name="birth" placeholder="생년월일" value="${userForm.birth}" required>
-
+              <input type="date" class="form-control" id="BIRTH" name="birth" placeholder="생년월일" value="${userForm.birth}" required>
               <div class="invalid-feedback">
                 생년월일을 입력해주세요.
               </div>

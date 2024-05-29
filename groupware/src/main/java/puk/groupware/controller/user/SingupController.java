@@ -33,7 +33,7 @@ public class SingupController {
         try {
             userservice.saveUser(user);
             model.addAttribute("userForm", user);
-            return "signupSuccess";
+            return "success";
         } catch (IllegalArgumentException e) {
             model.addAttribute("userForm", user);
             model.addAttribute("idErrorMessage", e.getMessage());
