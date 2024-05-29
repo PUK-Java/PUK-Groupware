@@ -25,7 +25,7 @@ public class ProjectRegController {
     }
 
 
-    @GetMapping("/projectreg")
+    @GetMapping("/projectregform")
     public String regForm() {
         return "projectregform";
     }

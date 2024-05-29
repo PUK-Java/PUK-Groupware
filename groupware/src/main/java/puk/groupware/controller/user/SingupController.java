@@ -41,9 +41,5 @@ public class SingupController {
 
     }
 
-    @GetMapping("/projectregform")
-    public String projectform() {
-        return "projectregform";
-    }
 
 }
