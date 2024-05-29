@@ -67,7 +67,6 @@
                 프로젝트명을 입력해주세요.
               </div>
             </div>
-
             <div class="col-md-12 mb-3">
               <label for="DESCRIPTION">상세 정보</label>
               <textarea class="form-control" id="DESCRIPTION"  required rows="10" cols="20" style="resize: none;" name="description"></textarea>
@@ -77,7 +76,6 @@
             </div>
           </div>
 
-
           <div class="mb-3">
             <label for="TARGET_COST">목표 금액</label>
             <input type="text" class="form-control" id="TARGET_COST" placeholder="목표 금액" name="targetCost" required>
@@ -85,7 +83,6 @@
               목표 금액을 입력해주세요.
             </div>
           </div>
-
           <div class="mb-3">
             <label for="END_DATE">종료일자</label>
             <input type="date" class="form-control" id="END_DATE"  name="strEndDate"required>
@@ -99,9 +96,6 @@
             <input type="file" class="form-control" id="image" name="imageFile" accept="image/*" required/>
             <span class="text-muted"> *이미지 파일만 업로드 가능합니다.</span>
           </div>
-
-
-
           <div class="mb-4"></div>
           <button class="btn btn-primary btn-lg btn-block" type="submit">등록 완료</button>
         </form>
