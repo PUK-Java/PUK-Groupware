@@ -20,7 +20,7 @@
     <div class="col-md-3 text-end">
 
         <button type="button" class="btn btn-outline-primary" onclick="location.href='/login'">로그인</button>
-        <button type="button" class="btn btn-primary" onclick="location.href='/test1'">회원가입</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='/signupform'">회원가입</button>
         <button type="button" class="btn btn-info" onclick="location.href='/projectregform'">프로젝트 생성</button>
     </div>
 </div>
