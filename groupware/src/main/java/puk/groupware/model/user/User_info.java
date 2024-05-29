@@ -1,48 +1,43 @@
 package puk.groupware.model.user;
 
-
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
-
-@Entity
-@Table(name="USER_INFO")
 @Getter
-@ToString
 @Setter
-public class User_info {
-
+@Entity
+@Table(name = "USER_INFO")
+public class User_Info {
     @Id
-    @Column(name = "USER_ID", nullable = false)
+    @Column(name = "USER_ID", length = 14)
     private String userId;
 
-    @Column(name = "USER_NAME" )
-    private String userName;
-    
-    @Column(name="USER_PW")
+    @Column(name = "USER_PW", length = 20)
     private String userPw;
 
-    @Column(name="EMAIL")
-    private String email;
+    @Column(name = "USER_NAME", length = 10)
+    private String userName;
 
-    @Column(name="ADDRESS")
+    @Column(name = "ADDRESS", length = 50)
     private String address;
 
-    @Column(name = "PHONE_NUMBER")
+    @Column(name = "EMAIL", length = 80)
+    private String email;
+
+    @Column(name = "PHONE_NUMBER", length = 13)
     private String phoneNumber;
 
-    @Column(name="ACCOUNT")
-    private long account;
+    @Column(name = "ACCOUNT", length = 30)
+    private String account;
 
-    @Column(name="BIRTH")
-    private int birth;
+    @Column(name = "BIRTH", length = 50)
+    private String birth;
 
-    @Column(name="ADMIN")
+    @Column(name = "ADMIN", length = 30)
     private String admin;
+
 }
