@@ -19,8 +19,16 @@
     </h1>
     <div class="col-md-3 text-end">
 
-        <button type="button" class="btn btn-outline-primary" onclick="location.href='/login'">로그인</button>
-        <button type="button" class="btn btn-primary" onclick="location.href='/test1'">회원가입</button>
+        <c:choose>
+            <c:when test="${user == null}">
+                <button type="button" class="btn btn-outline-primary" onclick="location.href='/login'">로그인</button>
+                <button type="button" class="btn btn-primary" onclick="location.href='/signupform'">회원가입</button>
+                </c:when>
+            <c:when test="${user != null}">
+                ${user.userName}님 반갑습니다!
+                <button type="button" class="btn btn-outline-primary" onclick="location.href='/logout'">로그아웃</button>
+            </c:when>
+        </c:choose>
         <button type="button" class="btn btn-info" onclick="location.href='/projectregform'">프로젝트 생성</button>
     </div>
 </div>
@@ -143,6 +151,5 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
 </body>
 </html>

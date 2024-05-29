@@ -38,6 +38,7 @@ public class LoginController {
         User_info user = userloginService.findUser(userId, userPw);
         if(user != null && user.getUserId().equals(userId) && user.getUserPw().equals(userPw)){
             httpSession.setAttribute("user", user);
+            // System.out.println(user.getUserId());
             return "redirect:/";
         }else{
             model.addAttribute("error", "아이디나 비밀번호가 불일치 합니다.");
