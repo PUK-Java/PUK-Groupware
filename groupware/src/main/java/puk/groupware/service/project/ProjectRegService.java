@@ -56,6 +56,9 @@ public class ProjectRegService {
         //User_info logineduser = (User_info) httpSession.getAttribute("loginedUser");
         //prjInfo.setUserId(logineduser);
         
+        //STATE를 1로 저장
+        prjInfo.setState("1");
+        
         //저장하기
         pRepository.save(prjInfo);
     }

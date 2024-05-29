@@ -59,6 +59,7 @@ public class Project_info {
     @Column(name="IMAGE")
     private String image;
 
+
     @Column(name="STATE")
     @ColumnDefault("1")
     private String state;
