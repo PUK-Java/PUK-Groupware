@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import puk.groupware.model.User_Info;
+import puk.groupware.model.user.User_info;
 import puk.groupware.repository.UserRepository;
 
 @Service

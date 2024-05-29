@@ -2,8 +2,9 @@ package puk.groupware.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import puk.groupware.model.User_Info;
+import puk.groupware.model.user.User_info;
+import puk.groupware.repository.user.User_info_jpaRepository;
 
-public interface UserRepository extends JpaRepository<User_Info, String> {
+public interface UserRepository extends JpaRepository<User_info_jpaRepository, String> {
 
 }

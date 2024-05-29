@@ -6,7 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import puk.groupware.model.User_Info;
+import puk.groupware.model.user.User_info;
+import puk.groupware.repository.user.User_info_jpaRepository;
 import puk.groupware.service.Userservicesave;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +28,7 @@ public class GroupControl {
     }
 
     @PostMapping("/submitForm")
-    public String submitSignup(User_Info user, Model model) {
+    public String submitSignup(User_info_jpaRepository user, Model model) {
 
         try {
             userservice.saveUser(user);
