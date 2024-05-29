@@ -39,6 +39,17 @@
       -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
     }
+ 
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+
+    input[type='number'] {
+      -moz-appearance: textfield;
+    }
   </style>
 </head>
 
@@ -77,9 +88,9 @@
 
           <div class="mb-3">
             <label for="TARGET_COST">목표 금액</label>
-            <input type="text" class="form-control" id="TARGET_COST" placeholder="목표 금액" name="targetCost" required>
+            <input type="number" step="100" class="form-control" id="TARGET_COST" placeholder="목표 금액" name="targetCost" required>
             <div class="invalid-feedback">
-              목표 금액을 입력해주세요.
+              목표 금액을 백 단위로 입력해주세요.
             </div>
           </div>
           <div class="mb-3">

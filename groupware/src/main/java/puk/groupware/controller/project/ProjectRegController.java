@@ -39,7 +39,7 @@ public class ProjectRegController {
         try{
         projectService.registerProject(prjInfo, strEndDate, imageFile);
         }catch(Exception e){
-            return "fail";
+            return "/projectregform";
         }
         return "success";
     }

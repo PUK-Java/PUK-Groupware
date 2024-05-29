@@ -6,7 +6,7 @@
 </head>
 <body style="text-align: center;">
     <script>
-        alert("성공하셨습니다.")
+        alert("요청에 성공했습니다.")
         window.location='/'
     </script>
 </body>
