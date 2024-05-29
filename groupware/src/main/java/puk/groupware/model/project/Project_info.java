@@ -1,4 +1,4 @@
-package puk.groupware.domain.project;
+package puk.groupware.model.project;
 
 import java.time.LocalDate;
 
@@ -20,7 +20,7 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Getter;
 import lombok.Setter;
-import puk.groupware.domain.user.User_info;
+import puk.groupware.model.user.User_info;
 
 @Entity
 @Table(name="PROJECT_INFO")
