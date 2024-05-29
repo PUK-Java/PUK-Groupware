@@ -10,4 +10,6 @@ public interface Project_info_jpaRepository extends JpaRepository<Project_info, 
     
     
     Page<Project_info> findAll(Pageable pageable);
+
+    Page<Project_info> findByTitleContains(String title, Pageable pageable);
 }

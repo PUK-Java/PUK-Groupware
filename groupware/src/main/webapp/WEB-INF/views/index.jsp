@@ -53,8 +53,8 @@
                 </li>
             </ul>
             <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">🔑</button>
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="projectName">
+                <button class="btn btn-primary" type="submit">검색</button>
             </form>
         </div>
     </div>
