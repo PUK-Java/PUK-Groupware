@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import puk.groupware.model.user.User_Info;
 import puk.groupware.service.user.UserLoginService;
@@ -19,12 +20,12 @@ public class LoginController {
 
     
     private final UserLoginService userloginService;
-    private final HttpSession httpSession;
+    private HttpSession httpSession;
 
     @Autowired
     LoginController(UserLoginService userloginService, HttpSession httpSession){
-        this.userloginService = userloginService;
         this.httpSession = httpSession;
+        this.userloginService = userloginService;
     }
 
     @GetMapping("/login")
@@ -34,9 +35,10 @@ public class LoginController {
     
 
     @PostMapping("/loginRequest")
-    public String postloginRequest(@RequestParam("userId") String userId, @RequestParam("userPw") String userPw, Model model) {
+    public String postloginRequest(@RequestParam("userId") String userId, @RequestParam("userPw") String userPw, HttpServletRequest request, Model model) {
         User_Info user = userloginService.findUser(userId, userPw);
         if(user != null && user.getUserId().equals(userId) && user.getUserPw().equals(userPw)){
+            httpSession = request.getSession();
             httpSession.setAttribute("loginUser", user);
             // System.out.println(user.getUserId());
             return "redirect:/";

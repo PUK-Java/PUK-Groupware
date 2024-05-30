@@ -23,9 +23,8 @@
                 font-size: 3.5rem;
             }
         }
-        /* 검색 버튼 가로로 출력 */
         .btn-outline-light {
-            white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+            white-space: nowrap;
         }
     </style>
 </head>
@@ -49,7 +48,7 @@
                     <c:choose>
                         <c:when test="${loginUser == null}">
                             <button type="button" class="btn btn-outline-light me-2" onclick="location.href='/login'">Login</button>
-                            <button type="button" class="btn btn-warning" onclick="location.href='signupform'">Sign-up</button>
+                            <button type="button" class="btn btn-warning" onclick="location.href='/signupform'">Sign-up</button>
                         </c:when>
                         <c:otherwise>
                             <button type="button" class="btn btn-outline-light me-2" onclick="location.href='/logout'">Logout</button>
@@ -78,7 +77,6 @@
             <c:forEach var="board" items="${boards}">
                 <tr>
                     <td>${board.boardNo}</td>
-                    <!-- 게시물의 제목을 누르면 해당 게시물의 상세페이지로 이동하도록(게시물 번호를 통해 찾아가는 방식) -->
                     <td><a href="${pageContext.request.contextPath}/detail?boardNo=${board.boardNo}">${board.title}</a></td>
                     <td>${board.writer}</td>
                     <td>${board.writeDate}</td>

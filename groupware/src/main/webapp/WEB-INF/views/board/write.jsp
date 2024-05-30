@@ -76,10 +76,10 @@
                 <label for="content">내용:</label>
                 <textarea id="content" name="content" required></textarea>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="writer">작성자:</label>
                 <input type="text" id="writer" name="writer" required>
-            </div>
+            </div> -->
             <form action="/index" method="get">
                 <input type="submit" value="저장">
             </form>
