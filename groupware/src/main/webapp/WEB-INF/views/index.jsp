@@ -27,12 +27,12 @@
 
 
         <c:choose>
-            <c:when test="${user == null}">
+            <c:when test="${loginUser == null}">
                 <button type="button" class="btn btn-outline-primary" onclick="location.href='/login'">로그인</button>
                 <button type="button" class="btn btn-primary" onclick="location.href='/signupform'">회원가입</button>
                 </c:when>
-            <c:when test="${user != null}">
-                ${user.userName}님 반갑습니다!
+            <c:when test="${loginUser != null}">
+                ${loginUser.userName}님 반갑습니다!
                 <button type="button" class="btn btn-outline-primary" onclick="location.href='/logout'">로그아웃</button>
             </c:when>
         </c:choose>

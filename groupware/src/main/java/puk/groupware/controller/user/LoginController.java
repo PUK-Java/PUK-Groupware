@@ -37,8 +37,8 @@ public class LoginController {
     public String postloginRequest(@RequestParam("userId") String userId, @RequestParam("userPw") String userPw, Model model) {
         User_Info user = userloginService.findUser(userId, userPw);
         if(user != null && user.getUserId().equals(userId) && user.getUserPw().equals(userPw)){
-            httpSession.setAttribute("user", user);
-            // System.out.println(user.getUserId());
+            httpSession.setAttribute("loginUser", user);
+            // System.out.println(user);
             return "redirect:/";
         }else{
             model.addAttribute("error", "아이디나 비밀번호가 불일치 합니다.");
@@ -48,7 +48,7 @@ public class LoginController {
 
     @GetMapping("/logout")
     public String getlogout() {
-        httpSession.removeAttribute("user");
+        httpSession.removeAttribute("loginUser");
         return "redirect:/";
     }
     
