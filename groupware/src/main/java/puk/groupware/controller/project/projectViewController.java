@@ -16,14 +16,14 @@ public class projectViewController {
     @Autowired
     private ProjectViewService viewService;
 
-    @GetMapping("/projectView/{id}")
+    @GetMapping("/projectDetail/{id}")
     public String prjview(@PathVariable("id") Long id, Model model) {
         Project_info projectView = viewService.getProjectById(id);
         long daysBetween = viewService.dayBetween(id);
         model.addAttribute("data", projectView);
         model.addAttribute("daysBetween", daysBetween);
 
-        return "projectView";
+        return "projectDetail";
     }
 
     @GetMapping("/test")

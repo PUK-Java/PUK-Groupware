@@ -56,6 +56,10 @@
             margin: 0 10px;
             font-size: 1.5rem;
         }
+        .card-img-top{
+            height: 25rem;
+            object-fit: fill;
+        }
    
     </style>
 </head>
@@ -72,7 +76,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active"  href="#">홈</a></li>
+                        <li class="nav-item"><a class="nav-link active"  href="http://localhost:8080/">홈</a></li>
                         <li class="nav-item"><a class="nav-link"  href="#">문의</a></li>
                     </ul>
                 </div>
@@ -82,7 +86,7 @@
             <div class="row align-items-stretch">
                 <div class="col-md-6 d-flex">
                     <div class="card w-100">
-                        <img src="/images/projectThumbnails/{data.image}" class="card-img-top" alt="준비중">
+                        <img src="/images/projectThumbnails/${data.image}" class="card-img-top" alt="준비중">
                         <div class="card-footer">
                             <button class="btn btn-primary w-50">후원하기</button>
                             <button class="btn btn-secondary w-50 ms-2">찜</button>
