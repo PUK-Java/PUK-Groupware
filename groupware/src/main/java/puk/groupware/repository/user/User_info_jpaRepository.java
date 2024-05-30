@@ -11,4 +11,5 @@ import puk.groupware.model.user.User_Info;
 public interface User_info_jpaRepository extends JpaRepository<User_Info, String> {
 
     User_Info  findByUserIdAndUserPw(String userId, String userPw);
+
 }
