@@ -14,12 +14,12 @@ import puk.groupware.model.project.Project_info;
 import puk.groupware.repository.project.Project_info_jpaRepository;
 
 @Service
-public class ProjectFind {
+public class ProjectFindService {
 
     private final Project_info_jpaRepository pRepository;
 
     @Autowired
-    ProjectFind(Project_info_jpaRepository pRepository){
+    ProjectFindService(Project_info_jpaRepository pRepository){
         this.pRepository = pRepository;
     }
 
@@ -43,6 +43,28 @@ public class ProjectFind {
         return pRepository.findByTitleContainsAndCategory(title,category,page);
     }
 
+
+    // 모든 컬럼의 Description의 길이를 확인해서 길이를 줄여주는 작업 작업
+    public void descriptionSummary(List<Project_info> projects){
+        for(Project_info project: projects){
+            String description = project.getDescription();
+            if(description.length()> 100){
+                description = description.substring(0, 100) + "...";
+                project.setDescription(description);
+            }
+        }
+    }
+
+    //Page 객체를 받아서 List으로 변환한 다음 모델에 추가해주는 작업
+    public void pagetoListAddtoModel(Model model,Page<Project_info> pageNumber){
+        List<Project_info> projects = pageNumber.getContent();
+        descriptionSummary(projects);
+        model.addAttribute("projectPage", pageNumber.getNumber());
+        model.addAttribute("projectTotalPage",pageNumber.getTotalPages());
+        model.addAttribute("projects", projects);
+
+    }
+
     //페이지 설정
     public void paging(int page,String projectName, String projectCategory,Model model){
         PageRequest pageable = PageRequest.of(page,9,Sort.by("startDate").descending());
@@ -63,37 +85,25 @@ public class ProjectFind {
         //프로젝트 이름과 카테고리에 조건이 없다면
         if((projectName == null) && (projectCategory == null)){
             Page<Project_info> pageNumber = findAllPage(pageable);
-            List<Project_info> projects = pageNumber.getContent();
-            model.addAttribute("projectPage",pageNumber.getNumber());
-            model.addAttribute("projectTotalPage", pageNumber.getTotalPages());
-            model.addAttribute("projects", projects);
+            pagetoListAddtoModel(model, pageNumber);
         }
 
         //프로젝트 이름의 조건만 있다면
         if((projectName != null) && (projectCategory == null)){
             Page<Project_info> pageNumber = findByTitleLike(projectName, pageable);
-            List<Project_info> projects = pageNumber.getContent();
-            model.addAttribute("projectPage", pageNumber.getNumber());
-            model.addAttribute("projectTotalPage",pageNumber.getTotalPages());
-            model.addAttribute("projects", projects);
+            pagetoListAddtoModel(model, pageNumber);
         }
 
         //카테고리 조건만 있다면
         if((projectCategory != null) && (projectName == null)){
             Page<Project_info> pageNumber = findByCategory(projectCategory, pageable);
-            List<Project_info> projects = pageNumber.getContent();
-            model.addAttribute("projectPage", pageNumber.getNumber());
-            model.addAttribute("projectTotalPage",pageNumber.getTotalPages());
-            model.addAttribute("projects", projects);
+            pagetoListAddtoModel(model, pageNumber);
         }
 
         //프로젝트 이름과 카테고리 조건이 모두 있다면
         if((projectName != null) && (projectCategory != null)){
             Page<Project_info> pageNumber = findByTitleContainsAndCategory(projectName, projectCategory, pageable);
-            List<Project_info> projects = pageNumber.getContent();
-            model.addAttribute("projectPage", pageNumber.getNumber());
-            model.addAttribute("projectTotalPage",pageNumber.getTotalPages());
-            model.addAttribute("projects", projects);
+            pagetoListAddtoModel(model, pageNumber);
         }
     }
 
