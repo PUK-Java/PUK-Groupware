@@ -18,11 +18,11 @@ public class WishListId implements Serializable{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="PROJECT_NO", referencedColumnName = "PROJECT_NO")
-    private Project_info projectNo;
+    private Project_info projectInfo;
 
     @ManyToOne
     @JoinColumn(name="USER_ID", referencedColumnName = "USER_ID")
-    private User_Info userId;
+    private User_Info userInfo;
 
 
 }
