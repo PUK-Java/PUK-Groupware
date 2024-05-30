@@ -2,11 +2,9 @@ package puk.groupware.controller.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import jakarta.servlet.http.HttpSession;
-import lombok.extern.slf4j.Slf4j;
 import puk.groupware.model.user.User_Info;
 import puk.groupware.service.user.UserPageService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,9 +30,12 @@ public class UserPageController {
 
     //회원정보 수정
     @PostMapping("/updateUser")
-    public String modifyCurrentUser() {
+    public String modifyCurrentUser(Model model) {
         User_Info user = (User_Info) httpSession.getAttribute("loginUser");
+
+
         
+        userPageService.saveUser(user);
         return "userpage";
     }
     
