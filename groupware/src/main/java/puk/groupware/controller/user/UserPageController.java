@@ -30,12 +30,9 @@ public class UserPageController {
 
     //회원정보 수정
     @PostMapping("/updateUser")
-    public String modifyCurrentUser(Model model) {
-        User_Info user = (User_Info) httpSession.getAttribute("loginUser");
-
-
-        
+    public String modifyCurrentUser(User_Info user) {
         userPageService.saveUser(user);
+        httpSession.setAttribute("loginUser", user);
         return "userpage";
     }
     
