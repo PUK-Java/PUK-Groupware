@@ -9,22 +9,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import lombok.RequiredArgsConstructor;
 import puk.groupware.model.board.BoardInfo;
 import puk.groupware.service.board.BoardInfoService;
 
 
-@RequiredArgsConstructor
+
 @Controller
 public class BoardController  {
-    // @Autowired
+    @Autowired
     private final BoardInfoService boardInfoService;
 
-    // @Autowired
-    // public BoardController(BoardInfoService boardInfoService) {
-    //     this.boardInfoService = boardInfoService;
-    // }
-    
+    @Autowired
+    public BoardController(BoardInfoService boardInfoService) {
+        this.boardInfoService = boardInfoService;
+    }
     // request에 home을 받으면 index.jsp로 이동하게 설정
     // 딱히 민감하지는 않지만 회원가입이나 로그인의 상황을 생각해서 POST방식으로 진행
     @PostMapping("/save")

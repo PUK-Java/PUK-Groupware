@@ -8,13 +8,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import puk.groupware.model.board.BoardInfo;
 import puk.groupware.repository.board.BoardInfoJpaRepository;
 
-@Transactional(readOnly = true)
 @Service
 public class BoardInfoService {
 
@@ -27,7 +25,6 @@ public class BoardInfoService {
         this.boardInfoJpaRepository = boardInfoJpaRepository;
     }
 
-    @Transactional
     // BoradInfoJpaRepository 객체의 save 메서드를 통해 파라미터로 들어온 boardInfo 객체를 DB로 저장
     // 하려고 했으나, 게시물 번호, 작성자는 사용자 입력없이 진행 될 예정이라 입력에 받은 항목을 파라미터로 지정
     public BoardInfo saveBoardInfo(String title, String content, String writer) {

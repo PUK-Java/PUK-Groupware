@@ -14,6 +14,10 @@
             height: 15rem;
             object-fit: fill;
         }
+          /* 검색 버튼 가로로 출력 */
+          .btn-primary {
+            white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+        }
     </style>
 </head>
 <body>
@@ -61,7 +65,7 @@
                         더보기
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/board/board">공지사항</a></li>
+                        <li><a class="dropdown-item" href="#">공지사항</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">도움말</a></li>
                     </ul>
