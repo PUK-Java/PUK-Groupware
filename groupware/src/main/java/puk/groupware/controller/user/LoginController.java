@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
-import puk.groupware.model.user.User_info;
+import puk.groupware.model.user.User_Info;
 import puk.groupware.service.user.UserLoginService;
 
 
@@ -35,7 +35,7 @@ public class LoginController {
 
     @PostMapping("/loginRequest")
     public String postloginRequest(@RequestParam("userId") String userId, @RequestParam("userPw") String userPw, Model model) {
-        User_info user = userloginService.findUser(userId, userPw);
+        User_Info user = userloginService.findUser(userId, userPw);
         if(user != null && user.getUserId().equals(userId) && user.getUserPw().equals(userPw)){
             httpSession.setAttribute("user", user);
             // System.out.println(user.getUserId());
