@@ -32,7 +32,6 @@ public class LoginController {
         return "loginform";
     }
     
-
     @PostMapping("/loginRequest")
     public String postloginRequest(@RequestParam("userId") String userId, @RequestParam("userPw") String userPw, Model model) {
         User_Info user = userloginService.findUser(userId, userPw);

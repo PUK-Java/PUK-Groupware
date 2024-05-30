@@ -16,6 +16,10 @@ public class UserPageService {
         this.uJpaRepository = uJpaRepository;
     }
 
+    public void saveUser(User_Info user){
+        uJpaRepository.save(user);
+    }
+
     public int deleteUser(String userId){
         return uJpaRepository.deleteByUserId(userId);
     }

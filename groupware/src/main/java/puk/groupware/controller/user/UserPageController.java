@@ -9,11 +9,11 @@ import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import puk.groupware.model.user.User_Info;
 import puk.groupware.service.user.UserPageService;
+import org.springframework.web.bind.annotation.PostMapping;
 
 
 
 @Controller
-@Slf4j
 public class UserPageController {
     
     private final UserPageService userPageService;
@@ -30,6 +30,15 @@ public class UserPageController {
         return "userpage";
     }
 
+    //회원정보 수정
+    @PostMapping("/updateUser")
+    public String modifyCurrentUser() {
+        User_Info user = (User_Info) httpSession.getAttribute("loginUser");
+        
+        return "userpage";
+    }
+    
+    //회원정보 삭제
     @GetMapping("/deleteUser")
     public String deleteCurrentUser() {
         User_Info user = (User_Info) httpSession.getAttribute("loginUser");

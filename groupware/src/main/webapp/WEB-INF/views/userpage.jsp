@@ -24,7 +24,7 @@
 <body>
     <h2>유저 페이지</h2>
     <!-- 회원 정보 수정 -->
-    <form class="validation-form" action="/" method="post">
+    <form class="validation-form" action="/updateUser" method="post">
         <div class="row">
             <!-- id -->
             <div class="col-md-6 mb-3">
@@ -34,7 +34,7 @@
             <!-- pw -->
             <div class="col-md-6 mb-3">
                 <label for="PW">비밀번호</label>
-                <input type="password" class="form-control" id="PW" name="userPw" placeholder="password" value="${userForm.userPw}">
+                <input type="password" class="form-control" id="PW" name="userPw" placeholder="password" value="${userForm.userPw}" required>
             </div>
         </div>
         <div class="row">
@@ -81,7 +81,7 @@
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <button class="btn btn-primary btn-lg btn-block " type="submit">회원 정보 수정</button>
-            <button class="btn btn-secondary btn-lg btn-block " type="reset">초기화</button>
+            <button class="btn btn-secondary btn-lg btn-block " type="reset">수정 사항 초기화</button>
             <button class="btn btn-danger btn-lg btn-block " type="button" onclick="location.href='/deleteUser'">회원 정보 삭제</button>
         </div>
         </form>
