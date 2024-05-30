@@ -37,7 +37,7 @@ public class LoginController {
     public String postloginRequest(@RequestParam("userId") String userId, @RequestParam("userPw") String userPw, Model model) {
         User_Info user = userloginService.findUser(userId, userPw);
         if(user != null && user.getUserId().equals(userId) && user.getUserPw().equals(userPw)){
-            httpSession.setAttribute("user", user);
+            httpSession.setAttribute("loginUser", user);
             // System.out.println(user.getUserId());
             return "redirect:/";
         }else{
