@@ -21,8 +21,9 @@ public class indexController {
     @GetMapping("/")
     public String getAllProject(@RequestParam(name="page", required = false, defaultValue = "0") int page,
     @RequestParam(name="projectName",required = false) String projectName,
+    @RequestParam(name="projectCategory",required = false) String projectCategory,
     Model model){
-        pService.paging(page,projectName,model);
+        pService.paging(page,projectName,projectCategory,model);
         return "index";
     }
 }

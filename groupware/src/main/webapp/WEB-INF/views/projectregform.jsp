@@ -127,19 +127,18 @@
   <script>
     window.addEventListener('load', () => {
       const forms = document.getElementsByClassName('validation-form');
-
       Array.prototype.filter.call(forms, (form) => {
         form.addEventListener('submit', function (event) {
+          if(parseInt(form.cost.value) > parseInt(form.targetCost.value)){
+            alert("후원 금액이 목표 금액보다 클 수 없습니다.");
+            event.preventDefault();
+            event.stopPropagation();
+          }
           if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
           }
-          if(form.cost.value >= form.targetCost.value){
-            alert("후원 금액이 목표 금액보다 클 수 없습니다.")
-            event.stopPropagation();
-            event.preventDefault();
-          }
-
+    
           form.classList.add('was-validated');
         }, false);
       });
