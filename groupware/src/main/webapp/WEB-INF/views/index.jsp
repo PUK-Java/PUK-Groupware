@@ -14,6 +14,10 @@
             height: 15rem;
             object-fit: fill;
         }
+          /* 검색 버튼 가로로 출력 */
+          .btn-primary {
+            white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+        }
     </style>
 </head>
 <body>
