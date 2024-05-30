@@ -3,11 +3,13 @@ package puk.groupware.repository.project;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import puk.groupware.model.project.Project_info;
 
 
 
+@Repository
 public interface Project_info_jpaRepository extends JpaRepository<Project_info, Integer>{
     
     
