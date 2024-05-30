@@ -39,6 +39,17 @@
       -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
     }
+ 
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+
+    input[type='number'] {
+      -moz-appearance: textfield;
+    }
   </style>
 </head>
 
@@ -49,7 +60,6 @@
         <h4 class="mb-3">프로젝트 생성</h4>
         <form class="validation-form" novalidate action="/regRequest" method="post" enctype="multipart/form-data">
           <div class="row">
-
             <div class="col-md-3 mb-3">
               <label for="CATEGORY">카테고리</label>
               <select class="custom-select d-block w-100" id="CATEGORY" name="category">
@@ -78,11 +88,20 @@
 
           <div class="mb-3">
             <label for="TARGET_COST">목표 금액</label>
-            <input type="text" class="form-control" id="TARGET_COST" placeholder="목표 금액" name="targetCost" required>
+            <input type="number" step="100" class="form-control" id="TARGET_COST" placeholder="목표 금액" name="targetCost" required>
             <div class="invalid-feedback">
-              목표 금액을 입력해주세요.
+              목표 금액을 백 단위로 입력해주세요.
             </div>
           </div>
+
+          <div class="mb-3">
+            <label for="TARGET_COST">후원 금액 단위</label>
+            <input type="number" step="100" class="form-control" id="TARGET_COST" placeholder="후원 금액" name="cost" required>
+            <div class="invalid-feedback">
+              금액을 백 단위로 입력해주세요.
+            </div>
+          </div>
+
           <div class="mb-3">
             <label for="END_DATE">종료일자</label>
             <input type="date" class="form-control" id="END_DATE"  name="strEndDate"required>
@@ -108,18 +127,24 @@
   <script>
     window.addEventListener('load', () => {
       const forms = document.getElementsByClassName('validation-form');
-
       Array.prototype.filter.call(forms, (form) => {
         form.addEventListener('submit', function (event) {
+          if(parseInt(form.cost.value) > parseInt(form.targetCost.value)){
+            alert("후원 금액이 목표 금액보다 클 수 없습니다.");
+            event.preventDefault();
+            event.stopPropagation();
+          }
           if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
           }
-
+    
           form.classList.add('was-validated');
         }, false);
       });
     }, false);
+    
+
   </script>
 </body>
 </html>
