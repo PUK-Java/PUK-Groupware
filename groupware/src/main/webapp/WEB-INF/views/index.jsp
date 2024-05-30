@@ -34,6 +34,7 @@
             <c:when test="${loginUser != null}">
                 ${loginUser.userName}님 반갑습니다!
                 <button type="button" class="btn btn-outline-primary" onclick="location.href='/logout'">로그아웃</button>
+                <button type="button" class="btn btn-outline-primary" onclick="location.href='/userpage'">내 정보</button>
             </c:when>
         </c:choose>
 
