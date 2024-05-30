@@ -29,7 +29,7 @@ import puk.groupware.model.user.User_Info;
 public class Project_info {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PROJECT_NO")
+    @Column(name = "PROJECT_NO",  nullable = false)
     private Long projectNo;
     
 
@@ -38,32 +38,35 @@ public class Project_info {
     @JoinColumn(name = "USER_ID",referencedColumnName = "USER_ID")
     private User_Info userId;
 
-    @Column(name="TITLE")
+    @Column(name="TITLE",  nullable = false)
     private String title;
 
-    @Column(name="DESCRIPTION")
+    @Column(name="DESCRIPTION", nullable = false)
     private String description;
 
-    @Column(name="TARGET_COST")
+    @Column(name="TARGET_COST",  nullable = false)
     private int targetCost;
 
 
     @CreationTimestamp
-    @Column(name="START_DATE")
+    @Column(name="START_DATE",  nullable = false)
     private LocalDate startDate;
 
     @Temporal(TemporalType.DATE)
-    @Column(name="END_DATE")
+    @Column(name="END_DATE",  nullable = false)
     private LocalDate endDate;
 
-    @Column(name="IMAGE")
+    @Column(name="IMAGE",  nullable = false)
     private String image;
 
 
-    @Column(name="STATE")
+    @Column(name="STATE",  nullable = false)
     @ColumnDefault("1")
     private String state;
 
-    @Column(name="CATEGORY")
+    @Column(name="CATEGORY",  nullable = false)
     private String category;
+
+    @Column(name="COST", nullable = false)
+    private int cost;
 }
