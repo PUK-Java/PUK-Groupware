@@ -52,7 +52,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">홈</a>
+                    <a class="nav-link" aria-current="page" href="/">홈</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">펀딩</a>
@@ -65,7 +65,7 @@
                         더보기
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">공지사항</a></li>
+                        <li><a class="dropdown-item" href="/boardmain">공지사항</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">도움말</a></li>
                     </ul>

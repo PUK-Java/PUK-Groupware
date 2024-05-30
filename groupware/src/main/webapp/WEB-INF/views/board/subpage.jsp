@@ -29,7 +29,7 @@
         </div>
     </div>
     <br>
-    <a href="${pageContext.request.contextPath}/" class="btn btn-primary">목록</a>
+    <a href="${pageContext.request.contextPath}/boardmain" class="btn btn-primary">목록</a>
     <form action="/updateOnBoard" method="get" >
         <button tpye="button">수정</button>
     </form>

@@ -46,8 +46,15 @@
                     <button type="submit" class="btn btn-outline-light">검색</button>
                 </form>
                 <div class="text-end">
-                    <button type="button" class="btn btn-outline-light me-2" onclick="moveLogin();">Login</button>
-                    <button type="button" class="btn btn-warning" onclick="moveJoin();">Sign-up</button>
+                    <c:choose>
+                        <c:when test="${loginUser == null}">
+                            <button type="button" class="btn btn-outline-light me-2" onclick="location.href='/login'">Login</button>
+                            <button type="button" class="btn btn-warning" onclick="location.href='signupform'">Sign-up</button>
+                        </c:when>
+                        <c:otherwise>
+                            <button type="button" class="btn btn-outline-light me-2" onclick="location.href='/logout'">Logout</button>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>
@@ -87,8 +94,8 @@
         <nav aria-label="Page navigation example">
            <ul class="pagination justify-content-center">
                <c:if test="${totalPage != 0}">
-                    <li class="page-item"><a class="page-link" href="/boardList?page=${currentPage -1}">이전</a></li>
-                    <li class="page-item"><a class="page-link" href="/boardList?page=${currentPage +1}">다음</a></li>
+                    <li class="page-item"><a class="page-link" href="/boardmain?page=${currentPage -1}">이전</a></li>
+                    <li class="page-item"><a class="page-link" href="/boardmain?page=${currentPage +1}">다음</a></li>
                </c:if>
            </ul>
        </nav>

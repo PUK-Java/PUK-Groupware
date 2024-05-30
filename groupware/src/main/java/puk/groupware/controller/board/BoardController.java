@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import puk.groupware.model.board.BoardInfo;
 import puk.groupware.service.board.BoardInfoService;
 
@@ -26,22 +28,37 @@ public class BoardController  {
     // request에 home을 받으면 index.jsp로 이동하게 설정
     // 딱히 민감하지는 않지만 회원가입이나 로그인의 상황을 생각해서 POST방식으로 진행
     @PostMapping("/save")
-    public String saveOnBoard(@RequestParam("title") String title, @RequestParam("content") String content, @RequestParam("writer") String writer) {
-       
+    public String saveOnBoard(@RequestParam("title") String title, @RequestParam("content") String content, @RequestParam("writer") String writer, HttpServletRequest request) {
+       // 로그인 된 회원만 저장 권한을 부여하도록 (1차적으로 write에서 필터링) 
+       HttpSession session = request.getSession();
+       if(session.getAttribute("userId") == null) {
+        return "redirect:/login";
+       }
         // service단으로 보내서 실질적인 DB로의 저장은 service에서 실행하도록
         boardInfoService.saveBoardInfo(title, content, writer);
-        return "redirect:/index";
+        return "redirect:/boardmain";
     }
     
     // 메인 페이지에서 페이징된 게시물 목록 조회가 이루어 지도록 수정
-    @GetMapping("/board/boardmain")
-    public String mainBoard(@RequestParam(name="page", required = false, defaultValue = "0") int page, Model model) {
+    @GetMapping("/boardmain")
+    public String mainBoard(HttpServletRequest request, @RequestParam(name="page", required = false, defaultValue = "0") int page, Model model) {
+        HttpSession session = request.getSession();
+        // JSP에서 읽어갈 수 있게
+        Object loginUser = session.getAttribute("loginUser");
+        model.addAttribute("loginUser", loginUser);
+        
         boardInfoService.getPagingBoard(page, model); // 페이징된 게시물 가져오기
-        return "/board/boardindex";                               // 게시글 목록이 포함된 메인 페이지로 이동
+        return "/board/boardindex"; // 게시글 목록이 포함된 메인 페이지로 이동
     }
 
     @GetMapping("/write")
-    public String writeOnBoard() {
+    public String writeOnBoard(HttpServletRequest request) {
+        // 로그인 되지 않은 사용자는 로그인 창으로 보내기
+        HttpSession session = request.getSession();
+        // 로그인 컨트롤러에서 세션을 저장할 때 선언한 변수의 값을 getAttribute를 통해 받아와 비교할 것
+        if(session.getAttribute("loginUser") == null) {
+            return "redirect:/login";
+        }
         return "/board/write"; 
     }
 
