@@ -41,7 +41,7 @@ public class Project_info {
     @Column(name="TITLE",  nullable = false)
     private String title;
 
-    @Column(name="DESCRIPTION", nullable = false)
+    @Column(name="DESCRIPTION", nullable = false,length = 4000)
     private String description;
 
     @Column(name="TARGET_COST",  nullable = false)
