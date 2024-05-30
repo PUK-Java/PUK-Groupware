@@ -107,12 +107,12 @@
            <c:if test="${projectTotalPage != 0}">
                 <form action="/" method="get">
                     <c:if test="${projectPage !=0}">
-                        <li class="page-item"><a class="page-link" href="/?page=${projectPage -1}&projectCategory=${request.getParameter('projectCategory')}&projectName=${request.getParameter('projectName')}">이전</a></li>
+                        <li class="page-item"><a class="page-link" href="/?page=${projectPage -1}&projectCategory=${param.projectCategory}&projectName=${param.projectName}">이전</a></li>
                     </c:if>
                 </form>
                 <form action="/" method="get">
                     <c:if test="${projectPage != projectTotalPage}">
-                        <li class="page-item"><a class="page-link" href="/?page=${projectPage +1}&projectCategory=${request.getParameter('projectCategory')}&projectName=${request.getParameter('projectName')}">다음</a></li>
+                        <li class="page-item"><a class="page-link" href="/?page=${projectPage +1}&projectCategory=${param.projectCategory}&projectName=${param.projectName}">다음</a></li>
                     </c:if>
                 </form>
            </c:if>

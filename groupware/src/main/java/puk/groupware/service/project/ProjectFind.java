@@ -47,8 +47,21 @@ public class ProjectFind {
     public void paging(int page,String projectName, String projectCategory,Model model){
         PageRequest pageable = PageRequest.of(page,9,Sort.by("startDate").descending());
 
+        //빈 문자열이 들어오면 널로 바꾸시오.
+        if(projectName!= null){
+            if(projectName.equals("")){
+                projectName = null;
+            }
+        }
+        //카테고리 역시 빈 문자열로 들어오면 널로 바꾸시오
+        if(projectCategory != null){
+            if(projectCategory.equals("")){
+                projectCategory = null;
+            }
+        }
+
         //프로젝트 이름과 카테고리에 조건이 없다면
-        if((projectName == null || projectName == "") && (projectCategory == null || projectCategory == "")){
+        if((projectName == null) && (projectCategory == null)){
             Page<Project_info> pageNumber = findAllPage(pageable);
             List<Project_info> projects = pageNumber.getContent();
             model.addAttribute("projectPage",pageNumber.getNumber());
@@ -57,7 +70,7 @@ public class ProjectFind {
         }
 
         //프로젝트 이름의 조건만 있다면
-        if((projectName != null || projectName != "") && (projectCategory == null || projectCategory =="")){
+        if((projectName != null) && (projectCategory == null)){
             Page<Project_info> pageNumber = findByTitleLike(projectName, pageable);
             List<Project_info> projects = pageNumber.getContent();
             model.addAttribute("projectPage", pageNumber.getNumber());
@@ -66,7 +79,7 @@ public class ProjectFind {
         }
 
         //카테고리 조건만 있다면
-        if((projectCategory != null || projectCategory != "") && (projectName == null || projectName == "")){
+        if((projectCategory != null) && (projectName == null)){
             Page<Project_info> pageNumber = findByCategory(projectCategory, pageable);
             List<Project_info> projects = pageNumber.getContent();
             model.addAttribute("projectPage", pageNumber.getNumber());
@@ -75,7 +88,7 @@ public class ProjectFind {
         }
 
         //프로젝트 이름과 카테고리 조건이 모두 있다면
-        if((projectName != null || projectName != "") && (projectCategory != null || projectCategory != "")){
+        if((projectName != null) && (projectCategory != null)){
             Page<Project_info> pageNumber = findByTitleContainsAndCategory(projectName, projectCategory, pageable);
             List<Project_info> projects = pageNumber.getContent();
             model.addAttribute("projectPage", pageNumber.getNumber());

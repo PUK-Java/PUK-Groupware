@@ -23,8 +23,6 @@ public class indexController {
     @RequestParam(name="projectName",required = false) String projectName,
     @RequestParam(name="projectCategory",required = false) String projectCategory,
     Model model){
-        System.out.println(projectCategory);
-        System.out.println(projectName);
         pService.paging(page,projectName,projectCategory,model);
         return "index";
     }
