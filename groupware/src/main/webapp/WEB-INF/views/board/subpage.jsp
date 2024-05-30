@@ -30,10 +30,11 @@
     </div>
     <br>
     <a href="${pageContext.request.contextPath}/boardmain" class="btn btn-primary">목록</a>
-    <form action="/updateOnBoard" method="get" >
-        <button tpye="button">수정</button>
-    </form>
-    <a><button tpye="button">삭제</button></a>
+    <c:choose>    
+        <c:when test="${loginUser.userId == board.writer}">
+            <button type="button" class="btn btn-warning" onclick="location.href='/deleteOnBoard?boardNo=${board.boardNo}'">삭제</button>
+        </c:when>
+    </c:choose>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

@@ -66,4 +66,8 @@ public class BoardInfoService {
         return boardInfoJpaRepository.findByTitleContaining(title);
     }
 
+    public void deleteOnBoard(int boardNo) {
+        
+        boardInfoJpaRepository.deleteById(boardNo);
+    }
 }

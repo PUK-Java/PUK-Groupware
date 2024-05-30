@@ -89,11 +89,13 @@ public class BoardController  {
     }
 
     // 게시물 삭제 (Delete)
-    // @GetMapping("deleteOnBoard")
-    // public String deleteBoard(@RequestParam int boardNo) {
-    //     // boardNo를 구분자로 하여 테이블의 해당 컬럼을 삭제하도록 서비스 호출
-    //     return "/";
-    // }
+    // 삭제 버튼 노출 자체에서 작성자와 로그인 된 회원이 동일한 지 검증되기 때문에 여기서는 별도 검증 X
+    @GetMapping("/deleteOnBoard")
+    public String deleteOnBoard(@RequestParam("boardNo") int boardNo) {
+        boardInfoService.deleteOnBoard(boardNo);
+        // boardNo를 구분자로 하여 테이블의 해당 컬럼을 삭제하도록 서비스 호출
+        return "redirect:/boardmain";
+    }
     
 
 }
