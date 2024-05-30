@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import oracle.jdbc.proxy.annotation.Post;
 import puk.groupware.model.board.BoardInfo;
 import puk.groupware.model.user.User_Info;
 import puk.groupware.service.board.BoardInfoService;
@@ -81,11 +83,15 @@ public class BoardController  {
         return "/board/boardOnSearchList";
     }
     
-    // 게시물 수정 (Update) : 진행중, index를 반환해서 index.jsp로 진입하게 되면 게시물 목록이 출력되지 않음.
+    // 게시물 수정 (Update) : 진행중
+    // 제목, 내용 입력받아서 처리
     @GetMapping("/updateOnBoard")
-    public String updateBoard() {
+    public String updateBoard(@RequestParam("title") String title, @RequestParam("content") String content, @RequestParam("boardNo") int boardNo) {
+        BoardInfo boardInfo = new BoardInfo();
+        boardInfo.setTitle(title);
+        boardInfo.setContent(content);
 
-        return "/board/boardindex";
+        return "redirect:/boardmain";
     }
 
     // 게시물 삭제 (Delete)
@@ -97,5 +103,12 @@ public class BoardController  {
         return "redirect:/boardmain";
     }
     
-
+    // 수정 진행중
+    // @GetMapping("/update")
+    // public String getMethodName(@PathVariable("boardNo") int boardNo, Model model) {
+        
+    //     Post post = 
+    //     return "board/boardUpdate";
+    // }
+    
 }

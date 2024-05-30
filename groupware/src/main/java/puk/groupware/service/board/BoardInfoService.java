@@ -9,9 +9,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import oracle.jdbc.proxy.annotation.Post;
 import puk.groupware.model.board.BoardInfo;
 import puk.groupware.model.user.User_Info;
 import puk.groupware.repository.board.BoardInfoJpaRepository;
@@ -43,9 +45,6 @@ public class BoardInfoService {
         return boardInfoJpaRepository.save(boardInfo);
     }
 
-    // public List<BoardInfo> getAllBoards() {
-    //     return boardInfoJpaRepository.findAll();
-    // }
 
     public BoardInfo getBoardByNo(int boardNo) {
         Optional<BoardInfo> boardInfoOptional = boardInfoJpaRepository.findById(boardNo);
@@ -65,6 +64,19 @@ public class BoardInfoService {
     public List<BoardInfo> searchBoardsByTitle(String title) {
         return boardInfoJpaRepository.findByTitleContaining(title);
     }
+
+    public void updateOnBoard(String title, String content, int boardNo) {
+        
+        BoardInfo boardInfo = boardInfoJpaRepository.findById(boardNo).get();
+        boardInfo.setTitle(title);
+        boardInfo.setContent(content);
+        boardInfoJpaRepository.save(boardInfo);
+    }
+    // // 업데이트가 저장되기 전 실행되어야 할 메서드
+    // 뭔가 잘못됐다..
+    // public void preUpdate(@PathVariable("boardNo") int boardNo, Model model) {
+    //     Post post = (Post)boardInfoJpaRepository.findById(boardNo);
+    // }
 
     public void deleteOnBoard(int boardNo) {
         
