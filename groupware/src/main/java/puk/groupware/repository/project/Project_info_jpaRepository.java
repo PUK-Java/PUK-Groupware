@@ -9,8 +9,9 @@ import puk.groupware.model.project.Project_info;
 
 
 
+
 @Repository
-public interface Project_info_jpaRepository extends JpaRepository<Project_info, Integer>{
+public interface Project_info_jpaRepository extends JpaRepository<Project_info, Long>{
     
     
     Page<Project_info> findAll(Pageable pageable);
@@ -20,4 +21,5 @@ public interface Project_info_jpaRepository extends JpaRepository<Project_info, 
     Page<Project_info> findByCategory(String category,Pageable pageable);
 
     Page<Project_info> findByTitleContainsAndCategory(String title, String category,Pageable pageable);
+
 }

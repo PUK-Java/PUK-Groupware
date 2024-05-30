@@ -23,7 +23,7 @@ import lombok.Setter;
 import puk.groupware.model.user.User_Info;
 
 @Entity
-@Table(name="PROJECT_INFO")
+@Table(name = "PROJECT_INFO")
 @Getter
 @Setter
 public class Project_info {
@@ -31,12 +31,12 @@ public class Project_info {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PROJECT_NO",  nullable = false)
     private Long projectNo;
-    
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "USER_ID",referencedColumnName = "USER_ID")
+    @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
     private User_Info userId;
+
 
     @Column(name="TITLE",  nullable = false)
     private String title;
@@ -45,10 +45,11 @@ public class Project_info {
     private String description;
 
     @Column(name="TARGET_COST",  nullable = false)
+
     private int targetCost;
 
-
     @CreationTimestamp
+
     @Column(name="START_DATE",  nullable = false)
     private LocalDate startDate;
 
@@ -65,6 +66,7 @@ public class Project_info {
     private String state;
 
     @Column(name="CATEGORY",  nullable = false)
+
     private String category;
 
     @Column(name="COST", nullable = false)
