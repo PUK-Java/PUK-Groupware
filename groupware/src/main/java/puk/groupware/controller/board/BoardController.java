@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import puk.groupware.model.board.BoardInfo;
+import puk.groupware.service.board.BoardInfoService;
+
 
 
 @Controller
