@@ -24,7 +24,7 @@
 <body>
     <h2>유저 페이지</h2>
     <!-- 회원 정보 수정 -->
-    <form class="validation-form" action="/updateUser" method="post">
+    <form class="validation-form" action="/updateUser" method="post" onsubmit="return confirm('회원정보를 수정하시겠습니까?')">
         <!-- 메인페이지 -->
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <button class="btn btn-primary btn-lg btn-block " type="button" onclick="location.href='/'">메인으로</button>
@@ -86,11 +86,18 @@
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <button class="btn btn-primary btn-lg btn-block " type="submit">회원 정보 수정</button>
             <button class="btn btn-secondary btn-lg btn-block " type="reset">수정 사항 초기화</button>
-            <button class="btn btn-danger btn-lg btn-block " type="button" onclick="location.href='/deleteUser'">회원 정보 삭제</button>
+            <button class="btn btn-danger btn-lg btn-block " type="button" onclick="confirmDelete()">회원 정보 삭제</button>
         </div>
         </form>
     <!-- 결제 내역 -->
     <div></div>
 </body>
+<!-- 로그인 전에는 사용할 수 없도록 메인으로 리다이렉트 -->
+<c:if test="${loginUser == null}">
+    <c:redirect url="/"></c:redirect>
+</c:if>
 <!-- 삭제 시 확인 메시지 -->
+<script>
+
+</script>
 </html>
