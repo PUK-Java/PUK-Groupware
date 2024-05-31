@@ -29,7 +29,7 @@ import puk.groupware.model.user.User_Info;
 public class Project_info {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PROJECT_NO",  nullable = false)
+    @Column(name = "PROJECT_NO")
     private Long projectNo;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -37,38 +37,36 @@ public class Project_info {
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
     private User_Info userId;
 
-
-    @Column(name="TITLE",  nullable = false)
+    @Column(name = "TITLE", nullable = false)
     private String title;
 
-    @Column(name="DESCRIPTION", nullable = false,length = 4000)
+    @Column(name = "DESCRIPTION", nullable = false, length = 4000)
     private String description;
 
-    @Column(name="TARGET_COST",  nullable = false)
+    @Column(name = "TARGET_COST", nullable = false)
 
     private int targetCost;
 
     @CreationTimestamp
 
-    @Column(name="START_DATE",  nullable = false)
+    @Column(name = "START_DATE", nullable = false)
     private LocalDate startDate;
 
     @Temporal(TemporalType.DATE)
-    @Column(name="END_DATE",  nullable = false)
+    @Column(name = "END_DATE", nullable = false)
     private LocalDate endDate;
 
-    @Column(name="IMAGE",  nullable = false)
+    @Column(name = "IMAGE", nullable = false)
     private String image;
 
-
-    @Column(name="STATE",  nullable = false)
+    @Column(name = "STATE", nullable = false)
     @ColumnDefault("1")
     private String state;
 
-    @Column(name="CATEGORY",  nullable = false)
+    @Column(name = "CATEGORY", nullable = false)
 
     private String category;
 
-    @Column(name="COST", nullable = false)
+    @Column(name = "COST", nullable = false)
     private int cost;
 }
