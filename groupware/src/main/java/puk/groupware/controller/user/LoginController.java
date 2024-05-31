@@ -39,9 +39,11 @@ public class LoginController {
             httpSession.setAttribute("loginUser", user);
             return "redirect:/";
         }else{
-            model.addAttribute("error", "아이디나 비밀번호가 불일치 합니다.");
+            model.addAttribute("msg", "회원정보를 다시 확인해 주세요.");
             return "loginform";
         }
+        // 지금 user를 id와 pw을 이용해서 확인하기 때문에 id 혹은 pw 요소 하나만 틀릴 경우에는 회원정보가 있음에도 불구하고 user를 찾지못함
+        // 로그인 성공 시 환영합니다 문구 구현할 필요 있음
     }
 
     @GetMapping("/logout")

@@ -25,6 +25,10 @@
     <h2>유저 페이지</h2>
     <!-- 회원 정보 수정 -->
     <form class="validation-form" action="/updateUser" method="post">
+        <!-- 메인페이지 -->
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button class="btn btn-primary btn-lg btn-block " type="button" onclick="location.href='/'">메인으로</button>
+    </div>
         <div class="row">
             <!-- id -->
             <div class="col-md-6 mb-3">
