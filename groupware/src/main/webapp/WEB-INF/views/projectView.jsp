@@ -82,7 +82,7 @@
             <div class="row align-items-stretch">
                 <div class="col-md-6 d-flex">
                     <div class="card w-100">
-                        <img src="/images/projectThumbnails/{data.image}" class="card-img-top" alt="준비중">
+                        <img src="/images/projectThumbnails/${data.image}" class="card-img-top" alt="준비중">
                         <div class="card-footer">
                             <button class="btn btn-primary w-50">후원하기</button>
                             <button class="btn btn-secondary w-50 ms-2">찜</button>
