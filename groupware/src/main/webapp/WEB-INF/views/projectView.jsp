@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page import="puk.groupware.model.user.User_Info" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -85,7 +85,7 @@
                         <img src="/images/projectThumbnails/${data.image}" class="card-img-top" alt="준비중">
                         <div class="card-footer">
                             <button class="btn btn-primary w-50">후원하기</button>
-                            <button class="btn btn-secondary w-50 ms-2">찜</button>
+                            <button class="btn btn-success w-50 ms-2" data-project-no=${data.projectNo} data-user-id=${sessionScope.loginUser.userId} onclick="toggleWishList(this)">찜 하기</button>
                         </div>
                     </div>
                 </div>
@@ -122,6 +122,41 @@
         </div>
     </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script>
+    async function toggleWishList(button){
+        const loginUser = button.getAttribute('data-user-id');
+        console.log("loginUser:", loginUser);
+        if(loginUser !== ""){
+            const project = button.getAttribute('data-project-no');
+            const user = button.getAttribute('data-user-id');
+            const response = await fetch('/wishList/toggle',{
+                method :'POST',
+                headers : {
+                    'Content-Type' : 'application/json'
+                },
+                body : JSON.stringify({
+                    projectNo : project,
+                    userId : user
+                })
+            });
+            if(response.ok){
+                const data = await response.json();
+                if(data.isWished){
+                    button.innerText = '찜해제';
+                    button.classList.replace('btn-success','btn-secondary');
+                    alert('목록에 추가 됐습니다.');
+                }else{
+                    button.innerText= '찜하기';
+                    button.classList.replace('btn-secondary','btn-success');
+                    alert('목록에서 제거 됐습니다.');
+                }   
+            }else{
+                alert("서버 오류가 발생했습니다.");
+            }
+        }else{
+            alert("로그인 해주세요");
+        }
+    }
+</script>
 </body>
 </html>
