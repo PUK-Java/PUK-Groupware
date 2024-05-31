@@ -23,8 +23,8 @@ public class LoginController {
 
     @Autowired
     LoginController(UserLoginService userloginService, HttpSession httpSession){
-        this.userloginService = userloginService;
         this.httpSession = httpSession;
+        this.userloginService = userloginService;
     }
 
     @GetMapping("/login")

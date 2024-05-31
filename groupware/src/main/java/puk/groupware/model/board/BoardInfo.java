@@ -40,8 +40,8 @@ public class BoardInfo {
     @Column(name="WRITE_DATE")
     private LocalDateTime writeDate;
 
-    // @Column(name="VIEW_COUNT")
-    // private int viewCount=0;
+    @Column(name="VIEW_COUNT", columnDefinition = "integer default 0", nullable = false)
+    private int viewCount;
 
     @PrePersist
     protected void onCreate() {
