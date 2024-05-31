@@ -85,7 +85,7 @@
                         <img src="/images/projectThumbnails/${data.image}" class="card-img-top" alt="준비중">
                         <div class="card-footer">
                             <button class="btn btn-primary w-50">후원하기</button>
-                            <button class="btn btn-success w-50 ms-2" data-project-no=${data.projectNo} data-user-id=${sessionScope.loginUser.userId} onclick="toggleWishList(this)">찜 하기</button>
+                            <button class="btn btn-success w-50 ms-2" id ="supportButton" data-project-no=${data.projectNo} onclick="toggleWishList(this)" data-user-id=${sessionScope.loginUser.userId}>찜하기</button>
                         </div>
                     </div>
                 </div>
@@ -123,10 +123,10 @@
     </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
+    let loginUser = document.getElementById('supportButton').getAttribute('data-user-id');
     async function toggleWishList(button){
-        const loginUser = button.getAttribute('data-user-id');
-        console.log("loginUser:", loginUser);
-        if(loginUser !== ""){
+        if(loginUser !== ''){
+            const loginUser = button.getAttribute('data-user-id');
             const project = button.getAttribute('data-project-no');
             const user = button.getAttribute('data-user-id');
             const response = await fetch('/wishList/toggle',{
@@ -149,14 +149,15 @@
                     button.innerText= '찜하기';
                     button.classList.replace('btn-secondary','btn-success');
                     alert('목록에서 제거 됐습니다.');
-                }   
+                }
             }else{
                 alert("서버 오류가 발생했습니다.");
             }
         }else{
-            alert("로그인 해주세요");
+            alert("로그인 해주세요.");
+            location.replace("/login");
         }
-    }
+        }
 </script>
 </body>
 </html>
