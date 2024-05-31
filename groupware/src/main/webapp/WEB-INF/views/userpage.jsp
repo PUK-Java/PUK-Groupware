@@ -19,13 +19,15 @@
         -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
         box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
         }
+
+        
   </style>
 </head>
 <body>
     <h2>유저 페이지</h2>
     <!-- 회원 정보 수정 -->
     <form class="validation-form" action="/updateUser" method="post" onsubmit="return confirm('회원정보를 수정하시겠습니까?')">
-        <!-- 메인페이지 -->
+    <!-- 메인페이지 -->
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <button class="btn btn-primary btn-lg btn-block " type="button" onclick="location.href='/'">메인으로</button>
     </div>
@@ -90,12 +92,14 @@
         </div>
         </form>
     <!-- 결제 내역 -->
-    <div></div>
+    <div>
+        <h2>상품 페이지</h2>
+    </div>
 </body>
 <!-- 삭제 시 확인 메시지 -->
 <script>
     function deleteUser(){
-        if(confirm("정말 삭제하시겠습니까?")){
+        if(prompt("삭제하려면 비밀번호를 입력하세요") == "${loginUser.userPw}"){
             return location.href='/deleteUser';
         }
     }
