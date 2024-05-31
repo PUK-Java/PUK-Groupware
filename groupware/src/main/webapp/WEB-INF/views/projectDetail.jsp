@@ -56,6 +56,28 @@
             margin: 0 10px;
             font-size: 1.5rem;
         }
+        .card-img-top{
+            height: 25rem;
+            object-fit: fill;
+        }
+        .btn-primary-custom {
+            background-color: #007bff;
+            border-color: #007bff;
+            width: 75%;
+        }
+        .btn-primary-custom:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+        .btn-secondary-custom {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            width: 75%;
+        }
+        .btn-secondary-custom:hover {
+            background-color: #5a6268;
+            border-color: #4e555b;
+        }
    
     </style>
 </head>
@@ -72,7 +94,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active"  href="#">홈</a></li>
+                        <li class="nav-item"><a class="nav-link active"  href="http://localhost:8080/">홈</a></li>
                         <li class="nav-item"><a class="nav-link"  href="#">문의</a></li>
                     </ul>
                 </div>
@@ -83,9 +105,17 @@
                 <div class="col-md-6 d-flex">
                     <div class="card w-100">
                         <img src="/images/projectThumbnails/${data.image}" class="card-img-top" alt="준비중">
-                        <div class="card-footer">
-                            <button class="btn btn-primary w-50">후원하기</button>
-                            <button class="btn btn-secondary w-50 ms-2">찜</button>
+                        <div class="container mt-5">
+                            <div class="card-footer row">
+                                <div class="col text-center">
+                                    <form action="/sponTable/${data.projectNo}" method="post">
+                                        <button type="submit" class="btn btn-primary btn-primary-custom ms-2">후원하기</button>
+                                    </form>
+                                </div>
+                                <div class="col text-center">
+                                    <button class="btn btn-secondary btn-secondary-custom ms-2">찜</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -94,12 +124,14 @@
                         <div class="card-body">
                             <h5 class="card-title" style="text-align: center; line-height: 5vh;">${data.title}</h5>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">목표 금액: ${data.targetCost}</li>
+                                <li class="list-group-item" id="end123" data-target-cost="${data.targetCost}">목표 금액: ${data.targetCost}원</li>
+                                <li class="list-group-item" id="state123" data-state-cost="${count * data.cost}">현재 금액: ${count * data.cost}원</li>
                                 <li class="list-group-item">프로젝트 시작일: ${data.startDate}</li>
                                 <li class="list-group-item">프로젝트 종료일: ${data.endDate}</li>
-                                <li class="list-group-item">프로젝트 남은 일수: ${daysBetween}</li>
-                                <li class="list-group-item">프로젝트 상태: ${data.state}</li>
+                                <li class="list-group-item">프로젝트 남은 일수: ${daysBetween}일</li>
+                                <li class="list-group-item" id="state">프로젝트 상태:</li>
                                 <li class="list-group-item">프로젝트 카테고리: ${data.category}</li>
+                                <li class="list-group-item" id="stateP"></li>
                             </ul>
                         </div>
                     </div>
@@ -122,6 +154,24 @@
         </div>
     </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+<script>
+    const end = document.getElementById('end123');
+    const state1 = document.getElementById('state123');
+
+    const endCost = end.getAttribute('data-target-cost');
+    const stateCost = state1.getAttribute('data-state-cost');
+    if(Number(stateCost)<Number(endCost)){
+    const data1 ="프로젝트 상태: 진행중";
+    document.getElementById('state').innerText = data1;
+    }
+    else if(Number(stateCost)>=Number(endCost)){
+        const data1 ="프로젝트 상태: 목표달성";
+        document.getElementById('state').innerText = data1;
+    }
+    const data3 = Number(stateCost)/Number(endCost)*100;
+    const data4 = "달성률: " + Math.floor(data3) + "%";
+    document.getElementById('stateP').innerText = data4;
+</script>
 </body>
 </html>
