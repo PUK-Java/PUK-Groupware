@@ -11,16 +11,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.http.HttpSession;
 import puk.groupware.model.project.Project_info;
+import puk.groupware.model.user.User_Info;
 import puk.groupware.repository.project.Project_info_jpaRepository;
 
 @Service
 public class ProjectRegService {
         private final Project_info_jpaRepository pRepository;
+        private final HttpSession httpSession;
 
         @Autowired
-        ProjectRegService(Project_info_jpaRepository pRepository){
+        ProjectRegService(Project_info_jpaRepository pRepository, HttpSession httpSession){
             this.pRepository = pRepository;
+            this.httpSession= httpSession;
         }
         
 
@@ -53,8 +57,8 @@ public class ProjectRegService {
 
 
         //로그인한 유저의 객체 넣어주기 (로그인 Service에서 구현해주길 바람)
-        //User_info logineduser = (User_info) httpSession.getAttribute("loginedUser");
-        //prjInfo.setUserId(logineduser);
+        User_Info logineduser = (User_Info) httpSession.getAttribute("loginUser");
+        prjInfo.setUserId(logineduser);
         
         //STATE를 1로 저장
         prjInfo.setState("1");

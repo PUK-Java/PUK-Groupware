@@ -93,6 +93,15 @@
               목표 금액을 백 단위로 입력해주세요.
             </div>
           </div>
+
+          <div class="mb-3">
+            <label for="TARGET_COST">후원 금액 단위</label>
+            <input type="number" step="100" class="form-control" id="TARGET_COST" placeholder="후원 금액" name="cost" required>
+            <div class="invalid-feedback">
+              금액을 백 단위로 입력해주세요.
+            </div>
+          </div>
+
           <div class="mb-3">
             <label for="END_DATE">종료일자</label>
             <input type="date" class="form-control" id="END_DATE"  name="strEndDate"required>
@@ -118,18 +127,24 @@
   <script>
     window.addEventListener('load', () => {
       const forms = document.getElementsByClassName('validation-form');
-
       Array.prototype.filter.call(forms, (form) => {
         form.addEventListener('submit', function (event) {
+          if(parseInt(form.cost.value) > parseInt(form.targetCost.value)){
+            alert("후원 금액이 목표 금액보다 클 수 없습니다.");
+            event.preventDefault();
+            event.stopPropagation();
+          }
           if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
           }
-
+    
           form.classList.add('was-validated');
         }, false);
       });
     }, false);
+    
+
   </script>
 </body>
 </html>

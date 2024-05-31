@@ -1,7 +1,5 @@
 package puk.groupware.controller.project;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,16 +13,16 @@ import lombok.extern.slf4j.Slf4j;
 import puk.groupware.model.project.Project_info;
 import puk.groupware.service.project.ProjectRegService;
 
-
 @Controller
 @Slf4j
 public class ProjectRegController {
     private final ProjectRegService projectService;;
 
     @Autowired
-    ProjectRegController(ProjectRegService projectService){
+    ProjectRegController(ProjectRegService projectService) {
         this.projectService = projectService;
     }
+
 
 
     @RequestMapping("/projectregform")
@@ -43,4 +41,5 @@ public class ProjectRegController {
         }
         return "success";
     }
+
 }

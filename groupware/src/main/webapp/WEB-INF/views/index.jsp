@@ -14,6 +14,10 @@
             height: 15rem;
             object-fit: fill;
         }
+          /* 검색 버튼 가로로 출력 */
+          .btn-primary {
+            white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+        }
     </style>
 </head>
 <body>
@@ -49,7 +53,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">홈</a>
+                    <a class="nav-link" aria-current="page" href="/">홈</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">펀딩</a>
@@ -75,6 +79,17 @@
         </div>
     </div>
 </nav>
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="/?projectCategory=굿즈"><strong style="text-transform:uppercase">굿즈</strong></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link " aria-current="page" href="/?projectCategory=푸드"><strong style="text-transform:uppercase">푸드</strong></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/?projectCategory=전자제품"><strong style="text-transform:uppercase">전자제품</strong></a>
+      </li>
+  </ul>
 
 <div class="row row-cols-2 row-cols-md-3 g-10 mx-5 mt-5">
 <c:forEach var="project" items="${projects}">
@@ -97,12 +112,12 @@
            <c:if test="${projectTotalPage != 0}">
                 <form action="/" method="get">
                     <c:if test="${projectPage !=0}">
-                        <li class="page-item"><a class="page-link" href="/?page=${projectPage -1}">이전</a></li>
+                        <li class="page-item"><a class="page-link" href="/?page=${projectPage -1}&projectCategory=${param.projectCategory}&projectName=${param.projectName}">이전</a></li>
                     </c:if>
                 </form>
                 <form action="/" method="get">
                     <c:if test="${projectPage != projectTotalPage}">
-                        <li class="page-item"><a class="page-link" href="/?page=${projectPage +1}">다음</a></li>
+                        <li class="page-item"><a class="page-link" href="/?page=${projectPage +1}&projectCategory=${param.projectCategory}&projectName=${param.projectName}">다음</a></li>
                     </c:if>
                 </form>
            </c:if>
@@ -110,5 +125,13 @@
    </nav>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script>
+    document.querySelectorAll(".nav-link").forEach((link) => {
+    if (link.href === window.location.href) {
+        link.classList.add("active");
+        link.setAttribute("aria-current", "page");
+    }
+});
+</script>
 </body>
 </html>

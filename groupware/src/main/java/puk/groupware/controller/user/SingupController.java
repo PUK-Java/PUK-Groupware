@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import puk.groupware.model.user.User_Info;
 import puk.groupware.service.user.Userservicesave;
 
+
 @Controller
 public class SingupController {
     @Autowired

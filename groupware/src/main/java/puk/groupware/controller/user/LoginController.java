@@ -37,6 +37,7 @@ public class LoginController {
         User_Info user = userloginService.findUser(userId, userPw);
         if(user != null && user.getUserId().equals(userId) && user.getUserPw().equals(userPw)){
             httpSession.setAttribute("loginUser", user);
+
             return "redirect:/";
         }else{
             model.addAttribute("msg", "회원정보를 다시 확인해 주세요.");
