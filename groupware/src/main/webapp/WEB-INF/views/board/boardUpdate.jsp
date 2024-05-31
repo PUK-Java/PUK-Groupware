@@ -69,8 +69,6 @@
         <h2>게시물 수정</h2>
         <form action="/updateOnBoard" method="post">
             <input type="hidden" name="boardNo" value="${boardNo}">
-            <input type="hidden" name="title" value="${title}">
-            <input type="hidden" name="content" value="${content}">
 
             <div class="form-group">
                 <label for="title">제목:</label>

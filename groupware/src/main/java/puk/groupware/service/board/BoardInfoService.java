@@ -46,37 +46,14 @@ public class BoardInfoService {
 
     // 수정 항목 저장
     public BoardInfo saveBoardUpdate(int boardNo, String title, String content) {
-        // HttpSession session = request.getSession();
-        // User_Info loginUser = (User_Info)session.getAttribute("loginUser");
         BoardInfo boardInfo = boardInfoJpaRepository.findById(boardNo).get();
         boardInfo.setTitle(title);
+        System.out.println(title);
+        System.out.println(boardInfo.getTitle());
+
         boardInfo.setContent(content);
         return boardInfoJpaRepository.save(boardInfo);
     }
-
-    // public BoardInfo saveBoardInfo(String title, String content, HttpServletRequest request) {
-    //     HttpSession session = request.getSession();
-    //     User_Info loginUser = (User_Info) session.getAttribute("loginUser");
-    
-    //     BoardInfo boardInfo = new BoardInfo();
-    //     boardInfo.setTitle(title);
-    //     boardInfo.setContent(content);
-    //     boardInfo.setWriter(loginUser.getUserId());
-    
-    //     // 새로운 객체를 생성하는 대신 EntityManager를 사용, 이미 존재하는 엔티티는 수정
-    //     BoardInfo existingBoardInfo = entityManager.find(BoardInfo.class, boardInfo.getBoardNo());
-    
-    //     if (existingBoardInfo != null) {
-    //         // 이미 존재하는 엔티티를 찾았다면 해당 엔티티의 값을 업데이트합니다.
-    //         existingBoardInfo.setTitle(boardInfo.getTitle());
-    //         existingBoardInfo.setContent(boardInfo.getContent());
-    //         existingBoardInfo.setWriter(boardInfo.getWriter());
-    //         return boardInfoJpaRepository.save(existingBoardInfo);
-    //     } else {
-    //         // 존재하지 않는 엔티티라면 새로운 엔티티를 저장합니다.
-    //         return boardInfoJpaRepository.save(boardInfo);
-    //     }
-    // }
 
 
     public BoardInfo getBoardByNo(int boardNo) {

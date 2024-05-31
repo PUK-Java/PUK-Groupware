@@ -112,6 +112,12 @@ public class BoardController  {
     @PostMapping("/updateOnBoard")
     public String updateBoard(@RequestParam("boardNo") String strboardNo, @RequestParam("title") String title, @RequestParam("content") String content) {
         int boardNo = Integer.parseInt(strboardNo);
+        System.out.println("컨트롤러 출력 Start");
+        System.out.println(title);
+        System.out.println(content);
+        System.out.println("컨트롤러 출력 End");
+
+
         boardInfoService.saveBoardUpdate(boardNo, title, content);
 
         return "redirect:/boardmain";
