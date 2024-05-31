@@ -32,20 +32,6 @@ public class LoginController {
         return "loginform";
     }
     
-
-    // @PostMapping("/loginRequest")
-    // public String postloginRequest(@RequestParam("userId") String userId, @RequestParam("userPw") String userPw, HttpServletRequest request, Model model) {
-    //     User_Info user = userloginService.findUser(userId, userPw);
-    //     if(user != null && user.getUserId().equals(userId) && user.getUserPw().equals(userPw)){
-    //         httpSession = request.getSession();
-    //         httpSession.setAttribute("loginUser", user);
-    //         // System.out.println(user.getUserId());
-    //         return "redirect:/";
-    //     }else{
-    //         model.addAttribute("error", "아이디나 비밀번호가 불일치 합니다.");
-    //         return "loginform";
-    //     }
-    // }
     @PostMapping("/loginRequest")
     public String postloginRequest(@RequestParam("userId") String userId, @RequestParam("userPw") String userPw, Model model) {
         User_Info user = userloginService.findUser(userId, userPw);
