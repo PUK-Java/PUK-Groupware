@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,6 +17,7 @@ import jakarta.servlet.http.HttpSession;
 import oracle.jdbc.proxy.annotation.Post;
 import puk.groupware.model.board.BoardInfo;
 import puk.groupware.model.user.User_Info;
+import puk.groupware.repository.board.BoardInfoJpaRepository;
 import puk.groupware.service.board.BoardInfoService;
 
 
@@ -23,10 +26,13 @@ import puk.groupware.service.board.BoardInfoService;
 public class BoardController  {
     @Autowired
     private final BoardInfoService boardInfoService;
+    private final BoardInfoJpaRepository boardInfoJpaRepository;
+    
 
     @Autowired
-    public BoardController(BoardInfoService boardInfoService) {
+    public BoardController(BoardInfoService boardInfoService, BoardInfoJpaRepository boardInfoJpaRepository) {
         this.boardInfoService = boardInfoService;
+        this.boardInfoJpaRepository = boardInfoJpaRepository;
     }
     // request에 home을 받으면 index.jsp로 이동하게 설정
     // 딱히 민감하지는 않지만 회원가입이나 로그인의 상황을 생각해서 POST방식으로 진행
@@ -55,7 +61,7 @@ public class BoardController  {
 
         model.addAttribute("loginUser", loginUser);
         boardInfoService.getPagingBoard(page, model); // 페이징된 게시물 가져오기
-        return "/board/boardindex"; 
+        return "/board/boardIndex"; 
     }
 
     @GetMapping("/write")
@@ -82,17 +88,6 @@ public class BoardController  {
         model.addAttribute("boards", boards);
         return "/board/boardOnSearchList";
     }
-    
-    // 게시물 수정 (Update) : 진행중
-    // 제목, 내용 입력받아서 처리
-    @GetMapping("/updateOnBoard")
-    public String updateBoard(@RequestParam("title") String title, @RequestParam("content") String content, @RequestParam("boardNo") int boardNo) {
-        BoardInfo boardInfo = new BoardInfo();
-        boardInfo.setTitle(title);
-        boardInfo.setContent(content);
-
-        return "redirect:/boardmain";
-    }
 
     // 게시물 삭제 (Delete)
     // 삭제 버튼 노출 자체에서 작성자와 로그인 된 회원이 동일한 지 검증되기 때문에 여기서는 별도 검증 X
@@ -103,12 +98,25 @@ public class BoardController  {
         return "redirect:/boardmain";
     }
     
-    // 수정 진행중
-    // @GetMapping("/update")
-    // public String getMethodName(@PathVariable("boardNo") int boardNo, Model model) {
-        
-    //     Post post = 
-    //     return "board/boardUpdate";
-    // }
+    // 수정 버튼 클릭 시 기존에 작성했던 데이터를 불러와 수정 작성 페이지로 넘겨주는 과정
+    @Transactional
+    @GetMapping("/update")
+    public String preBoardUpdate(@RequestParam("boardNo") int boardNo, Model model) {
+        boardInfoService.preUpdate(boardNo, model);
+        return "board/boardUpdate";
+    }    
+
+    // 게시물 수정 (Update) : 진행중
+    // 사용자의 수정 내역을 입력받아 DB에 저장하는 과정
+    @Transactional
+    @PostMapping("/updateOnBoard")
+    public String updateBoard(@RequestParam("boardNo") String strboardNo, @RequestParam("title") String title, @RequestParam("content") String content) {
+        int boardNo = Integer.parseInt(strboardNo);
+        boardInfoService.saveBoardUpdate(boardNo, title, content);
+
+        return "redirect:/boardmain";
+    }
+
+    
     
 }

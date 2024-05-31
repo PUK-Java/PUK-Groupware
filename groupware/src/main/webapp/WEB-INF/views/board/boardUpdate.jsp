@@ -67,18 +67,20 @@
 <body>
     <div class="container">
         <h2>게시물 수정</h2>
-        <form action="/save" method="post">
+        <form action="/updateOnBoard" method="post">
+            <input type="hidden" name="boardNo" value="${boardNo}">
+            <input type="hidden" name="title" value="${title}">
+            <input type="hidden" name="content" value="${content}">
+
             <div class="form-group">
                 <label for="title">제목:</label>
-                <input type="text" id="title" name="title" required value="${board.title}">
+                <input type="text" id="title" name="title" required value="${title}">
             </div>
             <div class="form-group">
                 <label for="content">내용:</label>
-                <textarea id="content" name="content" required value="${board.content}"></textarea>
+                <textarea id="content" name="content" required>${content}</textarea>
             </div>
-            <form action="/boardmain" method="get">
                 <input type="submit" value="저장">
-            </form>
         </form>
     </div>
 </body>

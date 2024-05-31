@@ -34,7 +34,7 @@
         <c:when test="${loginUser.userId == board.writer}">
             <button type="button" class="btn btn-warning" onclick="location.href='/deleteOnBoard?boardNo=${board.boardNo}'">삭제</button>
             <!-- <button type="button" class="btn btn-warning" onclick="location.href='/updateOnBoard?title=${title}&content=${content}&boardNo=${board.boardNo}'">수정</button> -->
-            <button type="button" class="btn btn-warning" onclick="location.href='/update'">수정</button>
+            <button type="button" class="btn btn-warning" onclick="location.href='/update?boardNo=${board.boardNo}'">수정</button>
         </c:when>
     </c:choose>
 </div>
