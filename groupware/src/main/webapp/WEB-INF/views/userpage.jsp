@@ -86,18 +86,22 @@
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <button class="btn btn-primary btn-lg btn-block " type="submit">회원 정보 수정</button>
             <button class="btn btn-secondary btn-lg btn-block " type="reset">수정 사항 초기화</button>
-            <button class="btn btn-danger btn-lg btn-block " type="button" onclick="confirmDelete()">회원 정보 삭제</button>
+            <button class="btn btn-danger btn-lg btn-block " type="button" onclick="deleteUser()">회원 정보 삭제</button>
         </div>
         </form>
     <!-- 결제 내역 -->
     <div></div>
 </body>
+<!-- 삭제 시 확인 메시지 -->
+<script>
+    function deleteUser(){
+        if(confirm("정말 삭제하시겠습니까?")){
+            return location.href='/deleteUser';
+        }
+    }
+</script>
 <!-- 로그인 전에는 사용할 수 없도록 메인으로 리다이렉트 -->
 <c:if test="${loginUser == null}">
     <c:redirect url="/"></c:redirect>
 </c:if>
-<!-- 삭제 시 확인 메시지 -->
-<script>
-
-</script>
 </html>
