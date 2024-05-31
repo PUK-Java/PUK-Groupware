@@ -1,6 +1,7 @@
 package puk.groupware.model.project;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.OnDelete;
@@ -28,17 +29,18 @@ public class ProjectSupport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "SPON_NO")
     private Long sponNo;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
     private User_Info userId;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "PROJECT_INFO", referencedColumnName = "PROJECT_NO")
     private Project_info projectNo;
-    @Column(name = "SPON_AMOUNT")
-    private Long sponAmount;
+
     @Column(name = "SPON_DATE")
-    private LocalDate date;
+    private LocalDateTime date;
 
 }
