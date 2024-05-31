@@ -46,7 +46,7 @@ public class wishListController {
         WishListId wishListId = new WishListId();
         wishListId.setProjectInfo(project);
         wishListId.setUserInfo(user);
-
+        
         //wishList 객체를 생성해서 WishListId(기본키) 매핑 시켜주기
         WishList wishList = new WishList();
         wishList.setWishListId(wishListId);

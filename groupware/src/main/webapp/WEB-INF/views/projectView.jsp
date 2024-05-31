@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="puk.groupware.model.user.User_Info" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -85,7 +86,14 @@
                         <img src="/images/projectThumbnails/${data.image}" class="card-img-top" alt="준비중">
                         <div class="card-footer">
                             <button class="btn btn-primary w-50">후원하기</button>
-                            <button class="btn btn-success w-50 ms-2" id ="supportButton" data-project-no=${data.projectNo} onclick="toggleWishList(this)" data-user-id=${sessionScope.loginUser.userId}>찜하기</button>
+                            <c:choose>
+                                <c:when test="${wishListCheck}">
+                                    <button class="btn btn-secondary w-50 ms-2" id ="supportButton" data-project-no=${data.projectNo} onclick="toggleWishList(this)" data-user-id=${sessionScope.loginUser.userId}>찜해제</button>
+                                </c:when>
+                                <c:otherwise>
+                                    <button class="btn btn-success w-50 ms-2" id="supportButton" data-project-no="${data.projectNo}" onclick="toggleWishList(this)" data-user-id="${sessionScope.loginUser.userId}">찜하기</button>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                 </div>
