@@ -29,7 +29,6 @@
     </h1>
     <div class="col-md-3 text-end">
 
-
         <c:choose>
             <c:when test="${loginUser == null}">
                 <button type="button" class="btn btn-outline-primary" onclick="location.href='/login'">로그인</button>
