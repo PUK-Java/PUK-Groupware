@@ -8,13 +8,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import lombok.RequiredArgsConstructor;
 import puk.groupware.model.project.Project_info;
 import puk.groupware.service.project.ProjectViewService;
+import puk.groupware.service.wishList.WishListService;
 
 @Controller
+@RequiredArgsConstructor
 public class projectViewController {
     @Autowired
-    private ProjectViewService viewService;
+    private final ProjectViewService viewService;
+    private final WishListService wishListService;
 
     @GetMapping("/projectDetail/{id}")
     public String prjview(@PathVariable("id") Long id, Model model) {
@@ -22,7 +26,6 @@ public class projectViewController {
         long daysBetween = viewService.dayBetween(id);
         model.addAttribute("data", projectView);
         model.addAttribute("daysBetween", daysBetween);
-
         return "projectView";
     }
 

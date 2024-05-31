@@ -35,4 +35,12 @@ public class WishListService {
             return true;
         }
     }
+
+    public boolean checkWishList(WishList wishList,WishListId wishListId){
+        if(findById(wishList.getWishListId()).isPresent()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
