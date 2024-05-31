@@ -23,8 +23,8 @@ public class LoginController {
 
     @Autowired
     LoginController(UserLoginService userloginService, HttpSession httpSession){
-        this.userloginService = userloginService;
         this.httpSession = httpSession;
+        this.userloginService = userloginService;
     }
 
     @GetMapping("/login")
@@ -32,23 +32,24 @@ public class LoginController {
         return "loginform";
     }
     
-
     @PostMapping("/loginRequest")
     public String postloginRequest(@RequestParam("userId") String userId, @RequestParam("userPw") String userPw, Model model) {
         User_Info user = userloginService.findUser(userId, userPw);
         if(user != null && user.getUserId().equals(userId) && user.getUserPw().equals(userPw)){
             httpSession.setAttribute("loginUser", user);
-            // System.out.println(user.getUserId());
+
             return "redirect:/";
         }else{
-            model.addAttribute("error", "아이디나 비밀번호가 불일치 합니다.");
+            model.addAttribute("msg", "회원정보를 다시 확인해 주세요.");
             return "loginform";
         }
+        // 지금 user를 id와 pw을 이용해서 확인하기 때문에 id 혹은 pw 요소 하나만 틀릴 경우에는 회원정보가 있음에도 불구하고 user를 찾지못함
+        // 로그인 성공 시 환영합니다 문구 구현할 필요 있음
     }
 
     @GetMapping("/logout")
     public String getlogout() {
-        httpSession.removeAttribute("user");
+        httpSession.removeAttribute("loginUser");
         return "redirect:/";
     }
     

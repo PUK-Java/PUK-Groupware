@@ -17,4 +17,5 @@ public interface BoardInfoJpaRepository extends JpaRepository<BoardInfo, Integer
     Page<BoardInfo> findAll(Pageable pageable);
     // 입력된 제목으로 게시물 검색 목적
     List<BoardInfo> findByTitleContaining(String title);
+
 }

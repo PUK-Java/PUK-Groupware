@@ -23,9 +23,8 @@
                 font-size: 3.5rem;
             }
         }
-        /* 검색 버튼 가로로 출력 */
         .btn-outline-light {
-            white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+            white-space: nowrap;
         }
     </style>
 </head>
@@ -46,8 +45,15 @@
                     <button type="submit" class="btn btn-outline-light">검색</button>
                 </form>
                 <div class="text-end">
-                    <button type="button" class="btn btn-outline-light me-2" onclick="moveLogin();">Login</button>
-                    <button type="button" class="btn btn-warning" onclick="moveJoin();">Sign-up</button>
+                    <c:choose>
+                        <c:when test="${loginUser == null}">
+                            <button type="button" class="btn btn-outline-light me-2" onclick="location.href='/login'">Login</button>
+                            <button type="button" class="btn btn-warning" onclick="location.href='/signupform'">Sign-up</button>
+                        </c:when>
+                        <c:otherwise>
+                            <button type="button" class="btn btn-outline-light me-2" onclick="location.href='/logout'">Logout</button>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>
@@ -63,18 +69,19 @@
             <th>번호</th>
             <th>제목</th>
             <th>작성자</th>
-            <th>날짜</th>
+            <th>작성 일자</th>
             <th>조회수</th>
+            
         </tr>
         </thead>
         <tbody>
             <c:forEach var="board" items="${boards}">
                 <tr>
                     <td>${board.boardNo}</td>
-                    <!-- 게시물의 제목을 누르면 해당 게시물의 상세페이지로 이동하도록(게시물 번호를 통해 찾아가는 방식) -->
                     <td><a href="${pageContext.request.contextPath}/detail?boardNo=${board.boardNo}">${board.title}</a></td>
                     <td>${board.writer}</td>
                     <td>${board.writeDate}</td>
+                    <td>${board.viewCount}</td>
                 </tr>
             </c:forEach>
         </tbody>
@@ -87,8 +94,8 @@
         <nav aria-label="Page navigation example">
            <ul class="pagination justify-content-center">
                <c:if test="${totalPage != 0}">
-                    <li class="page-item"><a class="page-link" href="/boardList?page=${currentPage -1}">이전</a></li>
-                    <li class="page-item"><a class="page-link" href="/boardList?page=${currentPage +1}">다음</a></li>
+                    <li class="page-item"><a class="page-link" href="/boardmain?page=${currentPage -1}">이전</a></li>
+                    <li class="page-item"><a class="page-link" href="/boardmain?page=${currentPage +1}">다음</a></li>
                </c:if>
            </ul>
        </nav>

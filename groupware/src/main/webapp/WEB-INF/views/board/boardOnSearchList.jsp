@@ -55,6 +55,7 @@
 </main>
 
 <div class="container">
+    <br>
     <h3>검색된 게시물</h3>
     <table class="table table-hover">
         <thead>

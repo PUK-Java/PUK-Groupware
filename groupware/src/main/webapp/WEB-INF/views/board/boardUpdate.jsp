@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>글쓰기 페이지</title>
+    <title>수정</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -66,23 +66,19 @@
 </head>
 <body>
     <div class="container">
-        <h2>글쓰기 페이지</h2>
-        <form action="/save" method="post">
+        <h2>게시물 수정</h2>
+        <form action="/updateOnBoard" method="post">
+            <input type="hidden" name="boardNo" value="${boardNo}">
+
             <div class="form-group">
                 <label for="title">제목:</label>
-                <input type="text" id="title" name="title" required>
+                <input type="text" id="title" name="title" required value="${title}">
             </div>
             <div class="form-group">
                 <label for="content">내용:</label>
-                <textarea id="content" name="content" required></textarea>
+                <textarea id="content" name="content" required>${content}</textarea>
             </div>
-            <!-- <div class="form-group">
-                <label for="writer">작성자:</label>
-                <input type="text" id="writer" name="writer" required>
-            </div> -->
-            <form action="/index" method="get">
                 <input type="submit" value="저장">
-            </form>
         </form>
     </div>
 </body>
