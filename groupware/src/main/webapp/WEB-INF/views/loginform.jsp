@@ -1,8 +1,7 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-
-<!-- 로그인화면          -->
+<!-- 로그인화면  -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,11 +20,17 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="password">비밀번호</label>
-            <input class="form-control" type="password" name="userPw" id="password" />
+            <input class="form-control" type="password" name="userPw" id="password"/>
         </div>
         <button class="btn btn-outline-primary btn-sm" type="submit">로그인</button>
     </form>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<!-- //로그인 실패원인을 알려주는 경고창 -->
+<c:if test= "${msg != null}">
+    <script>
+        alert("${msg}");
+    </script>
+</c:if>
 </body>
 </html>

@@ -14,6 +14,10 @@
             height: 15rem;
             object-fit: fill;
         }
+          /* 검색 버튼 가로로 출력 */
+          .btn-primary {
+            white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+        }
     </style>
 </head>
 <body>
@@ -34,6 +38,7 @@
             <c:when test="${loginUser != null}">
                 ${loginUser.userName}님 반갑습니다!
                 <button type="button" class="btn btn-outline-primary" onclick="location.href='/logout'">로그아웃</button>
+                <button type="button" class="btn btn-outline-primary" onclick="location.href='/userpage'">내 정보</button>
             </c:when>
         </c:choose>
 
@@ -48,7 +53,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">홈</a>
+                    <a class="nav-link" aria-current="page" href="/">홈</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">펀딩</a>
