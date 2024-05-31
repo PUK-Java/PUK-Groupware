@@ -94,22 +94,18 @@ public class BoardInfoService {
         boardInfoJpaRepository.save(boardInfo);
     }
 
-    // @Transactional
-    // public void updateOnBoard(String title, String content, int boardNo) {
-        
-    //     BoardInfo boardInfo = entityManager.find(BoardInfo.class, boardNo);
-        
-    //     boardInfo.setTitle(title);
-    //     boardInfo.setContent(content);
-    //     entityManager.merge()
-    // }
-
-
-    
-
     @Transactional
     public void deleteOnBoard(int boardNo) {
         
         boardInfoJpaRepository.deleteById(boardNo);
     }
+
+    // 조회수 증가
+    @Transactional
+    public void viewCount(int boardNo) {
+        // 컨트롤러에서 호출받으면 BoardInfo의 setViewCount 호출
+        BoardInfo boardInfo = boardInfoJpaRepository.findById(boardNo).get();
+        boardInfo.setViewCount(boardInfo.getViewCount() + 1);
+    }
+
 }

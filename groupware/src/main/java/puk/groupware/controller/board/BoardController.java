@@ -79,6 +79,8 @@ public class BoardController  {
     public String getBoardDetail(@RequestParam("boardNo") int boardNo, Model model) {
         BoardInfo boardInfo = boardInfoService.getBoardByNo(boardNo);
         model.addAttribute("board", boardInfo);
+        // 조회수 메서드 호출
+        boardInfoService.viewCount(boardNo);
         return "/board/subpage";
     }
 

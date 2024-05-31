@@ -81,6 +81,7 @@
                     <td><a href="${pageContext.request.contextPath}/detail?boardNo=${board.boardNo}">${board.title}</a></td>
                     <td>${board.writer}</td>
                     <td>${board.writeDate}</td>
+                    <td>${board.viewCount}</td>
                 </tr>
             </c:forEach>
         </tbody>
