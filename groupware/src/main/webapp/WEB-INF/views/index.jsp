@@ -18,34 +18,41 @@
           .btn-primary {
             white-space: nowrap; /* 텍스트 줄바꿈 방지 */
         }
+        /*카드에 마우스 올려두면 조금 커지게*/
+        .card:hover{
+            transform:scale(110%);
+            transition: ease 0.2s;
+        }
+
+        /*a태그 텍스트 꾸미기 없애기*/
+        a{
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
-<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between h-100 mb-1">
- 
+<div class="container d-flex flex-wrap align-items-center justify-content-center justify-content-md-between mb-1 mt-3">
     <h1 class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         로고 위치
-        
     </h1>
-    <div class="col-md-3 text-end">
-
+    <div class="col text-end">
         <c:choose>
             <c:when test="${loginUser == null}">
                 <button type="button" class="btn btn-outline-primary" onclick="location.href='/login'">로그인</button>
                 <button type="button" class="btn btn-primary" onclick="location.href='/signupform'">회원가입</button>
                 </c:when>
             <c:when test="${loginUser != null}">
-                ${loginUser.userName}님 반갑습니다!
+                <span class="text-primary">${loginUser.userName}</span>
+                <small>님 반갑습니다!</small>
                 <button type="button" class="btn btn-outline-primary" onclick="location.href='/logout'">로그아웃</button>
                 <button type="button" class="btn btn-outline-primary" onclick="location.href='/userpage'">내 정보</button>
             </c:when>
         </c:choose>
-
-        <button type="button" class="btn btn-info" onclick="location.href='/projectregform'">프로젝트 생성</button>
+            <button type="button" class="btn btn-info" onclick="location.href='/projectregform'">프로젝트 생성</button>
     </div>
 </div>
 <nav class="navbar navbar-expand-lg border-bottom">
-    <div class="container-fluid">
+    <div class="container">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -72,12 +79,14 @@
                 </li>
             </ul>
             <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="projectName">
+                <input class="form-control me-2" type="search" placeholder="검색어를 입력해주세요" aria-label="Search" name="projectName">
+
                 <button class="btn btn-primary" type="submit">검색</button>
             </form>
         </div>
     </div>
 </nav>
+<div class="container">
 <ul class="nav nav-tabs">
     <li class="nav-item">
       <a class="nav-link" aria-current="page" href="/?projectCategory=굿즈"><strong style="text-transform:uppercase">굿즈</strong></a>
@@ -89,19 +98,32 @@
         <a class="nav-link" aria-current="page" href="/?projectCategory=전자제품"><strong style="text-transform:uppercase">전자제품</strong></a>
       </li>
   </ul>
+</div>
 
-<div class="row row-cols-2 row-cols-md-3 g-10 mx-5 mt-5">
+<div class="container">
+<div class="row row-cols-1 row-cols-md-3 g-10 mx-5 mt-5 mb-5">
 <c:forEach var="project" items="${projects}">
-    <div class="col">
-        <a href="/projectDetail/${project.projectNo}">
-            <div class="card h-100">
+    <div class="col mb-5">
+            <div class="card h-100 position-relative">
                 <img src="images/projectThumbnails/${project.image}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">${project.title}</h5>
-                    <p class="card-text">${project.description}</p>
+                    <p class="card-text">
+                        <small class="text-warning">${project.category}</small>
+                    </p>
+                    <div class="text-center mb-4">
+                        <a href ="/projectDetail/${project.projectNo}" class="h4 card-title stretched-link link-dark">${project.title}</a>
+                    </div>
+                    <p class="card-text text-center"><small>${project.description}</small></p>
+                    <p class="d-flex justify-content-center card-text text-muted">
+                        <span class="flex-fill">
+                            <small>${String.format("%,d",project.targetCost)}원</small>
+                        </span>
+                        <span clas="flex-fill">
+                            <small>종료일 : ${project.endDate}</small>
+                        </span> 
+                    </p>
                 </div>
             </div>
-        </a>
     </div>
 </c:forEach>
 </div>
@@ -122,6 +144,7 @@
            </c:if>
        </ul>
    </nav>
+</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script>
