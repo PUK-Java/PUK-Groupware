@@ -43,6 +43,7 @@ public class projectViewController {
 
         //처음 접속할 때 찜목록에 해당 프로젝트가 있는지 없는지 체크하기 위해 추가
         model.addAttribute("wishListCheck",wishListService.checkWishList(projectView));
+        
         model.addAttribute("count", supportCount);
         return "projectDetail";
     }

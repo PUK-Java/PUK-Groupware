@@ -1,8 +1,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,6 +26,20 @@
         a{
             text-decoration: none;
         }
+        /*프로그래스 바 스타일 */
+        .progress {
+        height: 5px;
+        background-color: #e9ecef;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-top: 10px;
+    }
+
+    .progress-bar {
+        height: 100%;
+        background-color: #fd2b2b;
+        transition: width 0.2s ease;
+    }
     </style>
 </head>
 <body>
@@ -106,9 +118,9 @@
     <div class="col mb-5">
             <div class="card h-100 position-relative">
                 <img src="images/projectThumbnails/${project.image}" class="card-img-top" alt="...">
-                <div class="card-body">
+                <div class="card-body pb-0">
                     <p class="card-text">
-                        <small class="text-warning">${project.category}</small>
+                        <small><small>${project.category}</small></small>
                     </p>
                     <div class="text-center mb-4">
                         <a href ="/projectDetail/${project.projectNo}" class="h4 card-title stretched-link link-dark">${project.title}</a>
@@ -116,12 +128,26 @@
                     <p class="card-text text-center"><small>${project.description}</small></p>
                     <p class="d-flex justify-content-center card-text text-muted">
                         <span class="flex-fill">
-                            <small>${String.format("%,d",project.targetCost)}원</small>
+                            <span class="text-danger">
+                                <small>
+                                ${Math.floor((projectFundingMap[project.projectNo] * project.cost* 100) / project.targetCost)}%
+                                </small>
+                            </span>
+                            <span>
+                                <small>${String.format("%,d",project.targetCost)}원</small>
+                            </span>
                         </span>
                         <span clas="flex-fill">
                             <small>종료일 : ${project.endDate}</small>
                         </span> 
                     </p>
+                </div>
+                <div class="card-body pt-0">
+                    <div class="progress" role="progressbar">
+                        <div class="progress-bar" aria-valuemax="100" aria-valuemin="0" 
+                        style="width: ${Math.floor((projectFundingMap[project.projectNo] * project.cost* 100) / project.targetCost)}%"
+                        aria-valuenow="${Math.floor((projectFundingMap[project.projectNo] * project.cost* 100) / project.targetCost)}"></div>
+                    </div>
                 </div>
             </div>
     </div>
