@@ -34,12 +34,26 @@
         overflow: hidden;
         margin-top: 10px;
     }
-
+    /*프로그래스 바 스타일*/
     .progress-bar {
         height: 100%;
         background-color: #fd2b2b;
         transition: width 0.2s ease;
     }
+
+    /* overlay를 가장 앞에 나오게 만들기*/
+    .overlay{
+        z-index: 1000;
+        left:0;
+        right: 0;
+    }
+
+    /*nav-link 글자 꾸미기 싹 다 없애기*/
+    .nav-link{
+        text-decoration: none;
+        color: black;
+    }
+
     </style>
 </head>
 <body>
@@ -71,13 +85,30 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/">홈</a>
+                    <a class="nav-link" aria-current="page" href="/"><strong>홈</strong></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">펀딩</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">투자</a>
+                    <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#categoryCollapse" aria-expanded="false" id="categoryLink"><strong>카테고리</strong></a>
+                    <div class="collapse position-fixed overlay bg-light border" id="categoryCollapse">
+                        <div class="row justify-content-center text-center">
+                            <div class="col-1">
+                                <a class="nav-link" aria-current="page" href="/?projectCategory=굿즈">
+                                    <img src="/images/icons/goods.svg" class="bi" width="32" height="23">
+                                    <strong style="text-transform:uppercase">굿즈</strong>
+                                </a>
+                            </div>
+                            <div class="col-1">
+                                <a class="nav-link " aria-current="page" href="/?projectCategory=푸드">
+                                    <img src="/images/icons/food.svg" class="bi" width="32" height="23">
+                                    <strong style="text-transform:uppercase">푸드</strong></a>
+                            </div>
+                            <div class="col-1">
+                                <a class="nav-link" aria-current="page" href="/?projectCategory=전자제품">
+                                    <img src="/images/icons/electric.svg" clas="bi" width="32" height="23">
+                                    <strong style="text-transform:uppercase">전자제품</strong></a>    
+                            </div>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -98,19 +129,7 @@
         </div>
     </div>
 </nav>
-<div class="container">
-<ul class="nav nav-tabs">
-    <li class="nav-item">
-      <a class="nav-link" aria-current="page" href="/?projectCategory=굿즈"><strong style="text-transform:uppercase">굿즈</strong></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link " aria-current="page" href="/?projectCategory=푸드"><strong style="text-transform:uppercase">푸드</strong></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" aria-current="page" href="/?projectCategory=전자제품"><strong style="text-transform:uppercase">전자제품</strong></a>
-      </li>
-  </ul>
-</div>
+
 
 <div class="container">
 <div class="row row-cols-1 row-cols-md-3 g-10 mx-5 mt-5 mb-5">
@@ -178,6 +197,31 @@
     if (link.href === window.location.href) {
         link.classList.add("active");
         link.setAttribute("aria-current", "page");
+    }
+});
+
+
+//collapse가 마우스 클릭이 아니라 hover일 때 처리하기
+const categoryLink = document.getElementById('categoryLink');
+const categoryCollapse = document.getElementById('categoryCollapse');
+
+//마우스가 올라가 있으면 
+categoryLink.addEventListener('mouseenter',() =>{
+    const bsCollapse = new bootstrap.Collapse(categoryCollapse,{
+        show:true
+    });
+});
+// 마우스가 떠난다면
+categoryCollapse.addEventListener('mouseleave',() =>{
+    const bsCollapse = bootstrap.Collapse.getInstance(categoryCollapse);
+    bsCollapse.hide();
+});
+
+//스크롤 된다면
+window.addEventListener('scroll',()=>{
+    const bsCollapse = bootstrap.Collapse.getInstance(categoryCollapse);
+    if(bsCollapse && categoryCollapse.classList.contains('show')){
+        bsCollapse.hide();
     }
 });
 </script>
