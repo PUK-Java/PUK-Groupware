@@ -25,7 +25,7 @@ public class ProjectRegController {
     @RequestMapping("/projectregform")
     public String regForm() {
         if(httpSession.getAttribute("loginUser") == null){
-            return "/login";
+            return "loginform";
         }
         return "projectregform";
     }
