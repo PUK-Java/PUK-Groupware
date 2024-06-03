@@ -7,10 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
-import lombok.RequiredArgsConstructor;
-
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import puk.groupware.model.project.Project_info;
 import puk.groupware.model.user.User_Info;
 import puk.groupware.service.project.ProjectSupportService;
@@ -27,7 +25,7 @@ public class projectViewController {
     private final ProjectSupportService supportService;
 
 
- 
+
     @GetMapping("/projectDetail/{id}")
     public String prjview(@PathVariable("id") Long id, Model model) {
         //프로젝트 객체 찾기
