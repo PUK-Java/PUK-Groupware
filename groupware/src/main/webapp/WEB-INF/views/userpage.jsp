@@ -84,31 +84,45 @@
                 </select>
                 </div>
             </div>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <c:choose>
-                        <c:when test="${verify == null}">
-                            <button class="btn btn-primary btn-lg btn-block " type="button" onclick="location.href='/verifyUser'">회원 정보 수정</button>
-                        </c:when>
-                        <c:when test="${verify != null}">
-                            <!-- 수정 버튼 누르면 readonly 해제 -->
-                            <c:if test="${verify != null}">
-                                <script>
-                                    var items = document.getElementsByClassName("form-control");
-                                    for(var i=0; i< items.length; i++){
-                                        items[i].readOnly = false;
-                                    }
-                                </script>
-                            </c:if>
-                            <button class="btn btn-primary btn-lg btn-block " type="submit">회원 정보 수정</button>
-                            <button class="btn btn-secondary btn-lg btn-block " type="reset">수정 사항 초기화</button>
-                            <button class="btn btn-danger btn-lg btn-block " type="button" onclick="deleteUser()">회원 정보 삭제</button>
-                        </c:when>
-                    </c:choose>
-                </div>
-            </form>
-        <!-- 결제 내역 -->
-        <div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <c:choose>
+                    <c:when test="${verify == null}">
+                        <button class="btn btn-primary btn-lg btn-block " type="button" onclick="location.href='/verifyUser'">회원 정보 수정</button>
+                    </c:when>
+                    <c:when test="${verify != null}">
+                        <!-- 수정 버튼 누르면 readonly 해제 -->
+                        <c:if test="${verify != null}">
+                            <script>
+                                var items = document.getElementsByClassName("form-control");
+                                for(var i=0; i< items.length; i++){
+                                    items[i].readOnly = false;
+                                }
+                            </script>
+                        </c:if>
+                        <button class="btn btn-primary btn-lg btn-block " type="submit">회원 정보 수정</button>
+                        <button class="btn btn-secondary btn-lg btn-block " type="reset">수정 사항 초기화</button>
+                        <button class="btn btn-danger btn-lg btn-block " type="button" onclick="deleteUser()">회원 정보 삭제</button>
+                    </c:when>
+                </c:choose>
+            </div>
+        </form>
+        <!-- 위시리스트 -->
+        <div class="row row-cols-2 row-cols-md-3 g-10 mx-5 mt-5">
             <h2>위시리스트</h2>
+                ${wishList.wishListId}
+             <c:forEach var="wishList" items="${wishList}">
+                <div class="col">
+                    <a href="/projectDetail/${project.projectNo}">
+                        <div class="card h-100">
+                            <img src="images/projectThumbnails/${project.image}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">${project.title}</h5>
+                                <p class="card-text">${project.description}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </c:forEach>
         </div>
     </div>
 </body>

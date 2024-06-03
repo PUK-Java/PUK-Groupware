@@ -1,5 +1,6 @@
 package puk.groupware.service.wishList;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -30,6 +31,7 @@ public class WishListService {
     public void deleteById(WishListId wishListId){
         wishList_jpaRepository.deleteById(wishListId);
     }
+
 
 
     //위시리스트가 존재하면 삭제하고 없으면 추가하는 메소드
@@ -64,4 +66,6 @@ public class WishListService {
             return false;
         }
     }
+
+  
 }

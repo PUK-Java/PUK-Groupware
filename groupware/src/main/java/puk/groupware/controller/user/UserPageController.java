@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import jakarta.servlet.http.HttpSession;
 import puk.groupware.model.user.User_Info;
 import puk.groupware.service.user.UserPageService;
+import puk.groupware.service.wishList.WishListService;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,15 +20,18 @@ public class UserPageController {
     
     private final UserPageService userPageService;
     private final HttpSession httpSession;
+    private final WishListService wishListService;
 
     @Autowired
-    UserPageController(UserPageService userPageService, HttpSession httpSession){
+    UserPageController(UserPageService userPageService, HttpSession httpSession, WishListService wishListService){
         this.userPageService = userPageService;
         this.httpSession = httpSession;
+        this.wishListService = wishListService;
     }
 
     @GetMapping("/userpage")
-    public String getUserpage() {
+    public String getUserpage(){
+        wishListService.findById(null);
         return "userpage";
     }
 
@@ -73,5 +78,4 @@ public class UserPageController {
         httpSession.removeAttribute("verify");
         return "redirect:/";
     }
-    
 }
