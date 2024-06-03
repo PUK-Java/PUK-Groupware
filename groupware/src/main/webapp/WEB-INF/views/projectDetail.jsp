@@ -321,7 +321,6 @@
         //응답을 받아서 처리합시다.
         if(response.ok){
             const data = await response.json();
-            console.log(data.projectNo);
         }
     }
     
