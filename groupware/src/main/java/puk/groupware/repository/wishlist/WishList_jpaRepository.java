@@ -16,4 +16,12 @@ public interface WishList_jpaRepository extends JpaRepository<WishList, WishList
 
     
     void deleteById(WishListId id);
+<<<<<<< Updated upstream
+=======
+
+    Optional<WishList> findByWishListIdProjectInfoProjectNo(Long projectNo);
+
+    Optional<WishList> findByWishListIdUserInfoUserId(String userId);
+
+>>>>>>> Stashed changes
 }
