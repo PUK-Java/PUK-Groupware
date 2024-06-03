@@ -19,6 +19,7 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import puk.groupware.model.user.User_Info;
+// 프로젝트 후원 관리 Table
 
 @Entity
 @Table(name = "SPON")

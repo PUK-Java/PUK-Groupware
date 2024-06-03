@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지사항 게시판 메인</title>
+    <title>QnA 게시판 메인</title>
     <link rel="stylesheet" href="/css/boardStyle.css">
 </head>
 <body>
@@ -41,7 +41,7 @@
     
     <div class="container">
         <br>
-        <h3>공지사항</h3>
+        <h3>QnA</h3>
         <table class="table">
             <thead>
             <tr>
@@ -53,31 +53,32 @@
             </tr>
             </thead>
             <tbody>
-                <c:forEach var="board" items="${boards}">
+                <c:forEach var="board" items="${qnaBoards}">
                     <tr>
-                        <td>${board.boardNo}</td>
-                        <td><a href="${pageContext.request.contextPath}/detail?boardNo=${board.boardNo}">${board.title}</a></td>
-                        <td>${board.writer}</td>
-                        <td>${board.writeDate}</td>
+                        <td>${board.qnaNo}</td>
+                        <!-- <td>${board.qnaTitle}</td> -->
+                        <td><a href="${pageContext.request.contextPath}/qnadetail?qnaNo=${board.qnaNo}">${board.qnaTitle}</a></td>
+                        <td>${board.qnaWriter.userId}</td>
+                        <td>${board.qnaWriteDate}</td>
                         <td>${board.viewCount}</td>
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
         <hr/>
-        <form action="/write" method="get" style="display: inline;">
+        <form action="/qnaWrite" method="get" style="display: inline;">
             <button type="submit" class="btn btn-default btn-normal pull-right">글쓰기</button>
         </form>
         <div class="center text-center">
             <nav aria-label="Page navigation example">
                <ul class="pagination">
                    <c:if test="${totalPage != 0}">
-                        <li class="page-item"><a class="page-link" href="/boardmain?page=${currentPage -1}">이전</a></li>
-                        <li class="page-item"><a class="page-link" href="/boardmain?page=${currentPage +1}">다음</a></li>
+                        <li class="page-item"><a class="page-link" href="/QnAIndex?page=${currentPage -1}">이전</a></li>
+                        <li class="page-item"><a class="page-link" href="/QnAIndex?page=${currentPage +1}">다음</a></li>
                    </c:if>
                </ul>
            </nav>
        </div>
     </div>
-    </body>
-    </html>
+</body>
+</html>
