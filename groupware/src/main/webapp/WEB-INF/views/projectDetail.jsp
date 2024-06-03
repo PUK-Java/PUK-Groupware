@@ -85,7 +85,7 @@
             color: #6c757d;
             border-radius: 0.25rem;
             border: 1px solid rgba(0, 0, 0, 0.1);
-            padding: 20px 20px;
+            padding: 13px 20px;
             align-items: center;
             transition: box-shadow 0.2s;
         }
@@ -101,7 +101,10 @@
             text-decoration: none;
         }
         
-   
+        /*commentTextAreaResize 불가능하게*/
+        #commentContent{
+            resize: none;
+        }
     </style>
 </head>
 <body>
@@ -204,11 +207,28 @@
                     <c:otherwise>
                         <div class="row">
                             <div class="col-8">
-                                <a href="#" class="d-block">
-                                    <button class="d-flex btn btn-outline-secondary w-100 btn-login justify-content-between" disabled>
+                                <button class="d-flex btn btn-outline-secondary w-100 btn-login justify-content-between" data-bs-toggle="modal" data-bs-target="#commentModal">
                                     <span>글쓰기</span>
-                                    </button>
-                                </a>
+                                </button>
+                                <div class="modal fade" id="commentModal" data-bs-backdrop="static" data-bs-keyboard="false">
+                                    <div class="modal-dialog">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="commentModalTitle">글쓰기</h5>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-floating">
+                                                <textarea class="form-control" placeholder="코멘트를 남겨주세요" id="commentContent" style="height: 300px"></textarea>
+                                                <label for="commentContent">코멘트</label>
+                                              </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-primary">등록</button>
+                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
                             </div>
                         </div>
                     </c:otherwise>
