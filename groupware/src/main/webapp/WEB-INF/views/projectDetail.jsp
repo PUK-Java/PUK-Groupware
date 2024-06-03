@@ -221,9 +221,9 @@
                                             <div class="form-floating">
                                                 <textarea class="form-control" placeholder="코멘트를 남겨주세요" id="commentContent" style="height: 300px"></textarea>
                                                 <label for="commentContent">코멘트</label>
-                                              </div>
+                                            </div>
                                         <div class="modal-footer">
-                                          <button type="button" class="btn btn-primary">등록</button>
+                                          <button type="button" class="btn btn-primary" onclick="commentReg()">등록</button>
                                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                                         </div>
                                       </div>
