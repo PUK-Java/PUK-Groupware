@@ -42,6 +42,17 @@ public class projectViewController {
         //처음 접속할 때 찜목록에 해당 프로젝트가 있는지 없는지 체크하기 위해 추가
         model.addAttribute("wishListCheck",wishListService.checkWishList(projectView));
         
+        //로그인 한 유저가 있다면 로그인한 유저가 해당 프로젝트를 후원 했는지 여부를 확인
+        if(HttpSession.getAttribute("loginUser") != null){
+            //유저 이름 구하기
+            User_Info loginUser= (User_Info) HttpSession.getAttribute("loginUser");
+            String loginUserId = loginUser.getUserId();
+
+            //해당 유저와 해당 페이지의 프로젝트 정보로 후원했는지 여부를 체크
+            boolean supportCheck = supportService.exexistsByProjectNoandUserId(id, loginUserId);
+            model.addAttribute("supportCheck", supportCheck);
+        }
+
         model.addAttribute("count", supportCount);
         return "projectDetail";
     }

@@ -79,6 +79,28 @@
             background-color: #5a6268;
             border-color: #4e555b;
         }
+        /* 로그인 해주십시오.에 대한 글씨 위치,색 테두리, 테두리 색 css */
+        .btn-login{
+            text-align: left;
+            color: #6c757d;
+            border-radius: 0.25rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 20px 20px;
+            align-items: center;
+            transition: box-shadow 0.2s;
+        }
+        /* 배경화면 바뀌는게 맘에 안 들어서 그냥 쉐도우 효과만 주기 */
+        .btn-login:hover{
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+            background-color: white;
+            color : #6c757d; 
+        }
+        /*버튼에서 밑줄 없애기*/
+        a.d-block{
+            text-decoration: none;
+        }
+        
    
     </style>
 </head>
@@ -145,10 +167,53 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <p><h2>제품설명</h2></p>
-                    ${data.description}
+            </div>
+                <div class="h2 my-3">
+                    <strong>프로젝트 소개</strong>
                 </div>
+                <div class="fs-6 mx-5 my-5">
+                    <p>${data.description}</p>
+                </div>
+            <div class="h2 my-3">
+                <strong>프로젝트 커뮤니티</strong>
+            </div>
+            <div class="mt-2 mx-5 mb-5">
+                <c:choose>
+                    <c:when test="${loginUser == null}">
+                        <div class="row">
+                            <div class="col-8">
+                                <a href="/login" class="d-block">
+                                    <button class="d-flex btn btn-outline-secondary w-100 btn-login justify-content-between">
+                                    <span>로그인해주세요.</span>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </c:when>
+                    <c:when test="${!supportCheck}">
+                        <div class="row">
+                            <div class="col-8">
+                                <a class="d-block">
+                                    <button class="d-flex btn btn-outline-secondary w-100 btn-login justify-content-between" disabled>
+                                    <span>후원자만 글을 쓸 수 있습니다.</span>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="row">
+                            <div class="col-8">
+                                <a href="#" class="d-block">
+                                    <button class="d-flex btn btn-outline-secondary w-100 btn-login justify-content-between" disabled>
+                                    <span>글쓰기</span>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+            </div>
             </div>
         </div>
     </main>

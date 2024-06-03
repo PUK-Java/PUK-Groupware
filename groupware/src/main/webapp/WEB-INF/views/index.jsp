@@ -94,17 +94,20 @@
                             <div class="col-1">
                                 <a class="nav-link" aria-current="page" href="/?projectCategory=굿즈">
                                     <img src="/images/icons/goods.svg" class="bi" width="32" height="23">
+                                    <br>
                                     <strong style="text-transform:uppercase">굿즈</strong>
                                 </a>
                             </div>
                             <div class="col-1">
                                 <a class="nav-link " aria-current="page" href="/?projectCategory=푸드">
                                     <img src="/images/icons/food.svg" class="bi" width="32" height="23">
+                                    <br>
                                     <strong style="text-transform:uppercase">푸드</strong></a>
                             </div>
                             <div class="col-1">
                                 <a class="nav-link" aria-current="page" href="/?projectCategory=전자제품">
                                     <img src="/images/icons/electric.svg" clas="bi" width="32" height="23">
+                                    <br>
                                     <strong style="text-transform:uppercase">전자제품</strong></a>    
                             </div>
                         </div>

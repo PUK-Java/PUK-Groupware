@@ -57,4 +57,9 @@ public class ProjectSupportService {
             projectRepository.save(project);
         }
     }
+    
+    // 이 유저가 이 프로젝트에 후원했는지 여부를 찾는 메소드
+    public boolean exexistsByProjectNoandUserId(Long rojectNo,String usreId){
+        return supportRepository.existsByProjectNoProjectNoAndUserIdUserId(rojectNo, usreId);
+    }
 }
