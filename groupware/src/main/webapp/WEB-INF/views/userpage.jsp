@@ -106,14 +106,19 @@
                 </c:choose>
             </div>
         </form>
-        <!-- 위시리스트 -->
-        <div class="row row-cols-2 row-cols-md-3 g-10 mx-5 mt-5">
+    </div>
+    <!-- 위시리스트 --> 
+    <div class="container">
+        <div style="margin-top: 32px;">
             <h2>위시리스트</h2>
-             <c:forEach var="projectList" items="${projectLists}">
+        </div>
+        <div class="row row-cols-2 row-cols-md-3 g-10 mx-5 mt-5">   
+            <c:forEach var="projectList" items="${projectLists}">
                 <div class="col">
                     <a href="/projectDetail/${projectList.projectNo}">
                         <div class="card h-100">
-                            
+                            ${projectList.projectNo}
+                            <img src="images/projectThumbnails/${projectList.image}">
                             <div class="card-body">
                             </div>
                         </div>

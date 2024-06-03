@@ -28,6 +28,7 @@ public class WishListService {
         return wishList_jpaRepository.findById(wishListId);
     }
 
+    @Transactional
     public List<WishList> findByWishListIdUserInfoUserId(String userId){
         return wishList_jpaRepository.findByWishListIdUserInfoUserId(userId);
     }

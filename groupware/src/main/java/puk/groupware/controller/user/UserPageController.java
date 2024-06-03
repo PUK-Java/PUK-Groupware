@@ -43,13 +43,9 @@ public class UserPageController {
     public String getUserpage(Model model){
         User_Info currentUser = (User_Info) httpSession.getAttribute("loginUser");
         String userId = currentUser.getUserId();
-        log.error(userId);
         List<WishList> wishLists = wishListService.findByWishListIdUserInfoUserId(userId);
-        log.error("123");
         List<Project_info> projectLists = new ArrayList<Project_info>();
-        log.error("321");
         for(WishList wishList : wishLists){
-            log.error("333");
             projectLists.add(wishList.getWishListId().getProjectInfo());
         }
         model.addAttribute("projectLists", projectLists);
