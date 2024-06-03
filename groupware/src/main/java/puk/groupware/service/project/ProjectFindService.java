@@ -27,7 +27,7 @@ public class ProjectFindService {
         this.supportService = supportService;
     }
 
-    //조건 없이 아이디만으로 찾기
+    //조건 없이 기본키로 찾기
     public Project_info findById(Long projectNo){
         return pRepository.findById(projectNo).orElseThrow();
     }

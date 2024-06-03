@@ -16,11 +16,15 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 import puk.groupware.model.project.Project_info;
 import puk.groupware.model.user.User_Info;
 
 @Table(name = "PROJECTCOMMENT")
 @Entity
+@Getter
+@Setter
 public class ProjectComment {
     
     @Id

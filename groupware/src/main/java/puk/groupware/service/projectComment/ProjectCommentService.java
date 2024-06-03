@@ -3,9 +3,12 @@ package puk.groupware.service.projectComment;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
+import puk.groupware.model.project.Project_info;
 import puk.groupware.model.projectComment.ProjectComment;
+import puk.groupware.model.user.User_Info;
 import puk.groupware.repository.projectComment.ProjectCommentJpaRepository;
 
 @Service
@@ -28,5 +31,17 @@ public class ProjectCommentService {
     //프로젝트 번호로 카운트 세기
     public int countByProjectInfoProjectNo(Long projectNo){
         return projectCommentJpaRepository.countByProjectInfoProjectNo(projectNo);
+    }
+
+    //저장하기
+    @Transactional
+    public void save(Project_info project,User_Info user,String commentContent){
+        ProjectComment projectComment = new ProjectComment();
+
+        projectComment.setProjectInfo(project);
+        projectComment.setUserInfo(user);
+        projectComment.setProjectCommentContent(commentContent);
+        
+        projectCommentJpaRepository.save(projectComment);
     }
 }

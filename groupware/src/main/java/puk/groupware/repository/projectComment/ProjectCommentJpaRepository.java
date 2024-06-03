@@ -19,4 +19,5 @@ public interface ProjectCommentJpaRepository extends JpaRepository<ProjectCommen
 
     //프로젝트 번호로 count세기
     int countByProjectInfoProjectNo(Long projectNo);
+
 }

@@ -142,10 +142,10 @@
                                 <div class="col text-center">
                                 <c:choose>
                                     <c:when test="${wishListCheck}">
-                                        <button class="btn btn-secondary w-50 ms-2" id ="supportButton" data-project-no=${data.projectNo} onclick="toggleWishList(this)" data-user-id=${sessionScope.loginUser.userId}>찜해제</button>
+                                        <button class="btn btn-secondary w-50 ms-2" id ="wishButton" data-project-no=${data.projectNo} onclick="toggleWishList(this)" data-user-id=${sessionScope.loginUser.userId}>찜해제</button>
                                     </c:when>
                                     <c:otherwise>
-                                        <button class="btn btn-success w-50 ms-2" id="supportButton" data-project-no="${data.projectNo}" onclick="toggleWishList(this)" data-user-id="${sessionScope.loginUser.userId}">찜하기</button>
+                                        <button class="btn btn-success w-50 ms-2" id="wishButton" data-project-no="${data.projectNo}" onclick="toggleWishList(this)" data-user-id="${sessionScope.loginUser.userId}">찜하기</button>
                                     </c:otherwise>
                                 </c:choose>
                                 </div>
@@ -223,7 +223,7 @@
                                                 <label for="commentContent">코멘트</label>
                                             </div>
                                         <div class="modal-footer">
-                                          <button type="button" class="btn btn-primary" onclick="commentReg()">등록</button>
+                                          <button type="button" class="btn btn-primary" onclick="commentReg(this)">등록</button>
                                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                                         </div>
                                       </div>
@@ -249,29 +249,43 @@
     </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
-    let loginUser = document.getElementById('supportButton').getAttribute('data-user-id');
+
+    //로그인한 유저 id 찾기. 없으면 빈 문자열입니다.
+    let loginUser = document.getElementById('wishButton').getAttribute('data-user-id');
+
+    //toggleWishList 찜하기/ 찜해제 버튼을 왔다갔다하기 위해 Fetch API를 사용해서 보냅니다.
     async function toggleWishList(button){
+        //로그인 했는지 체크
         if(loginUser !== ''){
+            //필요한 데이터를 변수에 저장합니다.
             const loginUser = button.getAttribute('data-user-id');
             const project = button.getAttribute('data-project-no');
             const user = button.getAttribute('data-user-id');
+            //여기서 response는 fetch API를 보내고 컨트롤러에서 반환한 데이터를 가지고 있습니다.
             const response = await fetch('/wishList/toggle',{
+                //보내는 방식은 POST
                 method :'POST',
+                //헤더에서 이 컨텐츠 타입이 json 타입이라는 명시합니다.
                 headers : {
                     'Content-Type' : 'application/json'
                 },
+                //바디에 원하는 데이터들은 실어 보냅니다.
                 body : JSON.stringify({
                     projectNo : project,
                     userId : user
                 })
             });
+            //돌려받은 response가 ok라면 response를 json으로 변화시켜 작성합니다.
+            //response 안의 데이터 접근은 객체.속성 과 같은 방식으로 접근합니다.
             if(response.ok){
                 const data = await response.json();
                 if(data.isWished){
+                    //조건에 따라 버튼의 색, 텍스트를 변화시킵니다.
                     button.innerText = '찜해제';
                     button.classList.replace('btn-success','btn-secondary');
                     alert('목록에 추가 됐습니다.');
                 }else{
+                    //조건에 따라 버튼의 색, 텍스트를 변화시킵니다.
                     button.innerText= '찜하기';
                     button.classList.replace('btn-secondary','btn-success');
                     alert('목록에서 제거 됐습니다.');
@@ -284,6 +298,35 @@
             location.replace("/login");
         }
     }
+
+    //코멘트 등록을 위한 API를 보냅니다.
+    async function commentReg(button){
+        //세션에서 로그인 유저의 아이디를 찾습니다.
+        //글쓰기는 반드시 로그인 해야 가능하므로 null값이나 빈 문자열이 될 일은 없습니다.
+        const longinUserId = "${sessionScope.loginUser.userId}";
+        const projectNo = "${data.projectNo}";
+        const commentContent = document.getElementById('commentContent').value;
+        const response = await fetch('/projectCommentReg',{
+            method : 'POST',
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify({
+                projectNo : projectNo,
+                loginUserId : longinUserId,
+                commentContent : commentContent
+            })
+        });
+
+        //응답을 받아서 처리합시다.
+        if(response.ok){
+            const data = await response.json();
+            console.log(data.projectNo);
+        }
+    }
+    
+
+
     const end = document.getElementById('end123');
     const state1 = document.getElementById('state123');
 
