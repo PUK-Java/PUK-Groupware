@@ -31,7 +31,6 @@ public class UserPageController {
 
     @GetMapping("/userpage")
     public String getUserpage(){
-        wishListService.findById(null);
         return "userpage";
     }
 
@@ -49,7 +48,7 @@ public class UserPageController {
             httpSession.setAttribute("verify", "ok");
             System.out.println(httpSession.getAttribute("verify"));
             return "/userpage";
-        }else return "redirect:/verifyuser";        
+        }else return "redirect:/userpage";        
     }
     
     //회원정보 수정
