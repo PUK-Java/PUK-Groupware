@@ -1,11 +1,20 @@
 package puk.groupware.controller.user;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
+import puk.groupware.model.project.Project_info;
 import puk.groupware.model.user.User_Info;
+import puk.groupware.model.wishlist.WishList;
+import puk.groupware.model.wishlist.WishListId;
 import puk.groupware.service.user.UserPageService;
 import puk.groupware.service.wishList.WishListService;
 
@@ -16,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
+@Slf4j
 public class UserPageController {
     
     private final UserPageService userPageService;
@@ -30,7 +40,19 @@ public class UserPageController {
     }
 
     @GetMapping("/userpage")
-    public String getUserpage(){
+    public String getUserpage(Model model){
+        User_Info currentUser = (User_Info) httpSession.getAttribute("loginUser");
+        String userId = currentUser.getUserId();
+        log.error(userId);
+        List<WishList> wishLists = wishListService.findByWishListIdUserInfoUserId(userId);
+        log.error("123");
+        List<Project_info> projectLists = new ArrayList<Project_info>();
+        log.error("321");
+        for(WishList wishList : wishLists){
+            log.error("333");
+            projectLists.add(wishList.getWishListId().getProjectInfo());
+        }
+        model.addAttribute("projectLists", projectLists);
         return "userpage";
     }
 
@@ -46,7 +68,6 @@ public class UserPageController {
         User_Info currentUser = (User_Info) httpSession.getAttribute("loginUser");
         if(currentUser.getUserPw().equals(password)){
             httpSession.setAttribute("verify", "ok");
-            System.out.println(httpSession.getAttribute("verify"));
             return "/userpage";
         }else return "redirect:/userpage";        
     }

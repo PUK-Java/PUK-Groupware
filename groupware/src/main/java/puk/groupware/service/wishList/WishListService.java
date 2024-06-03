@@ -28,11 +28,13 @@ public class WishListService {
         return wishList_jpaRepository.findById(wishListId);
     }
 
+    public List<WishList> findByWishListIdUserInfoUserId(String userId){
+        return wishList_jpaRepository.findByWishListIdUserInfoUserId(userId);
+    }
+
     public void deleteById(WishListId wishListId){
         wishList_jpaRepository.deleteById(wishListId);
     }
-
-
 
     //위시리스트가 존재하면 삭제하고 없으면 추가하는 메소드
     @Transactional

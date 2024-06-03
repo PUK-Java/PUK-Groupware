@@ -109,15 +109,12 @@
         <!-- 위시리스트 -->
         <div class="row row-cols-2 row-cols-md-3 g-10 mx-5 mt-5">
             <h2>위시리스트</h2>
-                ${wishList.wishListId}
-             <c:forEach var="wishList" items="${wishList}">
+             <c:forEach var="projectList" items="${projectLists}">
                 <div class="col">
-                    <a href="/projectDetail/${project.projectNo}">
+                    <a href="/projectDetail/${projectList.projectNo}">
                         <div class="card h-100">
-                            <img src="images/projectThumbnails/${project.image}" class="card-img-top" alt="...">
+                            
                             <div class="card-body">
-                                <h5 class="card-title">${project.title}</h5>
-                                <p class="card-text">${project.description}</p>
                             </div>
                         </div>
                     </a>
