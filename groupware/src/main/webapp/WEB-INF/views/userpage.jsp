@@ -26,7 +26,7 @@
     <form class="validation-form" action="/updateUser" method="post" onsubmit="return confirm('회원정보를 수정하시겠습니까?')">
     <!-- 메인페이지 -->
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button class="btn btn-primary btn-lg btn-block " type="button" onclick="location.href='/'">메인으로</button>
+        <button class="btn btn-primary btn-lg btn-block " type="button" onclick="location.href='/returnMain'">메인으로</button>
     </div>
     <h2>유저 페이지</h2><hr>
         <div class="row">
@@ -86,9 +86,18 @@
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <c:choose>
                     <c:when test="${verify == null}">
-                        <button class="btn btn-primary btn-lg btn-block " type="button" onclick="location.href='/verifyuser'">회원 정보 수정</button>
+                        <button class="btn btn-primary btn-lg btn-block " type="button" onclick="location.href='/verifyUser'">회원 정보 수정</button>
                     </c:when>
                     <c:when test="${verify != null}">
+                        <!-- 수정 버튼 누르면 readonly 해제 -->
+                        <c:if test="${verify != null}">
+                            <script>
+                                var items = document.getElementsByClassName("form-control");
+                                for(var i=0; i< items.length; i++){
+                                    items[i].readOnly = false;
+                                }
+                            </script>
+                        </c:if>
                         <button class="btn btn-primary btn-lg btn-block " type="submit">회원 정보 수정</button>
                         <button class="btn btn-secondary btn-lg btn-block " type="reset">수정 사항 초기화</button>
                         <button class="btn btn-danger btn-lg btn-block " type="button" onclick="deleteUser()">회원 정보 삭제</button>
@@ -104,17 +113,10 @@
 <script>
     //삭제 시 확인 메시지
     function deleteUser(){
-        if(prompt("삭제하려면 비밀번호를 입력하세요") == "${loginUser.userPw}"){
+        if(confirm("회원정보를 삭제하시겠습니까?") == true){
             return location.href='/deleteUser';
         }
     }
-
-    //수정 버튼 누르면 readonly 해제
-        var items = document.getElementsByClassName("form-control");
-        for(var i=0; i< items.length; i++){
-            items[i].readOnly = false;
-        }
-
 </script>
 <!-- 로그인 전에는 사용할 수 없도록 메인으로 리다이렉트 -->
 <c:if test="${loginUser == null}">

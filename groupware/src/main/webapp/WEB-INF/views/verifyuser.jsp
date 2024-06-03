@@ -9,7 +9,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/userpwcheck" method="post">
+    <form action="/userPwCheck" method="post">
         <input type="password" name="password">
         <input type="submit">
     </form>

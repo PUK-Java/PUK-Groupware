@@ -2,15 +2,12 @@ package puk.groupware.controller.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpSession;
 import puk.groupware.model.user.User_Info;
 import puk.groupware.service.user.UserPageService;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -34,19 +31,19 @@ public class UserPageController {
     }
 
     //비밀번호 확인 창
-    @GetMapping("/verifyuser")
+    @GetMapping("/verifyUser")
     public String verifyUser() {
         return "verifyuser";
     }
     
     //비밀번호 확인 후 다시 유저페이지로
-    @PostMapping("/userpwcheck")
+    @PostMapping("/userPwCheck")
     public String pwCheck(@RequestParam("password") String password) {
         User_Info currentUser = (User_Info) httpSession.getAttribute("loginUser");
         if(currentUser.getUserPw().equals(password)){
             httpSession.setAttribute("verify", "ok");
             System.out.println(httpSession.getAttribute("verify"));
-            return "redirect:/userpage";
+            return "/userpage";
         }else return "redirect:/verifyuser";        
     }
     
@@ -68,6 +65,13 @@ public class UserPageController {
         httpSession.removeAttribute("loginUser");
         httpSession.removeAttribute("verify");
         return "redirect:";
+    }
+    
+    //메인으로
+    @GetMapping("returnMain")
+    public String returnMain() {
+        httpSession.removeAttribute("verify");
+        return "redirect:/";
     }
     
 }
