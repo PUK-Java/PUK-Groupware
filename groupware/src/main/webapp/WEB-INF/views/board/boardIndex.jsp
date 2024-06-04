@@ -87,9 +87,12 @@
         </tbody>
     </table>
     <hr/>
-    <form action="/write" method="get" style="display: inline;">
-        <button type="submit" class="btn btn-default pull-right">글쓰기</button>
-    </form>
+    <!-- 공지사항 게시판은 관리자 계정으로만 게시물 작성 가능하도록, 버튼 노출 조절 -->
+    <c:if test="${isAdmin}">
+        <form action="/write" method="get" style="display: inline;">
+            <button type="submit" class="btn btn-default pull-right">글쓰기</button>
+        </form>
+    </c:if>
     <div class="center text-center">
         <nav aria-label="Page navigation example">
            <ul class="pagination justify-content-center">

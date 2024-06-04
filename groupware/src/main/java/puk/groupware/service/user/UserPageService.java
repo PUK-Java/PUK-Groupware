@@ -25,4 +25,11 @@ public class UserPageService {
     public int deleteUser(String userId){
         return uJpaRepository.deleteByUserId(userId);
     }
+
+    // 관리자 계정으로 로그인 됐는지 확인하는 용도.
+    // '24. 6. 4. 1125 허재혁 작성
+    public boolean isAdmin(String userId) {
+        User_Info user = uJpaRepository.findById(userId).orElse(null);
+        return user != null && "admin".equalsIgnoreCase(user.getAdmin());
+    }
 }

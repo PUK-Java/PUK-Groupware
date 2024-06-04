@@ -48,9 +48,6 @@ public class BoardInfoService {
     public BoardInfo saveBoardUpdate(int boardNo, String title, String content) {
         BoardInfo boardInfo = boardInfoJpaRepository.findById(boardNo).get();
         boardInfo.setTitle(title);
-        System.out.println(title);
-        System.out.println(boardInfo.getTitle());
-
         boardInfo.setContent(content);
         return boardInfoJpaRepository.save(boardInfo);
     }
