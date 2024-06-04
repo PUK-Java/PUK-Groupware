@@ -12,7 +12,7 @@ import puk.groupware.repository.projectComment.ProjectCommentJpaRepository;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class JpaTest {
-    @Autowired
+
     @MockBean
     private ProjectCommentJpaRepository pcj;
 
