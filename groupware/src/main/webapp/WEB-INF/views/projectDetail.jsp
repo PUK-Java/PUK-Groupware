@@ -272,7 +272,7 @@
                 <div class="modal-body">
                     <div class="form-floating">
                         <textarea class="form-control" placeholder="코멘트를 남겨주세요" id="commentContent" style="height: 300px" maxlength="100"></textarea>
-                        <label for="commentContent">코멘트</label>
+                        <label for="commentContent">코멘트(100자 제한)</label>
                     </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-primary" onclick="commentReg(this)">등록</button>
@@ -417,7 +417,7 @@
 
     //코멘트 삭제를 위한 API를 보냅니다.
     async function deleteComment (projectCommentId){
-        const response = await fetch('/deleteComment/${projectCommentId}',
+        const response = await fetch('/deleteComment/' + projectCommentId,
         {
             method : "DELETE",
             headers: {

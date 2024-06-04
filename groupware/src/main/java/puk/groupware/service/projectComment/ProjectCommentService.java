@@ -64,4 +64,9 @@ public class ProjectCommentService {
         PageRequest pageable = PageRequest.of(0,5,Sort.by("projectCommentWritDateTime").descending());
         return findByProjectInfoProjectNoPage(projectNo, pageable);
     }
+
+    //삭제하기
+    public void deleteById(Long projectCommentId){
+        projectCommentJpaRepository.deleteById(projectCommentId);
+    }
 }

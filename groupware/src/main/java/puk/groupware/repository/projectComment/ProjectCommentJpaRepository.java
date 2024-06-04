@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import puk.groupware.model.projectComment.ProjectComment;
 
@@ -27,4 +28,8 @@ public interface ProjectCommentJpaRepository extends JpaRepository<ProjectCommen
 
     //페이지 가져오기
     Page<ProjectComment> findByProjectInfoProjectNo(Long projectNo,Pageable page);
+
+    //기본키로 삭제하기
+    @Transactional
+    void deleteById(Long projectCommentNo);
 }
