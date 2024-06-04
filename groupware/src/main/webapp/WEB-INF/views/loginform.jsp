@@ -42,7 +42,7 @@
             <h2>로그인</h2>
             <!-- 메인페이지 -->
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button class="btn btn-outline-secondary btn-block" type="button" onclick="location.href='/'">메인으로</button>
+                <button class="btn btn-primary btn-lg btn-block " type="button" onclick="location.href='/'">메인으로</button>
             </div>
             <form action="/loginRequest" method="post">
                 <div class="mb-3">
@@ -53,8 +53,8 @@
                     <label class="form-label" for="password">비밀번호</label>
                     <input class="form-control" type="password" name="userPw" id="password"/>
                 </div>
-                <button class="btn btn-primary btn-lg btn-block" type="submit">로그인</button>
-                <button class="btn btn-outline-primary btn-lg btn-block" type="button" onclick="location.href='/signupform'">회원가입</button>
+                <button class="btn btn-outline-primary btn-sm" type="submit">로그인</button>
+                <button class="btn btn-outline-primary btn-sm" type="button" onclick="location.href='/signupform'">회원가입</button>
             </form>
         </div>
     </div>

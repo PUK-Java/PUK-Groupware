@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import puk.groupware.model.board.BoardInfo;
 import puk.groupware.model.qna.QnaInfo;
 import puk.groupware.model.user.User_Info;
 import puk.groupware.repository.qna.QnaRepository;
@@ -26,8 +27,8 @@ public class QnaService {
     
 
     public void getQnaPagingBoard(int page, Model model) {
-        PageRequest pageable = PageRequest.of(page,10,Sort.by("qnaNo").descending());
-        Page<QnaInfo> pageNumber = qnaRepository.findAll(pageable);
+        PageRequest pagable = PageRequest.of(page,10,Sort.by("qnaNo").descending());
+        Page<QnaInfo> pageNumber = qnaRepository.findAll(pagable);
         List<QnaInfo> qnaBoards = pageNumber.getContent();
         model.addAttribute("qnaBoards", qnaBoards);
         model.addAttribute("pageNumber", pageNumber);
