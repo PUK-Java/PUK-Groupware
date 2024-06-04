@@ -1,4 +1,4 @@
-package puk.groupware.controller.qboard;
+package puk.groupware.controller.qnaBoard;
 
 import java.util.List;
 
@@ -18,7 +18,6 @@ import puk.groupware.model.user.User_Info;
 import puk.groupware.repository.qna.QnaRepository;
 import puk.groupware.service.qna.QnaCommentService;
 import puk.groupware.service.qna.QnaService;
-import puk.groupware.service.user.UserPageService;
 
 @Controller
 @RequiredArgsConstructor
@@ -27,10 +26,7 @@ public class QnaController {
     private final QnaService qnaService;
     private final QnaRepository qnaRepository;
     private final QnaCommentService qnaCommentService;
-    private final UserPageService userPageService;
     private HttpSession httpSession;
-
-    
   
 
     // request에 home을 받으면 index.jsp로 이동하게 설정
@@ -55,7 +51,7 @@ public class QnaController {
         model.addAttribute("loginUser", loginUser);
         model.addAttribute("CurrunetPage", page);
         qnaService.getQnaPagingBoard(page, model); // 페이징된 게시물 가져오기
-        return "/qboard/qnaIndex"; 
+        return "/qna/QnaIndex"; 
     }
 
 
@@ -69,28 +65,18 @@ public class QnaController {
             return "redirect:/login";
         }
         
-        return "/qboard/qnaWrite"; 
+        return "/qna/QnaWrite"; 
     }
 
     @GetMapping("/qnadetail")
-    public String getQnaDetail(HttpServletRequest request, @RequestParam("qnaNo") int qnaNo, Model model) {
-        httpSession = request.getSession();
-        User_Info loginUser = (User_Info)httpSession.getAttribute("loginUser");
-        if (loginUser != null) {
-            boolean isAdmin = userPageService.isAdmin(loginUser.getUserId());
-            model.addAttribute("isAdmin", isAdmin);
-        }
-        model.addAttribute("loginUser", loginUser);
-
-        
+    public String getQnaDetail(@RequestParam("qnaNo") int qnaNo, Model model) {
         QnaInfo qnaInfo = qnaService.getQnaBoardByNo(qnaNo);
-        model.addAttribute("board", qnaInfo);
         List<QnaCommentInfo> comments = qnaCommentService.getQnaCommentByQnaNo(qnaInfo);
+        model.addAttribute("board", qnaInfo);
         model.addAttribute("comments", comments);
         // 조회수 메서드 호출
         qnaService.qnaViewCount(qnaNo);
-
-        return "/qboard/qnaDetail";
+        return "/qna/QnaDetail";
     }
 
     // @GetMapping("/boardOnSearchList")
@@ -114,7 +100,7 @@ public class QnaController {
     @GetMapping("/preQnaUpdate")
     public String preQnaUpdate(@RequestParam("qnaNo") int qnaNo, Model model) {
         qnaService.preUpdateQna(qnaNo, model);
-        return "qboard/qnaModify";
+        return "qna/QnaModify";
     }    
 
     // // 게시물 수정 (Update) : 진행중
@@ -129,14 +115,19 @@ public class QnaController {
         return "redirect:/qnamain?success=true";
     }
 
-    
+
     @GetMapping("/addComment")
     public String saveComment(@RequestParam("qnaNo") int qnaNo, @RequestParam("content") String content){
         QnaInfo qnaInfo = qnaService.getQnaBoardByNo(qnaNo);
 
+        QnaCommentInfo qnaCommentInfo = new QnaCommentInfo();
         // qnaInfo.setQnaTitle(title);
-        qnaCommentService.saveQnaComment(qnaNo, content);
+        qnaCommentInfo.setQnaCommentContent(content);
+        qnaCommentInfo.setQnaNo(qnaInfo);
+        qnaCommentService.saveQnaComment(qnaCommentInfo);
         // return qnaRepository.save(qnaInfo);
         return "redirect:/qnadetail?qnaNo=" + qnaNo;
     }
+    
+
 }

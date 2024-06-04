@@ -12,26 +12,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import lombok.RequiredArgsConstructor;
 import puk.groupware.model.board.BoardInfo;
 import puk.groupware.model.user.User_Info;
 import puk.groupware.repository.board.BoardInfoJpaRepository;
 
 import puk.groupware.service.board.BoardInfoService;
-import puk.groupware.service.user.UserPageService;
 
 
 
 @Controller
-@RequiredArgsConstructor
 public class BoardController  {
-
+    @Autowired
     private final BoardInfoService boardInfoService;
     private final BoardInfoJpaRepository boardInfoJpaRepository;
-    private final UserPageService userPageService;
     
 
-    
+    @Autowired
+    public BoardController(BoardInfoService boardInfoService, BoardInfoJpaRepository boardInfoJpaRepository) {
+        this.boardInfoService = boardInfoService;
+        this.boardInfoJpaRepository = boardInfoJpaRepository;
+    }
     // request에 home을 받으면 index.jsp로 이동하게 설정
     // 딱히 민감하지는 않지만 회원가입이나 로그인의 상황을 생각해서 POST방식으로 진행
     @PostMapping("/save")
@@ -53,11 +53,10 @@ public class BoardController  {
         // JSP에서 읽어갈 수 있게
         User_Info loginUser = (User_Info)session.getAttribute("loginUser");
         
-        if (loginUser != null) {
-            // 현재 로그인 된 사용자가 관리자 계정인지에 대한 검증
-            boolean isAdmin = userPageService.isAdmin(loginUser.getUserId());
-            model.addAttribute("isAdmin", isAdmin);
-        }
+        // if (loginUser == null) {
+        //     return "redirect:/login";
+        // }
+
         model.addAttribute("loginUser", loginUser);
         boardInfoService.getPagingBoard(page, model); // 페이징된 게시물 가져오기
         return "/board/boardIndex"; 
@@ -113,12 +112,6 @@ public class BoardController  {
     @PostMapping("/updateOnBoard")
     public String updateBoard(@RequestParam("boardNo") String strboardNo, @RequestParam("title") String title, @RequestParam("content") String content) {
         int boardNo = Integer.parseInt(strboardNo);
-        System.out.println("컨트롤러 출력 Start");
-        System.out.println(title);
-        System.out.println(content);
-        System.out.println("컨트롤러 출력 End");
-
-
         boardInfoService.saveBoardUpdate(boardNo, title, content);
 
         return "redirect:/boardmain";

@@ -8,6 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QnA 게시판 메인</title>
     <link rel="stylesheet" href="/css/boardStyle.css">
+    <script>
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('success') === 'true') {
+                alert('QnA가 성공적으로 수정되었습니다!');
+            }
+        };
+    </script>
 </head>
 <body>
     <main>
@@ -41,7 +49,7 @@
     
     <div class="container">
         <br>
-        <h3>QnA</h3>
+        <h3>QnA 게시판</h3>
         <table class="table">
             <thead>
             <tr>

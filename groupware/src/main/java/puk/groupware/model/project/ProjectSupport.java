@@ -1,7 +1,9 @@
 package puk.groupware.model.project;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -17,6 +19,7 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import puk.groupware.model.user.User_Info;
+// 프로젝트 후원 관리 Table
 
 @Entity
 @Table(name = "SPON")

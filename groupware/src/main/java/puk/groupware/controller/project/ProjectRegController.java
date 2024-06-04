@@ -9,24 +9,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.servlet.http.HttpSession;
-import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import puk.groupware.model.project.Project_info;
 import puk.groupware.service.project.ProjectRegService;
 
 @Controller
-@RequiredArgsConstructor
+@Slf4j
 public class ProjectRegController {
-    private final ProjectRegService projectService;
-    private final HttpSession httpSession;
+    private final ProjectRegService projectService;;
+
+    @Autowired
+    ProjectRegController(ProjectRegService projectService) {
+        this.projectService = projectService;
+    }
 
 
 
     @RequestMapping("/projectregform")
     public String regForm() {
-        if(httpSession.getAttribute("loginUser") == null){
-            return "loginform";
-        }
         return "projectregform";
     }
     

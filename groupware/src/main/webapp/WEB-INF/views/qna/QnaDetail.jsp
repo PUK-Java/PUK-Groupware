@@ -8,6 +8,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QnA 상세</title>
     <link rel="stylesheet" href="/css/boardStyle.css">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .comments {
+            margin-top: 30px;
+        }
+        .comment-form {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        .comment-form textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+        }
+        .comment-form input[type="submit"] {
+            margin-top: 10px;
+            background-color: #5cb85c;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .comment-form input[type="submit"]:hover {
+            background-color: #4cae4c;
+        }
+        .comment-list {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+        .comment-item {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .comment-item:last-child {
+            border-bottom: none;
+        }
+        .comment-author {
+            font-weight: bold;
+            color: #333;
+        }
+        .comment-date {
+            font-size: 12px;
+            color: #999;
+        }
+    </style>
 </head>
 <body>
     <main>
@@ -58,6 +115,33 @@
                 <button type="button" class="btn btn-warning" onclick="location.href='/preQnaUpdate?qnaNo=${board.qnaNo}'">수정</button>
             </c:when>
         </c:choose>
+
+        <!-- 댓글 섹션 시작 -->
+        <div class="comments">
+            <h4>댓글</h4>
+            <!-- 댓글 목록 -->
+            <div class="comment-list">
+                <c:forEach var="comment" items="${comments}">
+                    <div class="comment-item">
+                        <p>관리자</p>
+                        <p>${comment.content}</p>
+                        <div class="commentDate">${comment.date}</div>
+                    </div>
+                </c:forEach>
+            </div>
+            
+            <!-- 댓글 작성 폼 -->
+            <div class="comment-form">
+                <!-- <form action="${pageContext.request.contextPath}/addComment" method="post"> -->
+                <form action="/addComment" method="get">
+                    <input type="hidden" name="qnaNo" value="${board.qnaNo}">
+                    <textarea name="content" rows="4" placeholder="댓글을 입력하세요..." required></textarea> 
+                    <input type="submit" value="댓글 작성">
+                </form>
+            </div>
+        </div>
+        <!-- 댓글 섹션 끝 -->
+
     </div>
 </body>
 </html>
