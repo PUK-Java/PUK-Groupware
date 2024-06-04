@@ -1,6 +1,5 @@
 package puk.groupware.controller.project;
 
-import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,8 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import lombok.RequiredArgsConstructor;
-
 import jakarta.servlet.http.HttpSession;
 import puk.groupware.model.project.Project_info;
 import puk.groupware.model.user.User_Info;
@@ -19,23 +16,20 @@ import puk.groupware.service.project.ProjectSupportService;
 import puk.groupware.service.project.ProjectViewService;
 import puk.groupware.service.wishList.WishListService;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.springframework.web.bind.annotation.RequestBody;
-
 @Controller
-@RequiredArgsConstructor
 public class projectViewController {
     @Autowired
     private ObjectMapper objectMapper;
+
+
+
     private final ProjectViewService viewService;
-    private final WishListService wishListService;
-    private final HttpSession HttpSession;
     private final ProjectSupportService supportService;
+    private final HttpSession HttpSession;
 
     // 프로젝트 정보를 뷰에 띄우기
     @GetMapping("/projectDetail/{id}")
@@ -44,6 +38,19 @@ public class projectViewController {
         Project_info projectView = viewService.getProjectById(id);
         // 시작날짜와 끝날짜 사이를 계산하기위한 서비스메소드
         // 가져온 값은 long 타입으로 전환
+
+    @Autowired
+    projectViewController(HttpSession HttpSession,
+            ProjectViewService viewService, ProjectSupportService supportService) {
+
+        this.HttpSession = HttpSession;
+        this.viewService = viewService;
+        this.supportService = supportService;
+    }
+
+    @GetMapping("/projectDetail/{id}")
+    public String prjview(@PathVariable("id") Long id, Model model) {
+        Project_info projectView = viewService.getProjectById(id);
         long daysBetween = viewService.dayBetween(id);
         // 몇명이 후원을 했는지 count해주는 서비스 메소드
         // 가져온 값은 long타입으로 전환한다
@@ -53,8 +60,9 @@ public class projectViewController {
         // 뷰에서 쓰기 위하여 모델이 값을 넣는다.
         model.addAttribute("data", projectView);
         model.addAttribute("daysBetween", daysBetween);
+      
         // projectView.getUserId() 같은경우 객체이기때문에 스트링으로 변환하기 위한 작업
-        // null같이 있을경우 오류가 발생하기때문에 조건문으로 처리
+        // null값이 있을경우 오류가 발생하기때문에 조건문으로 처리
         if (projectView.getUserId() != null) {
             String checkId = (projectView.getUserId().getUserId());
             model.addAttribute("checkId", checkId);

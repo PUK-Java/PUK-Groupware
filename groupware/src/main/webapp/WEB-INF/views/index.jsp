@@ -1,7 +1,5 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -67,7 +65,8 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/boardmain">공지사항</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">도움말</a></li>
+                        <!-- 작성중 -->
+                        <li><a class="dropdown-item" href="/qnamain">QnA</a></li>
                     </ul>
                 </li>
             </ul>

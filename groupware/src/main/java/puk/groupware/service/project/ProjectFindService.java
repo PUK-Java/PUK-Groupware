@@ -23,12 +23,7 @@ public class ProjectFindService {
         this.pRepository = pRepository;
     }
 
-    //조건 없이 아이디만으로 찾기
-    public Project_info findById(Long projectNo){
-        return pRepository.findById(projectNo).orElseThrow();
-    }
-
-    //조건 없이 페이지 모두 찾기
+    //조건 없이 모두 찾기
     public Page<Project_info> findAllPage(Pageable page){
         return pRepository.findAll(page);
     }
