@@ -1,8 +1,6 @@
 package puk.groupware.service.project;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,12 +17,10 @@ import puk.groupware.repository.project.Project_info_jpaRepository;
 public class ProjectFindService {
 
     private final Project_info_jpaRepository pRepository;
-    private final ProjectSupportService supportService;
 
     @Autowired
-    ProjectFindService(Project_info_jpaRepository pRepository, ProjectSupportService supportService){
+    ProjectFindService(Project_info_jpaRepository pRepository){
         this.pRepository = pRepository;
-        this.supportService = supportService;
     }
 
     //조건 없이 기본키로 찾기
@@ -63,25 +59,15 @@ public class ProjectFindService {
             }
         }
     }
-    //퍼센트를 표기하기 위해 현재 후원한 사람의 인수를 구해서 projectFundimgMap이라는 Map 객체에 넣어서 반환하는 메서드(이 때문에 현재 index페이지에서 쿼리가 많이 보내지고 있는데 최대 20개 가량 보내질 것이라 예상된다. 성능상 괜찮은지 모르겠다.)
-    public Map<Long,Integer> projectFundingMap(List<Project_info> projects){
-        Map<Long,Integer> projectFundingMap = new HashMap<>();
-        for (Project_info project : projects){
-            //롱을 반환하고 있었으므로 강제 int로 변환
-            int currentCount = (int) supportService.getcount(project.getProjectNo());
-            projectFundingMap.put(project.getProjectNo(),currentCount);
-        }
-        return projectFundingMap;
-    }
 
-    //Page 객체를 받아서 List으로 변환한 다음 모델에 추가해주는 작업 + 현재 후원 총금액까지 반환하게 만들기
+    //Page 객체를 받아서 List으로 변환한 다음 모델에 추가해주는 작업
     public void pagetoListAddtoModel(Model model,Page<Project_info> pageNumber){
         List<Project_info> projects = pageNumber.getContent();
         descriptionSummary(projects);
         model.addAttribute("projectPage", pageNumber.getNumber());
         model.addAttribute("projectTotalPage",pageNumber.getTotalPages());
         model.addAttribute("projects", projects);
-        model.addAttribute("projectFundingMap", projectFundingMap(projects));
+
     }
 
     //페이지 설정

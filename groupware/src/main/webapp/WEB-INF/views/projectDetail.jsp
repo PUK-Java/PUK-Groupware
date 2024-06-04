@@ -127,7 +127,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link active"  href="http://localhost:8080/">홈</a></li>
-                        <li class="nav-item"><a class="nav-link"  href="#">문의</a></li>
+                        <li class="nav-item"><a class="nav-link"  href="http://localhost:8080/boardmain">문의</a></li>
                     </ul>
                 </div>
             </div>
@@ -142,7 +142,7 @@
                             <div class="card-footer row">
                                 <div class="col text-center">
                                     <form action="/sponTable/${data.projectNo}" method="post">
-                                        <button type="submit" class="btn btn-primary btn-primary-custom ms-2">후원하기</button>
+                                        <button type="submit" class="btn btn-secondary btn-primary-custom ms-2" onclick="huCheck">후원하기</button>
                                     </form>
                                 </div>
                                 <div class="col text-center">
@@ -164,6 +164,7 @@
                         <div class="card-body">
                             <h5 class="card-title" style="text-align: center; line-height: 5vh;">${data.title}</h5>
                             <ul class="list-group list-group-flush">
+                                <li class="list-group-item">후원가격: ${data.cost}</li>
                                 <li class="list-group-item" id="end123" data-target-cost="${data.targetCost}">목표 금액: ${data.targetCost}원</li>
                                 <li class="list-group-item" id="state123" data-state-cost="${count * data.cost}">현재 금액: ${count * data.cost}원</li>
                                 <li class="list-group-item">프로젝트 시작일: ${data.startDate}</li>
@@ -172,6 +173,11 @@
                                 <li class="list-group-item" id="state">프로젝트 상태:</li>
                                 <li class="list-group-item">프로젝트 카테고리: ${data.category}</li>
                                 <li class="list-group-item" id="stateP"></li>
+                                <li class="list-group-item">                                                                   
+                                    <a href="/projectModify/${data.projectNo}">                                     
+                                        <button class="btn btn-primary btn-primary-custom w-100" id="checkId">수정</button>
+                                    </a>                                                                       
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -380,6 +386,7 @@
         }
     }
 
+
     //코멘트 등록을 위한 API를 보냅니다.
     async function commentReg(button){
         //세션에서 로그인 유저의 아이디를 찾습니다.
@@ -428,22 +435,51 @@
     
 
 
+    // body에서 모델에 저장된 값을 스크립트로 가져와서 처리하기위해, ID,data로 가져와서 변수에 넣는다
+
     const end = document.getElementById('end123');
     const state1 = document.getElementById('state123');
 
     const endCost = end.getAttribute('data-target-cost');
     const stateCost = state1.getAttribute('data-state-cost');
     if(Number(stateCost)<Number(endCost)){
-    const data1 ="프로젝트 상태: 진행중";
-    document.getElementById('state').innerText = data1;
+    const projectCondition ="프로젝트 상태: 진행중";
+    document.getElementById('state').innerText = projectCondition;
     }
     else if(Number(stateCost)>=Number(endCost)){
-        const data1 ="프로젝트 상태: 목표달성";
-        document.getElementById('state').innerText = data1;
+        const projectCondition ="프로젝트 상태: 목표달성";
+        document.getElementById('state').innerText = projectCondition;
     }
-    const data3 = Number(stateCost)/Number(endCost)*100;
-    const data4 = "달성률: " + Math.floor(data3) + "%";
-    document.getElementById('stateP').innerText = data4;
+    // 달성률을 나타내기위해서 변수를 숫자로 바꿔서 계산
+    const costCheck = Number(stateCost)/Number(endCost)*100;
+    const Attainment = "달성률: " + Math.floor(costCheck) + "%";
+    const stateData =document.getElementById('stateP');
+    // 프로젝트 상세페이지에 100프로를 기준으로 넘을시 글자색 빨간색으로
+    if(costCheck >100){
+        stateData.style.cssText = 'color:red';
+        stateData.innerText = Attainment + "  초과달성!!";
+    }
+    else if(costCheck < 100){
+        stateData.innerText = Attainment;
+    }
+    else if(costCheck == 100){
+        stateData.style.cssText = 'color:red';
+        stateData.innerText = Attainment + "  목표달성";
+    }
+
+    //세션에 저장된 로그인된 id와 프로젝트테이블에있는 id를 비교하여 같으면 프로젝트 상세페이지에 수정하기 출력
+    const loginUserIdCheck = "${loginUser.userId}";
+    var projectUserId = '${checkId}';
+    console.log(loginUserIdCheck);
+    if(loginUserIdCheck == ''){
+        document.getElementById("checkId").style.display='none';
+    }else if(loginUserIdCheck != projectUserId){
+        document.getElementById("checkId").style.display='none';
+    }
+    
+     
+    
 </script>
+
 </body>
 </html>
