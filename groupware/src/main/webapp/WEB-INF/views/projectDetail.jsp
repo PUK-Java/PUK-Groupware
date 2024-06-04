@@ -410,8 +410,20 @@
     }
 
     //코멘트 삭제를 위한 API를 보냅니다.
-    async function commentDelete(projectCommentId){
-        const response = await fetch('/deleteComment/${}')
+    async function deleteComment (projectCommentId){
+        const response = await fetch('/deleteComment/${projectCommentId}',
+        {
+            method : "DELETE",
+            headers: {
+                'Content-Type' : 'application/json'
+            }
+        })
+        if(response.ok){
+            alert('댓글이 삭제됐습니다.');
+            location.reload();
+        }else{
+            alert('댓글 삭제에 실패했습니다.');
+        }
     }
     
 
