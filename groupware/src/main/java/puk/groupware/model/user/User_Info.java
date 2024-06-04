@@ -12,6 +12,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "USER_INFO")
 public class User_Info {
+    // 유정정보를 저장하고 있는 테이블
     @Id
     @Column(name = "USER_ID", length = 14)
     private String userId;
