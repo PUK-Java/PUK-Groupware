@@ -1,4 +1,4 @@
-package puk.groupware.controller.qna;
+package puk.groupware.controller.qboard;
 
 import java.util.List;
 
