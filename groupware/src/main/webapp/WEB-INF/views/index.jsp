@@ -227,6 +227,9 @@ window.addEventListener('scroll',()=>{
         bsCollapse.hide();
     }
 });
+
+//프로젝트 생성 누를시 후원자 판단 만들꺼임 우현
+
 </script>
 </body>
 </html>
