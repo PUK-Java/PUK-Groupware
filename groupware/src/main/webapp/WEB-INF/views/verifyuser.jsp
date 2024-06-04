@@ -9,9 +9,16 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/userPwCheck" method="post">
+    <form id="checkform"  method="post">
         <input type="password" name="password">
-        <input type="submit">
+        <input type="button" onclick="check()">
     </form>
 </body>
+<script>
+    function check(){
+        form = document.getElementById("checkform");
+        form.submit("/userPwCheck");
+        window.close();
+    }
+</script>
 </html>

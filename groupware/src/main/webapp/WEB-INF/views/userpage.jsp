@@ -10,14 +10,14 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
       <style>
-        form {
-        padding: 32px;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
-        border-radius: 10px;
-        -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-        -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-        box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+        .container {
+            padding: 32px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+            /* -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+            -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15) */
         }
   </style>
 </head>
@@ -87,7 +87,7 @@
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <c:choose>
                     <c:when test="${verify == null}">
-                        <button class="btn btn-primary btn-lg btn-block " type="button" onclick="location.href='/verifyUser'">회원 정보 수정</button>
+                        <button class="btn btn-primary btn-lg btn-block " type="button" onclick="openpw()">회원 정보 수정</button>
                     </c:when>
                     <c:when test="${verify != null}">
                         <!-- 수정 버튼 누르면 readonly 해제 -->
@@ -110,21 +110,19 @@
     <!-- 위시리스트 --> 
     <div class="container">
         <div style="margin-top: 32px;">
-            <h2>위시리스트</h2>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-secondary btn-lg btn-block " type="button" onclick="location.href='/'">내 작품보기</button>
         </div>
-        <div class="row row-cols-2 row-cols-md-3 g-10 mx-5 mt-5">   
-            <c:forEach var="projectList" items="${projectLists}">
-                <div class="col">
-                    <a href="/projectDetail/${projectList.projectNo}">
-                        <div class="card h-100">
-                            ${projectList.projectNo}
-                            <img src="images/projectThumbnails/${projectList.image}">
-                            <div class="card-body">
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </c:forEach>
+            <h2 style="margin-bottom: 32px;">위시리스트</h2><hr>
+        </div>
+            <div class="col-md-3 mb-3 d-md-flex">
+                <c:forEach var="project" items="${projectLists}">
+                    <div class="card">
+                        <div><h2>${project.title}</h2></div>
+                        <img src="/images/projectThumbnails/${project.image}">
+                    </div>
+                </c:forEach>
+            </div>
         </div>
     </div>
 </body>
@@ -133,6 +131,12 @@
     function deleteUser(){
         if(confirm("회원정보를 삭제하시겠습니까?") == true){
             return location.href='/deleteUser';
+        }
+    }
+    function openpw(){
+        var popup = window.open('/verifyUser');
+        popup.onbeforeunload = function(){
+            window.location.reload();
         }
     }
 </script>

@@ -1,11 +1,9 @@
 package puk.groupware.controller.user;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -13,8 +11,6 @@ import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import puk.groupware.model.project.Project_info;
 import puk.groupware.model.user.User_Info;
-import puk.groupware.model.wishlist.WishList;
-import puk.groupware.model.wishlist.WishListId;
 import puk.groupware.service.user.UserPageService;
 import puk.groupware.service.wishList.WishListService;
 
@@ -40,16 +36,17 @@ public class UserPageController {
     }
 
     @GetMapping("/userpage")
+    @Transactional
     public String getUserpage(Model model){
         User_Info currentUser = (User_Info) httpSession.getAttribute("loginUser");
-        String userId = currentUser.getUserId();
-        List<WishList> wishLists = wishListService.findByWishListIdUserInfoUserId(userId);
-        List<Project_info> projectLists = new ArrayList<Project_info>();
-        for(WishList wishList : wishLists){
-            projectLists.add(wishList.getWishListId().getProjectInfo());
+        if(currentUser == null){
+            return "redirect:/";
+        }else{
+            String userId = currentUser.getUserId();
+            List<Project_info> projectLists = wishListService.findByJoinProjectInfo(userId);
+            model.addAttribute("projectLists", projectLists);
+            return "userpage";
         }
-        model.addAttribute("projectLists", projectLists);
-        return "userpage";
     }
 
     //비밀번호 확인 창
