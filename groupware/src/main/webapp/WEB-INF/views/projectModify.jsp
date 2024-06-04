@@ -58,11 +58,11 @@
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
         <h4 class="mb-3">프로젝트 생성</h4>
-        <form class="validation-form" novalidate action="/regRequest" method="post" enctype="multipart/form-data">
+        <form class="validation-form" action="/projectModify/${data.projectNo}" method="post" enctype="multipart/form-data" onsubmit="enablseSelect()">
           <div class="row">
             <div class="col-md-3 mb-3">
               <label for="CATEGORY">카테고리</label>
-              <select class="custom-select d-block w-100" id="CATEGORY" name="category">
+              <select class="custom-select d-block w-100" id="CATEGORY" name="category" disabled>
                 <option>전자제품</option>
                 <option>푸드</option>
                 <option>굿즈</option>
@@ -72,14 +72,14 @@
             
             <div class="col-md-9 mb-3">
               <label for="TITLE">프로젝트 명</label>
-              <input type="text" class="form-control" id="TITLE" placeholder="프로젝트 명" name="title" required>
+              <input type="text" class="form-control" id="TITLE" placeholder="프로젝트 명" name="title" required value="${data.title}" >
               <div class="invalid-feedback">
                 프로젝트명을 입력해주세요.
               </div>
             </div>
             <div class="col-md-12 mb-3">
               <label for="DESCRIPTION">상세 정보</label>
-              <textarea class="form-control" id="DESCRIPTION"  required rows="10" cols="20" style="resize: none;" name="description"></textarea>
+              <textarea class="form-control" id="DESCRIPTION"  required rows="10" cols="20" style="resize: none;" name="description">${data.description}</textarea>
               <div class="invalid-feedback">
                 상세정보를 입력해주세요.
               </div>
@@ -88,7 +88,7 @@
 
           <div class="mb-3">
             <label for="TARGET_COST">목표 금액</label>
-            <input type="number" step="100" class="form-control" id="TARGET_COST" placeholder="목표 금액" name="targetCost" required>
+            <input type="number" step="100" class="form-control" id="TARGET_COST" placeholder="목표 금액" name="targetCost" required value="${data.targetCost}" readonly>
             <div class="invalid-feedback">
               목표 금액을 백 단위로 입력해주세요.
             </div>
@@ -96,7 +96,7 @@
 
           <div class="mb-3">
             <label for="TARGET_COST">후원 금액 단위</label>
-            <input type="number" step="100" class="form-control" id="TARGET_COST" placeholder="후원 금액" name="cost" required>
+            <input type="number" step="100" class="form-control" id="TARGET_COST" placeholder="후원 금액" name="cost" required value="${data.cost}" readonly>
             <div class="invalid-feedback">
               금액을 백 단위로 입력해주세요.
             </div>
@@ -104,7 +104,7 @@
 
           <div class="mb-3">
             <label for="END_DATE">종료일자</label>
-            <input type="date" class="form-control" id="END_DATE"  name="strEndDate"required >
+            <input type="date" class="form-control" id="END_DATE"  name="strEndDate"required value="${data.endDate}">
             <div class="invalid-feedback">
               종료일자를 선택해주세요.
             </div>
@@ -112,11 +112,13 @@
 
           <div class="mb-12">
             <label for="image">이미지 파일</label>
-            <input type="file" class="form-control" id="image" name="imageFile" accept="image/*" required/>
+            <image class="form-control" src="/images/projectThumbnails/${data.image}" style="height: 400px;"/>
+            <input type="file" class="form-control" id="image" name="imageFile" accept="image/*" />
             <span class="text-muted"> *이미지 파일만 업로드 가능합니다.</span>
           </div>
           <div class="mb-4"></div>
-          <button class="btn btn-primary btn-lg btn-block" type="submit" id="data11">등록완료</button>
+          <button class="btn btn-primary btn-lg btn-block" type="submit" >수정완료</button>
+          <button class="btn btn-primary btn-lg btn-block" href="http://localhost:8080/projectDetail/${data.projectNo}">취소</button>
         </form>
       </div>
     </div>
@@ -143,14 +145,13 @@
         }, false);
       });
     }, false);
-    const data10= document.getElementById("TITLE").value;
-    const data11= document.getElementById("data11").innerText;
-    console.log(data10);
-    console.log(data11);
-    if(data10 !=""){
-      document.getElementById("data11").innerText = "수정완료";
-    }
-    
+    // 카테고리 기본값 출력
+   document.getElementById("CATEGORY").value="${data.category}"
+   // select에 disabled는 submit할때 값을 같이 넘기지 않는다. 그래서 submit 클릭시 disabled를 false로 바꿔야한다. form에 onsubmit사용
+   function enablseSelect(){
+    const selectElement = document.getElementById("CATEGORY");
+    selectElement.disabled=false;
+   }
 
   </script>
 </body>

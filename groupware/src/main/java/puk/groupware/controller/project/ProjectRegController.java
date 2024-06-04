@@ -23,20 +23,18 @@ public class ProjectRegController {
         this.projectService = projectService;
     }
 
-
-
     @RequestMapping("/projectregform")
     public String regForm() {
         return "projectregform";
     }
-    
 
     @PostMapping("/regRequest")
     public String regRequest(@ModelAttribute Project_info prjInfo,
-        @RequestParam(name="strEndDate") String strEndDate,@RequestParam(name ="imageFile") MultipartFile imageFile)  {
-        try{
-        projectService.registerProject(prjInfo, strEndDate, imageFile);
-        }catch(Exception e){
+            @RequestParam(name = "strEndDate") String strEndDate,
+            @RequestParam(name = "imageFile") MultipartFile imageFile) {
+        try {
+            projectService.registerProject(prjInfo, strEndDate, imageFile);
+        } catch (Exception e) {
             return "/projectregform";
         }
         return "success";
