@@ -79,7 +79,38 @@
             background-color: #5a6268;
             border-color: #4e555b;
         }
-   
+        /* 로그인 해주십시오.에 대한 글씨 위치,색 테두리, 테두리 색 css */
+        .btn-login{
+            text-align: left;
+            color: #6c757d;
+            border-radius: 0.25rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 13px 20px;
+            align-items: center;
+            transition: box-shadow 0.2s;
+        }
+        /* 배경화면 바뀌는게 맘에 안 들어서 그냥 쉐도우 효과만 주기 */
+        .btn-login:hover{
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+            background-color: white;
+            color : #6c757d; 
+        }
+        /*버튼에서 밑줄 없애기*/
+        a.d-block{
+            text-decoration: none;
+        }
+        
+        /*commentTextAreaResize 불가능하게*/
+        #commentContent{
+            resize: none;
+        }
+
+        /*modal-comment-all의 최대 크기 설정하고 스크롤 생성되게*/
+        .modal-comment-all{
+            max-height: 500px;
+            overflow-y: auto;
+        }
     </style>
 </head>
 <body>
@@ -117,10 +148,10 @@
                                 <div class="col text-center">
                                 <c:choose>
                                     <c:when test="${wishListCheck}">
-                                        <button class="btn btn-secondary w-50 ms-2" id ="supportButton" data-project-no=${data.projectNo} onclick="toggleWishList(this)" data-user-id=${sessionScope.loginUser.userId}>찜해제</button>
+                                        <button class="btn btn-secondary w-50 ms-2" id ="wishButton" data-project-no=${data.projectNo} onclick="toggleWishList(this)" data-user-id=${sessionScope.loginUser.userId}>찜해제</button>
                                     </c:when>
                                     <c:otherwise>
-                                        <button class="btn btn-success w-50 ms-2" id="supportButton" data-project-no="${data.projectNo}" onclick="toggleWishList(this)" data-user-id="${sessionScope.loginUser.userId}">찜하기</button>
+                                        <button class="btn btn-success w-50 ms-2" id="wishButton" data-project-no="${data.projectNo}" onclick="toggleWishList(this)" data-user-id="${sessionScope.loginUser.userId}">찜하기</button>
                                     </c:otherwise>
                                 </c:choose>
                                 </div>
@@ -151,12 +182,147 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <p><h2>제품설명</h2></p>
-                    ${data.description}
+            </div>
+                <div class="h2 my-3">
+                    <strong>프로젝트 소개</strong>
+                </div>
+                <div class="fs-6 mx-5 my-5">
+                    <p>${data.description}</p>
+                </div>
+            <div class="h2 my-3">
+                <strong>프로젝트 커뮤니티</strong>
+            </div>
+            <div class="mt-2 mx-5 mb-5">
+                <c:choose>
+                    <c:when test="${loginUser == null}">
+                        <div class="row mb-4">
+                            <div class="col-8">
+                                <a href="/login" class="d-block">
+                                    <button class="d-flex btn btn-outline-secondary w-100 btn-login justify-content-between">
+                                    <span>로그인해주세요.</span>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </c:when>
+                    <c:when test="${!supportCheck}">
+                        <div class="row mb-4">
+                            <div class="col-8">
+                                <a class="d-block">
+                                    <button class="d-flex btn btn-outline-secondary w-100 btn-login justify-content-between" disabled>
+                                    <span>후원자만 글을 쓸 수 있습니다.</span>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="row mb-4">
+                            <div class="col-8">
+                                <button class="d-flex btn btn-outline-secondary w-100 btn-login justify-content-between" data-bs-toggle="modal" data-bs-target="#commentModal">
+                                    <span>글쓰기</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </c:otherwise>
+                </c:choose>
+                    <c:forEach var="projectComment" items="${projectComments}">
+                        <div class="comment-card card col-8 my-0">
+                            <div class="card-body">
+                                <div class="row mb-1 d-flex align-items-center">
+                                    <img class="col-1 pe-0" src="/images/icons/userIcon.png" alt="...준비중" height="32px">
+                                    <p class="col-3 card-title h6">${projectComment.userInfo.userId}</p>
+                                </div>
+                                <p class="card-subtitle mb-2 text-muted"><small>작성일 : ${projectComment.projectCommentWritDateTime}</small></p>
+                                <div class="row">
+                                    <div class="col-10">
+                                        <p class="card-text">${projectComment.projectCommentContent}</p>
+                                    </div>
+                                    <c:if test="${projectComment.userInfo.userId == sessionScope.loginUser.userId}">
+                                    <div class="col-2 d-flex justify-content-end align-items-end">
+                                        <a class="card-text text-muted" href="#" onclick="deleteComment('${projectComment.projectCommentNo}')"><small>삭제</small></a>
+                                    </div>
+                                    </c:if>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                    <c:choose>
+                        <c:when test="${isCommentTotalPages}">
+                            <div>
+                                <div class="col-8">
+                                        <button class="d-flex btn btn-outline-secondary w-100 btn-login justify-content-center" data-bs-toggle="modal" data-bs-target="#commentAllModal">
+                                        <span>전체보기</span>
+                                        </button>
+                                </div>
+                            </div>
+                        </c:when>
+                    </c:choose>
                 </div>
             </div>
         </div>
+          <!-- 코멘트 작성 모달 시작 -->
+          <div class="modal fade" id="commentModal" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="commentModalTitle">글쓰기</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating">
+                        <textarea class="form-control" placeholder="코멘트를 남겨주세요" id="commentContent" style="height: 300px"></textarea>
+                        <label for="commentContent">코멘트</label>
+                    </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" onclick="commentReg(this)">등록</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+          <!-- 코멘트 작성 모달 끝 -->
+
+          <!-- 전체 보기 모달 시작 -->
+          <div class="modal fade" id="commentAllModal" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="commentAllModalTitle">전체 코멘트</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body modal-comment-all">
+                    <c:forEach var="projectAllComment" items="${projectAllComments}">
+                        <div class="comment-card card my-0">
+                            <div class="card-body">
+                                <div class="row mb-1 d-flex align-items-center">
+                                    <img class="col-1 pe-0" src="/images/icons/userIcon.png" alt="...준비중" height="32px">
+                                    <p class="col-3 card-title h6">${projectAllComment.userInfo.userId}</p>
+                                </div>
+                                <p class="card-subtitle mb-2 text-muted"><small>작성일 : ${projectAllComment.projectCommentWritDateTime}</small></p>
+                                <div class="row">
+                                    <div class="col-10">
+                                        <p class="card-text">${projectAllComment.projectCommentContent}</p>
+                                    </div>
+                                    <c:if test="${projectAllComment.userInfo.userId == sessionScope.loginUser.userId}">
+                                    <div class="col-2 d-flex justify-content-end align-items-end">
+                                        <a class="card-text text-muted" href="#" onclick="deleteComment('${projectAllComment.projectCommentNo}')"><small>삭제</small></a>
+                                    </div>
+                                    </c:if>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 전체보기 모달 끝 -->
     </main>
     <footer class="bg-dark text-white p-3 mt-5">
         <div class="container text-center">
@@ -170,29 +336,43 @@
     </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
-    let loginUser = document.getElementById('supportButton').getAttribute('data-user-id');
+
+    //로그인한 유저 id 찾기. 없으면 빈 문자열입니다.
+    let loginUser = document.getElementById('wishButton').getAttribute('data-user-id');
+
+    //toggleWishList 찜하기/ 찜해제 버튼을 왔다갔다하기 위해 Fetch API를 사용해서 보냅니다.
     async function toggleWishList(button){
+        //로그인 했는지 체크
         if(loginUser !== ''){
+            //필요한 데이터를 변수에 저장합니다.
             const loginUser = button.getAttribute('data-user-id');
             const project = button.getAttribute('data-project-no');
             const user = button.getAttribute('data-user-id');
+            //여기서 response는 fetch API를 보내고 컨트롤러에서 반환한 데이터를 가지고 있습니다.
             const response = await fetch('/wishList/toggle',{
+                //보내는 방식은 POST
                 method :'POST',
+                //헤더에서 이 컨텐츠 타입이 json 타입이라는 명시합니다.
                 headers : {
                     'Content-Type' : 'application/json'
                 },
+                //바디에 원하는 데이터들은 실어 보냅니다.
                 body : JSON.stringify({
                     projectNo : project,
                     userId : user
                 })
             });
+            //돌려받은 response가 ok라면 response를 json으로 변화시켜 작성합니다.
+            //response 안의 데이터 접근은 객체.속성 과 같은 방식으로 접근합니다.
             if(response.ok){
                 const data = await response.json();
                 if(data.isWished){
+                    //조건에 따라 버튼의 색, 텍스트를 변화시킵니다.
                     button.innerText = '찜해제';
                     button.classList.replace('btn-success','btn-secondary');
                     alert('목록에 추가 됐습니다.');
                 }else{
+                    //조건에 따라 버튼의 색, 텍스트를 변화시킵니다.
                     button.innerText= '찜하기';
                     button.classList.replace('btn-secondary','btn-success');
                     alert('목록에서 제거 됐습니다.');
@@ -205,7 +385,58 @@
             location.replace("/login");
         }
     }
+
+
+    //코멘트 등록을 위한 API를 보냅니다.
+    async function commentReg(button){
+        //세션에서 로그인 유저의 아이디를 찾습니다.
+        //글쓰기는 반드시 로그인 해야 가능하므로 null값이나 빈 문자열이 될 일은 없습니다.
+        const longinUserId = "${sessionScope.loginUser.userId}";
+        const projectNo = "${data.projectNo}";
+        const commentContent = document.getElementById('commentContent').value;
+        const response = await fetch('/projectCommentReg',{
+            method : 'POST',
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify({
+                projectNo : projectNo,
+                loginUserId : longinUserId,
+                commentContent : commentContent
+            })
+        });
+        //응답을 받아서 처리합시다. json 파일을 받아서 처리할 것은 없으므로 페이지 새로고침만 해줍시다.
+        if(response.ok){
+            const data = await response.json();
+            location.reload(true);
+        }
+
+        if(response.status === 500){
+            alert('최대 글자수는 100자입니다.');
+        }
+    }
+
+    //코멘트 삭제를 위한 API를 보냅니다.
+    async function deleteComment (projectCommentId){
+        const response = await fetch('/deleteComment/${projectCommentId}',
+        {
+            method : "DELETE",
+            headers: {
+                'Content-Type' : 'application/json'
+            }
+        })
+        if(response.ok){
+            alert('댓글이 삭제됐습니다.');
+            location.reload();
+        }else{
+            alert('댓글 삭제에 실패했습니다.');
+        }
+    }
+    
+
+
     // body에서 모델에 저장된 값을 스크립트로 가져와서 처리하기위해, ID,data로 가져와서 변수에 넣는다
+
     const end = document.getElementById('end123');
     const state1 = document.getElementById('state123');
 

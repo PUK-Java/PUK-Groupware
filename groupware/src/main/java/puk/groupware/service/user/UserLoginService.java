@@ -19,4 +19,8 @@ public class UserLoginService {
     public User_Info findUser(String userId,String userPw){
         return uJpaRepository.findByUserIdAndUserPw(userId, userPw);
     }
+
+    public User_Info findById(String userId){
+        return uJpaRepository.findByUserId(userId);
+    }
 }
