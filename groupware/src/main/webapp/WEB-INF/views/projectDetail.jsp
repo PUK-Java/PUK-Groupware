@@ -229,7 +229,16 @@
                                     <p class="col-3 card-title h6">${projectComment.userInfo.userId}</p>
                                 </div>
                                 <p class="card-subtitle mb-2 text-muted"><small>작성일 : ${projectComment.projectCommentWritDateTime}</small></p>
-                                <p class="card-text">${projectComment.projectCommentContent}</p>
+                                <div class="row">
+                                    <div class="col-10">
+                                        <p class="card-text">${projectComment.projectCommentContent}</p>
+                                    </div>
+                                    <c:if test="${projectComment.userInfo.userId == sessionScope.loginUser.userId}">
+                                    <div class="col-2 d-flex justify-content-end align-items-end">
+                                        <a class="card-text text-muted" href="#" onclick="deleteComment('${projectComment.projectCommentNo}')"><small>삭제</small></a>
+                                    </div>
+                                    </c:if>
+                                </div>
                             </div>
                         </div>
                     </c:forEach>
@@ -287,7 +296,16 @@
                                     <p class="col-3 card-title h6">${projectAllComment.userInfo.userId}</p>
                                 </div>
                                 <p class="card-subtitle mb-2 text-muted"><small>작성일 : ${projectAllComment.projectCommentWritDateTime}</small></p>
-                                <p class="card-text">${projectAllComment.projectCommentContent}</p>
+                                <div class="row">
+                                    <div class="col-10">
+                                        <p class="card-text">${projectAllComment.projectCommentContent}</p>
+                                    </div>
+                                    <c:if test="${projectAllComment.userInfo.userId == sessionScope.loginUser.userId}">
+                                    <div class="col-2 d-flex justify-content-end align-items-end">
+                                        <a class="card-text text-muted" href="#" onclick="deleteComment('${projectAllComment.projectCommentNo}')"><small>삭제</small></a>
+                                    </div>
+                                    </c:if>
+                                </div>
                             </div>
                         </div>
                     </c:forEach>
@@ -385,6 +403,15 @@
             const data = await response.json();
             location.reload(true);
         }
+
+        if(response.status === 500){
+            alert('최대 글자수는 100자입니다.');
+        }
+    }
+
+    //코멘트 삭제를 위한 API를 보냅니다.
+    async function commentDelete(projectCommentId){
+        const response = await fetch('/deleteComment/${}')
     }
     
 

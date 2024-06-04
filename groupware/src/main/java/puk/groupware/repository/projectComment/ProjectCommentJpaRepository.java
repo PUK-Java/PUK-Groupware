@@ -15,6 +15,9 @@ public interface ProjectCommentJpaRepository extends JpaRepository<ProjectCommen
     //프로젝트 번호로 찾기
     List<ProjectComment> findByProjectInfoProjectNo(Long projectNo);
 
+    //프로젝트 번호로 찾고 정렬하기
+    List<ProjectComment> findByProjectInfoProjectNoOrderByProjectCommentWritDateTimeDesc(Long projectNo);
+
     //유저 이름으로 찾기
     List<ProjectComment> findByUserInfoUserId(String userId);
 

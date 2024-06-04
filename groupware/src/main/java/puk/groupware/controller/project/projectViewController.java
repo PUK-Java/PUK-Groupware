@@ -75,7 +75,7 @@ public class projectViewController {
         //토탈 페이지가 2 이상이라면 화면에 전체 보기 버튼을 넣어줄 것이고, 전체 코멘트도 모델에 추가해줄 것입니다.
         if(projectCommentsPage.getTotalPages() > 1){
             model.addAttribute("isCommentTotalPages", true);
-            List<ProjectComment> projectAllComments = projectCommentService.findByProjectInfoProjectNo(id);
+            List<ProjectComment> projectAllComments = projectCommentService.findByProjectInfoProjectNoOrderByProjectCommentWritDateTimeDesc(id);
             model.addAttribute("projectAllComments", projectAllComments);
         }
         

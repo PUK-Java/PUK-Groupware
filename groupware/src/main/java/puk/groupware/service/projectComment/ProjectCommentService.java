@@ -26,6 +26,11 @@ public class ProjectCommentService {
         return projectCommentJpaRepository.findByProjectInfoProjectNo(projectNo);
     }
 
+    //프로젝트 번호로 찾기 날짜 별로 내림 차순
+    public List<ProjectComment> findByProjectInfoProjectNoOrderByProjectCommentWritDateTimeDesc(Long projectNo){
+        return projectCommentJpaRepository.findByProjectInfoProjectNoOrderByProjectCommentWritDateTimeDesc(projectNo);
+    }
+
     //유저 이름으로 찾기
     public List<ProjectComment> findByUserInfoUserId(String userId){
         return projectCommentJpaRepository.findByUserInfoUserId(userId);
