@@ -1,6 +1,5 @@
 package puk.groupware.controller.project;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +13,6 @@ import puk.groupware.model.project.Project_info;
 import puk.groupware.model.user.User_Info;
 import puk.groupware.service.project.ProjectSupportService;
 import puk.groupware.service.project.ProjectViewService;
-import puk.groupware.service.wishList.WishListService;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,19 +23,9 @@ public class projectViewController {
     @Autowired
     private ObjectMapper objectMapper;
 
-
-
     private final ProjectViewService viewService;
     private final ProjectSupportService supportService;
     private final HttpSession HttpSession;
-
-    // 프로젝트 정보를 뷰에 띄우기
-    @GetMapping("/projectDetail/{id}")
-    public String prjview(@PathVariable("id") Long id, Model model) {
-        // 프로젝트 객체 찾기
-        Project_info projectView = viewService.getProjectById(id);
-        // 시작날짜와 끝날짜 사이를 계산하기위한 서비스메소드
-        // 가져온 값은 long 타입으로 전환
 
     @Autowired
     projectViewController(HttpSession HttpSession,
@@ -60,7 +48,7 @@ public class projectViewController {
         // 뷰에서 쓰기 위하여 모델이 값을 넣는다.
         model.addAttribute("data", projectView);
         model.addAttribute("daysBetween", daysBetween);
-      
+
         // projectView.getUserId() 같은경우 객체이기때문에 스트링으로 변환하기 위한 작업
         // null값이 있을경우 오류가 발생하기때문에 조건문으로 처리
         if (projectView.getUserId() != null) {
@@ -70,6 +58,7 @@ public class projectViewController {
 
         // 처음 접속할 때 찜목록에 해당 프로젝트가 있는지 없는지 체크하기 위해 추가
         model.addAttribute("wishListCheck", wishListService.checkWishList(projectView));
+
         model.addAttribute("count", supportCount);
         return "projectDetail";
     }
