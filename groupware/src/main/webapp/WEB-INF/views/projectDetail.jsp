@@ -105,6 +105,12 @@
         #commentContent{
             resize: none;
         }
+
+        /*modal-comment-all의 최대 크기 설정하고 스크롤 생성되게*/
+        .modal-comment-all{
+            max-height: 500px;
+            overflow-y: auto;
+        }
     </style>
 </head>
 <body>
@@ -183,7 +189,7 @@
             <div class="mt-2 mx-5 mb-5">
                 <c:choose>
                     <c:when test="${loginUser == null}">
-                        <div class="row">
+                        <div class="row mb-4">
                             <div class="col-8">
                                 <a href="/login" class="d-block">
                                     <button class="d-flex btn btn-outline-secondary w-100 btn-login justify-content-between">
@@ -194,7 +200,7 @@
                         </div>
                     </c:when>
                     <c:when test="${!supportCheck}">
-                        <div class="row">
+                        <div class="row mb-4">
                             <div class="col-8">
                                 <a class="d-block">
                                     <button class="d-flex btn btn-outline-secondary w-100 btn-login justify-content-between" disabled>
@@ -205,37 +211,94 @@
                         </div>
                     </c:when>
                     <c:otherwise>
-                        <div class="row">
+                        <div class="row mb-4">
                             <div class="col-8">
                                 <button class="d-flex btn btn-outline-secondary w-100 btn-login justify-content-between" data-bs-toggle="modal" data-bs-target="#commentModal">
                                     <span>글쓰기</span>
                                 </button>
-                                <div class="modal fade" id="commentModal" data-bs-backdrop="static" data-bs-keyboard="false">
-                                    <div class="modal-dialog">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <h5 class="modal-title" id="commentModalTitle">글쓰기</h5>
-                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="form-floating">
-                                                <textarea class="form-control" placeholder="코멘트를 남겨주세요" id="commentContent" style="height: 300px"></textarea>
-                                                <label for="commentContent">코멘트</label>
-                                            </div>
-                                        <div class="modal-footer">
-                                          <button type="button" class="btn btn-primary" onclick="commentReg(this)">등록</button>
-                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
                             </div>
                         </div>
+
                     </c:otherwise>
                 </c:choose>
-            </div>
+                    <c:forEach var="projectComment" items="${projectComments}">
+                        <div class="comment-card card col-8 my-0">
+                            <div class="card-body">
+                                <div class="row mb-1 d-flex align-items-center">
+                                    <img class="col-1 pe-0" src="/images/icons/userIcon.png" alt="...준비중" height="32px">
+                                    <p class="col-3 card-title h6">${projectComment.userInfo.userId}</p>
+                                </div>
+                                <p class="card-subtitle mb-2 text-muted"><small>작성일 : ${projectComment.projectCommentWritDateTime}</small></p>
+                                <p class="card-text">${projectComment.projectCommentContent}</p>
+                            </div>
+                        </div>
+                    </c:forEach>
+                    <c:choose>
+                        <c:when test="${isCommentTotalPages}">
+                            <div>
+                                <div class="col-8">
+                                        <button class="d-flex btn btn-outline-secondary w-100 btn-login justify-content-center" data-bs-toggle="modal" data-bs-target="#commentAllModal">
+                                        <span>전체보기</span>
+                                        </button>
+                                </div>
+                            </div>
+                        </c:when>
+                    </c:choose>
+                </div>
             </div>
         </div>
+          <!-- 코멘트 작성 모달 시작 -->
+          <div class="modal fade" id="commentModal" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="commentModalTitle">글쓰기</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating">
+                        <textarea class="form-control" placeholder="코멘트를 남겨주세요" id="commentContent" style="height: 300px"></textarea>
+                        <label for="commentContent">코멘트</label>
+                    </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" onclick="commentReg(this)">등록</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+          <!-- 코멘트 작성 모달 끝 -->
+
+          <!-- 전체 보기 모달 시작 -->
+          <div class="modal fade" id="commentAllModal" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="commentAllModalTitle">전체 코멘트</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body modal-comment-all">
+                    <c:forEach var="projectAllComment" items="${projectAllComments}">
+                        <div class="comment-card card my-0">
+                            <div class="card-body">
+                                <div class="row mb-1 d-flex align-items-center">
+                                    <img class="col-1 pe-0" src="/images/icons/userIcon.png" alt="...준비중" height="32px">
+                                    <p class="col-3 card-title h6">${projectAllComment.userInfo.userId}</p>
+                                </div>
+                                <p class="card-subtitle mb-2 text-muted"><small>작성일 : ${projectAllComment.projectCommentWritDateTime}</small></p>
+                                <p class="card-text">${projectAllComment.projectCommentContent}</p>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 전체보기 모달 끝 -->
     </main>
     <footer class="bg-dark text-white p-3 mt-5">
         <div class="container text-center">
@@ -317,10 +380,10 @@
                 commentContent : commentContent
             })
         });
-
-        //응답을 받아서 처리합시다.
+        //응답을 받아서 처리합시다. json 파일을 받아서 처리할 것은 없으므로 페이지 새로고침만 해줍시다.
         if(response.ok){
             const data = await response.json();
+            location.reload(true);
         }
     }
     

@@ -28,6 +28,5 @@ public class CommentServiceTest {
     @Test
     @DisplayName("뭐임?")
     void 서비스테스트(){
-        System.out.println(projectSupportService.exexistsByProjectNoandUserId(Long.parseLong(("1")),"dfgddjd"));
     }
 }

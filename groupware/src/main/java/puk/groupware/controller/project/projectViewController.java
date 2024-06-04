@@ -1,6 +1,9 @@
 package puk.groupware.controller.project;
 
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,9 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import puk.groupware.model.project.Project_info;
+import puk.groupware.model.projectComment.ProjectComment;
 import puk.groupware.model.user.User_Info;
 import puk.groupware.service.project.ProjectSupportService;
 import puk.groupware.service.project.ProjectViewService;
+import puk.groupware.service.projectComment.ProjectCommentService;
 import puk.groupware.service.wishList.WishListService;
 
 @Controller
@@ -23,6 +28,7 @@ public class projectViewController {
     private final WishListService wishListService;
     private final HttpSession HttpSession;
     private final ProjectSupportService supportService;
+    private final ProjectCommentService projectCommentService;
 
 
 
@@ -60,6 +66,20 @@ public class projectViewController {
             boolean supportCheck = supportService.exexistsByProjectNoandUserId(id, loginUserId);
             model.addAttribute("supportCheck", supportCheck);
         }
+
+        //프로젝트 댓글도 리스트로 model에 추가해서 넣어주기
+        Page<ProjectComment> projectCommentsPage = projectCommentService.pageToFirstFiveList(id);
+        List<ProjectComment> projectComments = projectCommentsPage.getContent();
+        model.addAttribute("projectComments", projectComments);
+
+        //토탈 페이지가 2 이상이라면 화면에 전체 보기 버튼을 넣어줄 것이고, 전체 코멘트도 모델에 추가해줄 것입니다.
+        if(projectCommentsPage.getTotalPages() > 1){
+            model.addAttribute("isCommentTotalPages", true);
+            List<ProjectComment> projectAllComments = projectCommentService.findByProjectInfoProjectNo(id);
+            model.addAttribute("projectAllComments", projectAllComments);
+        }
+        
+
         return "projectDetail";
     }
 

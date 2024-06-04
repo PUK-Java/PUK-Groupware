@@ -2,6 +2,9 @@ package puk.groupware.service.projectComment;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,5 +46,17 @@ public class ProjectCommentService {
         projectComment.setProjectCommentContent(commentContent);
         
         projectCommentJpaRepository.save(projectComment);
+    }
+
+    
+
+    public Page<ProjectComment> findByProjectInfoProjectNoPage(Long projectNo,org.springframework.data.domain.Pageable page){
+        return projectCommentJpaRepository.findByProjectInfoProjectNo(projectNo,page);
+    }
+
+    //페이지 나누기 이번에는 5번까지만 가져올 것입니다. 그리고 바로 리스트로 반환할 것입니다.
+    public Page<ProjectComment> pageToFirstFiveList(Long projectNo){
+        PageRequest pageable = PageRequest.of(0,5,Sort.by("projectCommentWritDateTime").descending());
+        return findByProjectInfoProjectNoPage(projectNo, pageable);
     }
 }
