@@ -21,7 +21,6 @@ import jakarta.persistence.TemporalType;
 import lombok.Getter;
 import lombok.Setter;
 import puk.groupware.model.user.User_Info;
-// 프로젝트 정보 관리 Table
 
 @Entity
 @Table(name = "PROJECT_INFO")

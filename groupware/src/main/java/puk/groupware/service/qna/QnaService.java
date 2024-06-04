@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import puk.groupware.model.board.BoardInfo;
 import puk.groupware.model.qna.QnaInfo;
 import puk.groupware.model.user.User_Info;
 import puk.groupware.repository.qna.QnaRepository;
@@ -27,8 +26,8 @@ public class QnaService {
     
 
     public void getQnaPagingBoard(int page, Model model) {
-        PageRequest pagable = PageRequest.of(page,10,Sort.by("qnaNo").descending());
-        Page<QnaInfo> pageNumber = qnaRepository.findAll(pagable);
+        PageRequest pageable = PageRequest.of(page,10,Sort.by("qnaNo").descending());
+        Page<QnaInfo> pageNumber = qnaRepository.findAll(pageable);
         List<QnaInfo> qnaBoards = pageNumber.getContent();
         model.addAttribute("qnaBoards", qnaBoards);
         model.addAttribute("pageNumber", pageNumber);
@@ -52,6 +51,7 @@ public class QnaService {
             return qnaInfoOptional.get();
     }
 
+    // QnA 상세보기 시 조회수 증가
     @Transactional
     public void qnaViewCount(int qnaNo) {
         // 컨트롤러에서 호출받으면 BoardInfo의 setViewCount 호출
@@ -66,6 +66,15 @@ public class QnaService {
         model.addAttribute("qnaNo", qnaInfo.getQnaNo());
         model.addAttribute("qnaTitle", qnaInfo.getQnaTitle());
         model.addAttribute("qnaContent", qnaInfo.getQnaContent());
+    }
+
+    // 수정 항목 저장
+    public QnaInfo saveQnaUpdate(int qnaNo, String title, String content) {
+        QnaInfo qnaInfo = qnaRepository.findById(qnaNo).get();
+        qnaInfo.setQnaTitle(title);
+        
+        qnaInfo.setQnaContent(content);
+        return qnaRepository.save(qnaInfo);
     }
 
     // QnA 삭제 - 본인 작성에 한해
