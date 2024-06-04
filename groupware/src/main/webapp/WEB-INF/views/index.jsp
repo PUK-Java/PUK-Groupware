@@ -120,7 +120,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/boardmain">공지사항</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">도움말</a></li>
+                        <li><a class="dropdown-item" href="/qnamain">도움말</a></li>
                     </ul>
                 </li>
             </ul>
