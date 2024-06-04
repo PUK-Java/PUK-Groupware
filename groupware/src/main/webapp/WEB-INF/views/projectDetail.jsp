@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="puk.groupware.model.user.User_Info" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -272,7 +271,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-floating">
-                        <textarea class="form-control" placeholder="코멘트를 남겨주세요" id="commentContent" style="height: 300px"></textarea>
+                        <textarea class="form-control" placeholder="코멘트를 남겨주세요" id="commentContent" style="height: 300px" maxlength="100"></textarea>
                         <label for="commentContent">코멘트</label>
                     </div>
                 <div class="modal-footer">
@@ -412,7 +411,7 @@
         }
 
         if(response.status === 500){
-            alert('최대 글자수는 100자입니다.');
+            alert('서버에서 오류가 발생했습니다.');
         }
     }
 
