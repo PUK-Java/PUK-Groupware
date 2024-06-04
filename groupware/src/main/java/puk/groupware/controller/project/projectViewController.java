@@ -1,9 +1,13 @@
 package puk.groupware.controller.project;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,18 +21,31 @@ import puk.groupware.model.projectComment.ProjectComment;
 import puk.groupware.model.user.User_Info;
 import puk.groupware.service.project.ProjectSupportService;
 import puk.groupware.service.project.ProjectViewService;
+
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import puk.groupware.service.projectComment.ProjectCommentService;
 import puk.groupware.service.wishList.WishListService;
+
 
 @Controller
 @RequiredArgsConstructor
 public class projectViewController {
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+
 
     private final ProjectViewService viewService;
     private final WishListService wishListService;
     private final HttpSession HttpSession;
     private final ProjectSupportService supportService;
     private final ProjectCommentService projectCommentService;
+
 
 
 
@@ -49,10 +66,16 @@ public class projectViewController {
         model.addAttribute("daysBetween", daysBetween);
 
 
-        //처음 접속할 때 찜목록에 해당 프로젝트가 있는지 없는지 체크하기 위해 추가
-        model.addAttribute("wishListCheck",wishListService.checkWishList(projectView));
-        
-       
+        // projectView.getUserId() 같은경우 객체이기때문에 스트링으로 변환하기 위한 작업
+        // null값이 있을경우 오류가 발생하기때문에 조건문으로 처리
+        if (projectView.getUserId() != null) {
+            String checkId = (projectView.getUserId().getUserId());
+            model.addAttribute("checkId", checkId);
+        }
+
+        // 처음 접속할 때 찜목록에 해당 프로젝트가 있는지 없는지 체크하기 위해 추가
+        model.addAttribute("wishListCheck", wishListService.checkWishList(projectView));
+
 
         model.addAttribute("count", supportCount);
 
