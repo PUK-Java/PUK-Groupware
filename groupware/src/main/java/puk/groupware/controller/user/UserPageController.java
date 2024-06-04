@@ -61,7 +61,8 @@ public class UserPageController {
         User_Info currentUser = (User_Info) httpSession.getAttribute("loginUser");
         if(currentUser.getUserPw().equals(password)){
             httpSession.setAttribute("verify", "ok");
-            return "/userpage";
+            System.out.println(httpSession.getAttribute("verify"));
+            return "/verifyuser";
         }else return "redirect:/userpage";        
     }
     

@@ -78,16 +78,18 @@
                 <!-- 가입 유형 -->
                 <div class="col-md-12 mb-3">
                 <label for="ADMIN">가입 유형</label>
-                <select class="custom-select d-block w-100" id="ADMIN" name="admin" value="${loginUser.admin}" readonly>
-                    <option value="후원자">후원자</option>
-                    <option value="제작자">제작자</option>
+                <select class="custom-select d-block w-100" id="ADMIN" name="admin">
+                    <option value="후원자" 
+                        <c:if test="${loginUser.admin == '후원자'}">selected</c:if>>후원자</option>
+                    <option value="제작자" 
+                        <c:if test="${loginUser.admin == '제작자'}">selected</c:if>>제작자</option>
                 </select>
                 </div>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <c:choose>
                     <c:when test="${verify == null}">
-                        <button class="btn btn-primary btn-lg btn-block " type="button" onclick="openpw()">회원 정보 수정</button>
+                        <button class="btn btn-primary btn-lg btn-block " type="button" onclick="pwcheck()">회원 정보 수정</button>
                     </c:when>
                     <c:when test="${verify != null}">
                         <!-- 수정 버튼 누르면 readonly 해제 -->
@@ -132,12 +134,18 @@
         if(confirm("회원정보를 삭제하시겠습니까?") == true){
             return location.href='/deleteUser';
         }
-    }
-    function openpw(){
-        var popup = window.open('/verifyUser');
-        popup.onbeforeunload = function(){
-            window.location.reload();
-        }
+    } 
+
+    //팝업 창 띄우기
+    function pwcheck() {
+        // 현재 창의 너비와 높이를 가져옴
+        var windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+        // 팝업 창의 위치를 계산
+        var left = (windowWidth - 250) / 2 + window.screenLeft || window.screenX;
+        var top = (windowHeight - 100) / 2 + window.screenTop || window.screenY;
+        window.open("/verifyUser","__blank", 'width=' + 250 + ', height=' + 100 + ', left=' + left + ', top=' + top);
     }
 </script>
 <!-- 로그인 전에는 사용할 수 없도록 메인으로 리다이렉트 -->

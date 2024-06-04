@@ -9,16 +9,17 @@
     <title>Document</title>
 </head>
 <body>
-    <form id="checkform"  method="post">
+    <form action="/userPwCheck" id="pwform" method="post">
+        <h4>비밀번호를 입력하세요</h4>
         <input type="password" name="password">
-        <input type="button" onclick="check()">
+        <input type="submit">
     </form>
 </body>
-<script>
-    function check(){
-        form = document.getElementById("checkform");
-        form.submit("/userPwCheck");
+<!-- 세션 처리후 리다이렉트하면 팝업창은 닫고 원래창 새로고침 -->
+<c:if test="${verify != null}">
+    <script type="text/javascript">
+        window.opener.location.reload();
         window.close();
-    }
-</script>
+        </script>
+</c:if>
 </html>
