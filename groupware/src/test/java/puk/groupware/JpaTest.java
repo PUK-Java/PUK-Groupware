@@ -16,6 +16,10 @@ public class JpaTest {
     @MockBean
     private ProjectCommentJpaRepository pcj;
 
+    @Test
+    void test(){
+        
+    }
     
     @Test
     void aa(){
