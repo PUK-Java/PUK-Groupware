@@ -26,12 +26,14 @@ public class QnaService {
 
     
 
-    public void getQnaPagingBoard(int page, Model model) {
-        PageRequest pagable = PageRequest.of(page,10,Sort.by("qnaNo").descending());
-        Page<QnaInfo> pageNumber = qnaRepository.findAll(pagable);
-        List<QnaInfo> qnaBoards = pageNumber.getContent();
+    public void getQnaPagingBoard(int page, Model model ) {
+        PageRequest pageable = PageRequest.of(page,10,Sort.by("qnaNo").descending());
+        Page<QnaInfo> qnaPageNumber = qnaRepository.findAll(pageable);
+        List<QnaInfo> qnaBoards = qnaPageNumber.getContent();
         model.addAttribute("qnaBoards", qnaBoards);
-        model.addAttribute("pageNumber", pageNumber);
+        model.addAttribute("qnaPageNumber", qnaPageNumber);
+        model.addAttribute("qnaTotalPage", qnaPageNumber.getTotalPages());
+        model.addAttribute("qnaCurrentPage", page);
     }
 
     // 신규 저장

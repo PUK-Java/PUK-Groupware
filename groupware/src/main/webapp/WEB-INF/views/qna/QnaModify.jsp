@@ -67,7 +67,6 @@
 <body>
     <div class="container">
         <h2>QnA 수정</h2>
-        <!-- 현재 board 쪽으로 지정되어있음, QnA용으로 재설정 필요. 6월 3일 저녁 작업 시 가장 선행 될 작업 -->
         <form action="/updateOnQna" method="post">
             <input type="hidden" name="qnaNo" value="${qnaNo}">
 

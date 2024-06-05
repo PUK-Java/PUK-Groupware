@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import puk.groupware.model.board.BoardInfo;
 import puk.groupware.model.user.User_Info;
 import puk.groupware.repository.board.BoardInfoJpaRepository;
@@ -51,10 +52,6 @@ public class BoardController  {
         HttpSession session = request.getSession();
         // JSP에서 읽어갈 수 있게
         User_Info loginUser = (User_Info)session.getAttribute("loginUser");
-        
-        // if (loginUser == null) {
-        //     return "redirect:/login";
-        // }
 
         model.addAttribute("loginUser", loginUser);
         boardInfoService.getPagingBoard(page, model); // 페이징된 게시물 가져오기
@@ -116,6 +113,7 @@ public class BoardController  {
         return "redirect:/boardmain";
     }
 
+    
     
     
 }
