@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +27,7 @@ public class ProjectCommentController {
     private final ProjectCommentService projectCommentService;
 
 
+    //등록 메서드
     @Transactional
     @ResponseBody
     @PostMapping("/projectCommentReg")
@@ -41,6 +44,17 @@ public class ProjectCommentController {
         //저장 메서드 불러오기
         projectCommentService.save(project, user, commentContent);
 
+        Map<String,Object> response = new HashMap<>();
+        response.put("success",true);
+        return response;
+    }
+
+    //삭제 메서드
+    @Transactional
+    @ResponseBody
+    @DeleteMapping("/deleteComment/{projectCommentId}")
+    public Map<String,Object> projectCommentDelete(@PathVariable(name="projectCommentId") Long projectCommentId){
+        projectCommentService.deleteById(projectCommentId);
         Map<String,Object> response = new HashMap<>();
         response.put("success",true);
         return response;

@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="puk.groupware.model.user.User_Info" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
 <!DOCTYPE html>
@@ -302,8 +301,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-floating">
-                        <textarea class="form-control" placeholder="코멘트를 남겨주세요" id="commentContent" style="height: 300px"></textarea>
-                        <label for="commentContent">코멘트</label>
+                        <textarea class="form-control" placeholder="코멘트를 남겨주세요" id="commentContent" style="height: 300px" maxlength="100"></textarea>
+                        <label for="commentContent">코멘트(100자 제한)</label>
                     </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-primary" onclick="commentReg(this)">등록</button>
@@ -442,13 +441,13 @@
         }
 
         if(response.status === 500){
-            alert('최대 글자수는 100자입니다.');
+            alert('서버에서 오류가 발생했습니다.');
         }
     }
 
     //코멘트 삭제를 위한 API를 보냅니다.
     async function deleteComment (projectCommentId){
-        const response = await fetch('/deleteComment/${projectCommentId}',
+        const response = await fetch('/deleteComment/' + projectCommentId,
         {
             method : "DELETE",
             headers: {

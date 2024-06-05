@@ -6,19 +6,17 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import puk.groupware.repository.projectComment.ProjectCommentJpaRepository;
+import puk.groupware.repository.wishlist.WishList_jpaRepository;
 
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class JpaTest {
-    @Autowired
-    @MockBean
-    private ProjectCommentJpaRepository pcj;
 
-    
+public class JpaTest {
+    @MockBean
+    private  WishList_jpaRepository wishList_jpaRepository;
+   
     @Test
-    void aa(){
-        System.out.println(pcj.findByProjectInfoProjectNo(Long.parseLong( "1")));
+    void test(){
     }
 }

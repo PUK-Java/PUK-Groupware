@@ -76,7 +76,9 @@
             </div>
             <div class="nav-links">
                 <a href="/">Home</a>
-                <a href="#">About</a>
+                <a href="/boardmain">공지사항</a>
+                <a href="/qnamain">QnA</a>
+
             </div>
             <div class="auth-buttons">
                 <c:choose>
@@ -107,7 +109,6 @@
             </div>
         </div>
         <br>
-        <!-- <a href="${pageContext.request.contextPath}/boardmain" class="btn btn-default">목록</a> -->
         <button type="button" class="btn btn-normal" onclick="location.href='${pageContext.request.contextPath}/qnamain'">목록</button>
         <c:choose>
             <c:when test="${loginUser.userId == board.qnaWriter.userId}">
@@ -116,31 +117,30 @@
             </c:when>
         </c:choose>
 
-        <!-- 댓글 섹션 시작 -->
+        <!-- 여기부터 댓글 -->
         <div class="comments">
             <h4>댓글</h4>
-            <!-- 댓글 목록 -->
             <div class="comment-list">
                 <c:forEach var="comment" items="${comments}">
                     <div class="comment-item">
                         <p>관리자</p>
-                        <p>${comment.content}</p>
-                        <div class="commentDate">${comment.date}</div>
+                        <p>${comment.qnaCommentContent}</p>
+                        <div class="commentDate">${comment.qnaCommentWriteDate}</div>
                     </div>
                 </c:forEach>
             </div>
             
-            <!-- 댓글 작성 폼 -->
-            <div class="comment-form">
-                <!-- <form action="${pageContext.request.contextPath}/addComment" method="post"> -->
-                <form action="/addComment" method="get">
-                    <input type="hidden" name="qnaNo" value="${board.qnaNo}">
-                    <textarea name="content" rows="4" placeholder="댓글을 입력하세요..." required></textarea> 
-                    <input type="submit" value="댓글 작성">
-                </form>
-            </div>
+            <!-- 댓글 작성 / 관리자만 가능하게 -->
+            <c:if test="${isAdmin}">
+                <div class="comment-form">
+                    <form action="/addComment" method="get">
+                        <input type="hidden" name="qnaNo" value="${board.qnaNo}">
+                        <textarea name="content" rows="4" placeholder="댓글을 입력하세요..." required></textarea> 
+                        <input type="submit" value="댓글 작성">
+                    </form>
+                </div>
+            </c:if>
         </div>
-        <!-- 댓글 섹션 끝 -->
 
     </div>
 </body>
