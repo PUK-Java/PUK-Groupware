@@ -111,6 +111,9 @@ public class projectViewController {
     public String projectModify01(@PathVariable("id") Long id, Model model) {
         Project_info projectView = viewService.getProjectById(id);
         model.addAttribute("data", projectView);
+        if (projectView.getUserId() != null) {
+            model.addAttribute("data1", projectView.getUserId().getUserId());
+        }
         return "projectModify";
     }
 

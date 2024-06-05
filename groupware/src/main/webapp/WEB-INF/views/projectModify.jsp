@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
     <!DOCTYPE html>
 <html lang="ko">
@@ -54,6 +55,7 @@
 </head>
 
 <body>
+  
   <div class="container">
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
@@ -152,7 +154,15 @@
     const selectElement = document.getElementById("CATEGORY");
     selectElement.disabled=false;
    }
-
+   
   </script>
+  <c:if test="${loginUser == null}">
+    <c:redirect url="/projectDetail/${data.projectNo}"></c:redirect>
+  </c:if>
+  <c:if test="${loginUser.userId  != data1}">
+    <c:redirect url="/projectDetail/${data.projectNo}"></c:redirect>
+  </c:if>
+
+  
 </body>
 </html>

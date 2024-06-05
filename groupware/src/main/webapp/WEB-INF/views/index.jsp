@@ -72,9 +72,10 @@
                 <small>님 반갑습니다!</small>
                 <button type="button" class="btn btn-outline-primary" onclick="location.href='/logout'">로그아웃</button>
                 <button type="button" class="btn btn-outline-primary" onclick="location.href='/userpage'">내 정보</button>
+                
             </c:when>
         </c:choose>
-            <button type="button" class="btn btn-info" onclick="location.href='/projectregform'">프로젝트 생성</button>
+            <button type="button" class="btn btn-info" onclick="location.href='/projectregform'" id="projectProduce">프로젝트 생성</button>
     </div>
 </div>
 <nav class="navbar navbar-expand-lg border-bottom">
@@ -230,6 +231,15 @@ window.addEventListener('scroll',()=>{
 
 //프로젝트 생성 누를시 후원자 판단 만들꺼임 우현
 
+var adminCheck = '${adminCheck}';
+const projectButton = document.getElementById("projectProduce");
+if(adminCheck == "null값"){
+    projectButton.style.display ="none";
+}
+else if(adminCheck == "후원자"){
+    projectButton.style.display ="none";
+}
 </script>
 </body>
+
 </html>

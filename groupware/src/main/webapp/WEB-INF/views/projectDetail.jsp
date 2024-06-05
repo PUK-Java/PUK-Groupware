@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="puk.groupware.model.user.User_Info" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -111,6 +112,7 @@
             max-height: 500px;
             overflow-y: auto;
         }
+        
     </style>
 </head>
 <body>
@@ -141,19 +143,19 @@
                         <div class="container mt-5">
                             <div class="card-footer row">
                                 <div class="col text-center">
-                                    <form action="/sponTable/${data.projectNo}" method="post">
-                                        <button type="submit" class="btn btn-secondary btn-primary-custom ms-2" onclick="huCheck">후원하기</button>
+                                    <form action="/sponTable/${data.projectNo}" method="post" id="eventCheck">
+                                        <button type="submit" class="btn btn-secondary btn-primary-custom w-50 ms-2" onclick="huCheck()" id="huCheck">후원하기</button>                                   
                                     </form>
                                 </div>
                                 <div class="col text-center">
-                                <c:choose>
-                                    <c:when test="${wishListCheck}">
-                                        <button class="btn btn-secondary w-50 ms-2" id ="wishButton" data-project-no=${data.projectNo} onclick="toggleWishList(this)" data-user-id=${sessionScope.loginUser.userId}>찜해제</button>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <button class="btn btn-success w-50 ms-2" id="wishButton" data-project-no="${data.projectNo}" onclick="toggleWishList(this)" data-user-id="${sessionScope.loginUser.userId}">찜하기</button>
-                                    </c:otherwise>
-                                </c:choose>
+                                    <c:choose>
+                                        <c:when test="${wishListCheck}">
+                                            <button class="btn btn-secondary w-50 ms-2" id ="wishButton" data-project-no=${data.projectNo} onclick="toggleWishList(this)" data-user-id=${sessionScope.loginUser.userId}>찜해제</button>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <button class="btn btn-success w-50 ms-2" id="wishButton" data-project-no="${data.projectNo}" onclick="toggleWishList(this)" data-user-id="${sessionScope.loginUser.userId}">찜하기</button>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </div>
                         </div>
@@ -163,22 +165,50 @@
                     <div class="card w-100">
                         <div class="card-body">
                             <h5 class="card-title" style="text-align: center; line-height: 5vh;">${data.title}</h5>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">후원가격: ${data.cost}</li>
-                                <li class="list-group-item" id="end123" data-target-cost="${data.targetCost}">목표 금액: ${data.targetCost}원</li>
-                                <li class="list-group-item" id="state123" data-state-cost="${count * data.cost}">현재 금액: ${count * data.cost}원</li>
-                                <li class="list-group-item">프로젝트 시작일: ${data.startDate}</li>
-                                <li class="list-group-item">프로젝트 종료일: ${data.endDate}</li>
-                                <li class="list-group-item">프로젝트 남은 일수: ${daysBetween}일</li>
-                                <li class="list-group-item" id="state">프로젝트 상태:</li>
-                                <li class="list-group-item">프로젝트 카테고리: ${data.category}</li>
-                                <li class="list-group-item" id="stateP"></li>
-                                <li class="list-group-item">                                                                   
-                                    <a href="/projectModify/${data.projectNo}">                                     
-                                        <button class="btn btn-primary btn-primary-custom w-100" id="checkId">수정</button>
-                                    </a>                                                                       
-                                </li>
-                            </ul>
+                            <table class="table">
+                                <tr>
+                                    <td>후원가격</td>
+                                    <td>${data.cost}</td>
+                                </tr>
+                                <tr>
+                                    <td>목표 금액</td>
+                                    <td id="end123" data-target-cost="${data.targetCost}">${data.targetCost}원</td>
+                                </tr>
+                                <tr>
+                                    <td>현재 금액</td>
+                                    <td id="state123" data-state-cost="${count * data.cost}">${count * data.cost}원</td>
+                                </tr>
+                                <tr>
+                                    <td>프로젝트 시작일</td>
+                                    <td>${data.startDate}</td>
+                                </tr>
+                                <tr>
+                                    <td>프로젝트 종료일</td>
+                                    <td>${data.endDate}</td>
+                                </tr>
+                                <tr>
+                                    <td>프로젝트 남은 일수</td>
+                                    <td>${daysBetween}일</td>
+                                </tr>
+                                <tr>
+                                    <td>프로젝트 상태</td>
+                                    <td id="state"></td>
+                                </tr>
+                                <tr>
+                                    <td>프로젝트 카테고리</td>
+                                    <td>${data.category}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" id="stateP" class="text-center"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <a href="/projectModify/${data.projectNo}">
+                                            <button class="btn btn-primary btn-primary-custom w-100" id="checkId">수정</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -476,7 +506,27 @@
     }else if(loginUserIdCheck != projectUserId){
         document.getElementById("checkId").style.display='none';
     }
-    
+    document.getElementById('eventCheck').addEventListener('submit', function(event) {
+            event.preventDefault(); // 폼 제출 시 새로고침 방지
+            const button = document.getElementById('huCheck');
+            button.disabled=true;
+
+            huCheck(); // huCheck 함수 호출
+            
+            // 2초 딜레이 후 폼 제출
+            setTimeout(() => {
+                this.submit(); // 폼 제출
+            }, 1000); // 1000 밀리초 = 1초
+        });
+    function huCheck(){
+        const canvas = document.getElementById('custom_canvas');
+    const button = document.getElementById('huCheck');
+
+    const jsConfetti = new JSConfetti({canvas});
+        jsConfetti.addConfetti()
+
+    }
+        
      
     
 </script>
