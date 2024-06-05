@@ -19,7 +19,7 @@ import puk.groupware.repository.board.BoardInfoJpaRepository;
 
 @Service
 public class BoardInfoService {
-
+    
     @Autowired
     private final BoardInfoJpaRepository boardInfoJpaRepository;
 
@@ -56,6 +56,7 @@ public class BoardInfoService {
     }
 
 
+    // 게시물 번호로 해당 게시물 조회
     public BoardInfo getBoardByNo(int boardNo) {
         Optional<BoardInfo> boardInfoOptional = boardInfoJpaRepository.findById(boardNo);
             return boardInfoOptional.get();
@@ -63,19 +64,22 @@ public class BoardInfoService {
 
     // 메인 화면 출력 페이지 개수 조절
     public void getPagingBoard(int page, Model model) {
-        PageRequest pagable = PageRequest.of(page,10,Sort.by("boardNo").descending());
+        PageRequest pagable = PageRequest.of(page, 10, Sort.by("boardNo").descending());
         Page<BoardInfo> pageNumber = boardInfoJpaRepository.findAll(pagable);
         List<BoardInfo> boards = pageNumber.getContent();
+
         model.addAttribute("boards", boards);
         model.addAttribute("pageNumber", pageNumber);
+        model.addAttribute("totalPage", pageNumber.getTotalPages());
+        model.addAttribute("currentPage", page);
     } 
 
-
+    // 제목으로 검색
     public List<BoardInfo> searchBoardsByTitle(String title) {
         return boardInfoJpaRepository.findByTitleContaining(title);
     }
 
-// 게시물 번호가 파라미터로 전달받은 boardNo와 동일할 때 model에 title, content, wirter를 넘겨주도록
+    // 게시물 번호가 파라미터로 전달받은 boardNo와 동일할 때 model에 title, content, wirter를 넘겨주도록
     @Transactional
     public void preUpdate(int boardNo, Model model) {
         BoardInfo boardInfo = boardInfoJpaRepository.findById(boardNo).get();
@@ -107,5 +111,6 @@ public class BoardInfoService {
         BoardInfo boardInfo = boardInfoJpaRepository.findById(boardNo).get();
         boardInfo.setViewCount(boardInfo.getViewCount() + 1);
     }
+
 
 }

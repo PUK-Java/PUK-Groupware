@@ -27,7 +27,7 @@
             </div>
             <div class="nav-links">
                 <a href="/">Home</a>
-                <a href="#">About</a>
+                <a href="/boardmain">공지사항</a>
             </div>
             <form class="search-form" method="GET" action="/boardOnSearchList">
                 <input type="search" placeholder="Search..." aria-label="Search" name="searchText" value="${param.searchText}">
@@ -61,14 +61,13 @@
             </tr>
             </thead>
             <tbody>
-                <c:forEach var="board" items="${qnaBoards}">
+                <c:forEach var="qnaBoard" items="${qnaBoards}">
                     <tr>
-                        <td>${board.qnaNo}</td>
-                        <!-- <td>${board.qnaTitle}</td> -->
-                        <td><a href="${pageContext.request.contextPath}/qnadetail?qnaNo=${board.qnaNo}">${board.qnaTitle}</a></td>
-                        <td>${board.qnaWriter.userId}</td>
-                        <td>${board.qnaWriteDate}</td>
-                        <td>${board.viewCount}</td>
+                        <td>${qnaBoard.qnaNo}</td>
+                        <td><a href="${pageContext.request.contextPath}/qnadetail?qnaNo=${qnaBoard.qnaNo}">${qnaBoard.qnaTitle}</a></td>
+                        <td>${qnaBoard.qnaWriter.userId}</td>
+                        <td>${qnaBoard.qnaWriteDate}</td>
+                        <td>${qnaBoard.viewCount}</td>
                     </tr>
                 </c:forEach>
             </tbody>
@@ -79,13 +78,21 @@
         </form>
         <div class="center text-center">
             <nav aria-label="Page navigation example">
-               <ul class="pagination">
-                   <c:if test="${totalPage != 0}">
-                        <li class="page-item"><a class="page-link" href="/QnAIndex?page=${currentPage -1}">이전</a></li>
-                        <li class="page-item"><a class="page-link" href="/QnAIndex?page=${currentPage +1}">다음</a></li>
-                   </c:if>
-               </ul>
-           </nav>
+                <ul class="pagination justify-content-center">
+                    <c:if test="${qnaTotalPage != 0}">
+                         <form action="/" method="get">
+                             <c:if test="${qnaCurrentPage !=0}">
+                                <li class="page-item"><a class="page-link" href="/qnamain?page=${qnaCurrentPage - 1}">이전</a></li>
+                            </c:if>
+                         </form>
+                         <form action="/" method="get">
+                             <c:if test="${qnaCurrentPage != qnaTotalPage}">
+                                <li class="page-item"><a class="page-link" href="/qnamain?page=${qnaCurrentPage + 1}">다음</a></li>
+                            </c:if>
+                         </form>
+                    </c:if>
+                </ul>
+            </nav>
        </div>
     </div>
 </body>

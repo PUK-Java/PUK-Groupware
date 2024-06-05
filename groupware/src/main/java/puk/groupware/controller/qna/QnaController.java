@@ -1,4 +1,4 @@
-package puk.groupware.controller.qnaBoard;
+package puk.groupware.controller.qna;
 
 import java.util.List;
 
@@ -18,6 +18,7 @@ import puk.groupware.model.user.User_Info;
 import puk.groupware.repository.qna.QnaRepository;
 import puk.groupware.service.qna.QnaCommentService;
 import puk.groupware.service.qna.QnaService;
+import puk.groupware.service.user.UserPageService;
 
 @Controller
 @RequiredArgsConstructor
@@ -26,7 +27,7 @@ public class QnaController {
     private final QnaService qnaService;
     private final QnaRepository qnaRepository;
     private final QnaCommentService qnaCommentService;
-    private HttpSession httpSession;
+    private final UserPageService userPageService;
   
 
     // request에 home을 받으면 index.jsp로 이동하게 설정
@@ -34,8 +35,8 @@ public class QnaController {
     @PostMapping("/qnaSave")
     public String saveOnBoard(@RequestParam("title") String title, @RequestParam("content") String content, HttpServletRequest request) {
        // 로그인 된 회원만 저장 권한을 부여하도록 (1차적으로 write에서 필터링) 
-       httpSession = request.getSession();
-       if(httpSession.getAttribute("loginUser") == null) {
+       HttpSession session = request.getSession();
+       if(session.getAttribute("loginUser") == null) {
         return "redirect:/login";
        }
         // service단으로 보내서 실질적인 DB로의 저장은 service에서 실행하도록
@@ -46,10 +47,9 @@ public class QnaController {
     // 메인 페이지에서 페이징된 게시물 목록 조회가 이루어 지도록 수정
     @GetMapping("/qnamain")
     public String qnaMainBoard(HttpServletRequest request, @RequestParam(name="page", required = false, defaultValue = "0") int page, Model model) {
-        httpSession = request.getSession();
-        User_Info loginUser = (User_Info)httpSession.getAttribute("loginUser");
+        HttpSession session = request.getSession();
+        User_Info loginUser = (User_Info)session.getAttribute("loginUser");
         model.addAttribute("loginUser", loginUser);
-        model.addAttribute("CurrunetPage", page);
         qnaService.getQnaPagingBoard(page, model); // 페이징된 게시물 가져오기
         return "/qna/QnaIndex"; 
     }
@@ -69,22 +69,25 @@ public class QnaController {
     }
 
     @GetMapping("/qnadetail")
-    public String getQnaDetail(@RequestParam("qnaNo") int qnaNo, Model model) {
+    public String getQnaDetail(HttpServletRequest request, @RequestParam("qnaNo") int qnaNo, Model model) {
+        HttpSession session = request.getSession();
+        User_Info loginUser = (User_Info)session.getAttribute("loginUser");
+        if (loginUser != null) {
+            boolean isAdmin = userPageService.isAdmin(loginUser.getUserId());
+            model.addAttribute("isAdmin", isAdmin);
+        }
+        model.addAttribute("loginUser", loginUser);
+
+        
         QnaInfo qnaInfo = qnaService.getQnaBoardByNo(qnaNo);
-        List<QnaCommentInfo> comments = qnaCommentService.getQnaCommentByQnaNo(qnaInfo);
         model.addAttribute("board", qnaInfo);
+        List<QnaCommentInfo> comments = qnaCommentService.getQnaCommentByQnaNo(qnaInfo);
         model.addAttribute("comments", comments);
         // 조회수 메서드 호출
         qnaService.qnaViewCount(qnaNo);
+
         return "/qna/QnaDetail";
     }
-
-    // @GetMapping("/boardOnSearchList")
-    // public String searchBoards(@RequestParam("searchText") String searchText, Model model) {
-    //     List<BoardInfo> boards = boardInfoService.searchBoardsByTitle(searchText);
-    //     model.addAttribute("boards", boards);
-    //     return "/board/boardOnSearchList";
-    // }
 
     // // 게시물 삭제 (Delete)
     // // 삭제 버튼 노출 자체에서 작성자와 로그인 된 회원이 동일한 지 검증되기 때문에 여기서는 별도 검증 X
@@ -119,13 +122,8 @@ public class QnaController {
     @GetMapping("/addComment")
     public String saveComment(@RequestParam("qnaNo") int qnaNo, @RequestParam("content") String content){
         QnaInfo qnaInfo = qnaService.getQnaBoardByNo(qnaNo);
-
-        QnaCommentInfo qnaCommentInfo = new QnaCommentInfo();
-        // qnaInfo.setQnaTitle(title);
-        qnaCommentInfo.setQnaCommentContent(content);
-        qnaCommentInfo.setQnaNo(qnaInfo);
-        qnaCommentService.saveQnaComment(qnaCommentInfo);
-        // return qnaRepository.save(qnaInfo);
+        qnaCommentService.saveQnaComment(qnaNo, content);
+        
         return "redirect:/qnadetail?qnaNo=" + qnaNo;
     }
     

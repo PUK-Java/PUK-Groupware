@@ -11,32 +11,30 @@
 </head>
 <body>
     <main>
-        <header class="p-3 bg-dark text-white">
-            <div class="container">
-                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                    <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-                    </a>
-                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li><a href="/" class="nav-link px-2 text-white">Home</a></li>
-                        <li><a href="#" class="nav-link px-2 text-white">About</a></li>
-                    </ul>
-                    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 d-flex" method="GET" action="/boardOnSearchList">
-                        <input type="search" class="form-control form-control-dark me-2" placeholder="Search..." aria-label="Search" name="searchText" value="${param.searchText}">
-                        <button type="submit" class="btn btn-outline-light">검색</button>
-                    </form>
-                    <div class="text-end">
-                        <c:choose>
-                            <c:when test="${loginUser == null}">
-                                <button type="button" class="btn btn-outline-light me-2" onclick="location.href='/login'">Login</button>
-                                <button type="button" class="btn btn-warning" onclick="location.href='/signupform'">Sign-up</button>
-                            </c:when>
-                            <c:otherwise>
-                                <button type="button" class="btn btn-outline-light me-2" onclick="location.href='/logout'">Logout</button>
-                            </c:otherwise>
-                        </c:choose>
-                    </div>
-                </div>
+        <header class="navbar">
+            <div class="logo">
+                <a href="/">
+                    <img src="/images/logo/logo.jpg" width="45" height="45" alt="Logo">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/qnamain">QnA</a>
+            </div>
+            <form class="search-form" method="GET" action="/boardOnSearchList">
+                <input type="search" placeholder="Search..." aria-label="Search" name="searchText" value="${param.searchText}">
+                <button type="submit">검색</button>
+            </form>
+            <div class="auth-buttons">
+                <c:choose>
+                    <c:when test="${loginUser == null}">
+                        <button type="button" class="btn-outline-light" onclick="location.href='/login'">Login</button>
+                        <button type="button" class="btn-warning" onclick="location.href='/signupform'">Sign-up</button>
+                    </c:when>
+                    <c:otherwise>
+                        <button type="button" class="btn-outline-light" onclick="location.href='/logout'">Logout</button>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </header>
     </main>
@@ -67,19 +65,29 @@
             </tbody>
         </table>
         <hr/>
-        <form action="/write" method="get" style="display: inline;">
-            <button type="submit" class="btn btn-default btn-normal pull-right">글쓰기</button>
-        </form>
+        <c:if test="${isAdmin}">
+            <form action="/write" method="get" style="display: inline;">
+                <button type="submit" class="btn btn-default btn-normal pull-right">글쓰기</button>
+            </form>
+        </c:if>
         <div class="center text-center">
             <nav aria-label="Page navigation example">
-               <ul class="pagination">
-                   <c:if test="${totalPage != 0}">
-                        <li class="page-item"><a class="page-link" href="/boardmain?page=${currentPage -1}">이전</a></li>
-                        <li class="page-item"><a class="page-link" href="/boardmain?page=${currentPage +1}">다음</a></li>
-                   </c:if>
-               </ul>
-           </nav>
+                <ul class="pagination justify-content-center">
+                    <c:if test="${totalPage != 0}">
+                         <form action="/" method="get">
+                             <c:if test="${currentPage !=0}">
+                                <li class="page-item"><a class="page-link" href="/boardmain?page=${currentPage - 1}">이전</a></li>
+                            </c:if>
+                         </form>
+                         <form action="/" method="get">
+                             <c:if test="${currentPage != totalPage}">
+                                <li class="page-item"><a class="page-link" href="/boardmain?page=${currentPage + 1}">다음</a></li>
+                            </c:if>
+                         </form>
+                    </c:if>
+                </ul>
+            </nav>
        </div>
     </div>
-    </body>
-    </html>
+</body>
+</html>
