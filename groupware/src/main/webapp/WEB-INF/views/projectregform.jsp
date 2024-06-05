@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <!DOCTYPE html>
 <html lang="ko">
 
@@ -54,6 +54,7 @@
 </head>
 
 <body>
+  
   <div class="container">
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
@@ -143,15 +144,15 @@
         }, false);
       });
     }, false);
-    const data10= document.getElementById("TITLE").value;
-    const data11= document.getElementById("data11").innerText;
-    console.log(data10);
-    console.log(data11);
-    if(data10 !=""){
-      document.getElementById("data11").innerText = "수정완료";
-    }
-    
+
 
   </script>
 </body>
+<c:if test="${loginUser == null}">
+    <c:redirect url="/"></c:redirect>
+</c:if>
+<c:if test="${loginUser.admin == '후원자'}">
+    <c:redirect url="/"></c:redirect>
+</c:if>
+
 </html>

@@ -21,4 +21,15 @@ public class Userservicesave {
         // 중복되지 않으면 저장
         userRepository.save(user);
     }
+
+    public String userAdminCheck(User_Info userId) {
+        if (userId != null) {
+            String test1 = (String) userId.getUserId();
+            User_Info userInfo = userRepository.findByUserId(test1);
+            return userInfo.getAdmin();
+        }
+        return "null값";
+
+    }
+
 }
