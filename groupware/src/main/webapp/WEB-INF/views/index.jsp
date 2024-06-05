@@ -186,7 +186,7 @@
                     </c:if>
                 </form>
                 <form action="/" method="get">
-                    <c:if test="${projectPage != projectTotalPage}">
+                    <c:if test="${projectPage < projectTotalPage-1}">
                         <li class="page-item"><a class="page-link" href="/?page=${projectPage +1}&projectCategory=${param.projectCategory}&projectName=${param.projectName}">다음</a></li>
                     </c:if>
                 </form>
@@ -197,12 +197,7 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script>
-    document.querySelectorAll(".nav-link").forEach((link) => {
-    if (link.href === window.location.href) {
-        link.classList.add("active");
-        link.setAttribute("aria-current", "page");
-    }
-});
+
 
 
 //collapse가 마우스 클릭이 아니라 hover일 때 처리하기
