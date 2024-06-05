@@ -19,8 +19,10 @@
             -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
             box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15) */
         }
-
-        
+        .card-img{
+            height: 20rem;
+            object-fit: fill;
+        }
   </style>
 </head>
 <body>
@@ -120,13 +122,18 @@
         </div>
             <h2 style="margin-bottom: 32px;">위시리스트</h2><hr>
         </div>
-            <div class="col-md-3 mb-3 d-md-flex">
-                <c:forEach var="project" items="${projectLists}">
-                    <div class="card">
-                        <div><h2>${project.title}</h2></div>
-                        <img src="/images/projectThumbnails/${project.image}">
-                    </div>
-                </c:forEach>
+            <div class="container">
+                <div class="row row-cols-3 gap-1">
+                    <c:forEach var="project" items="${projectLists}">
+                        <div class="col card d-block">
+                            <a href="/projectDetail/${project.projectNo}">
+                                <div class="card-title"><h2>${project.title}</h2></div>
+                                <img class="card-img" src="/images/projectThumbnails/${project.image}">
+                                <p>가격 ${project.targetCost}</p>
+                            </a>
+                        </div>
+                    </c:forEach>
+                </div>
             </div>
         </div>
     </div>
