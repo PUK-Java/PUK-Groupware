@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -111,7 +110,6 @@
             max-height: 500px;
             overflow-y: auto;
         }
-        
     </style>
 </head>
 <body>
@@ -143,18 +141,18 @@
                             <div class="card-footer row">
                                 <div class="col text-center">
                                     <form action="/sponTable/${data.projectNo}" method="post" id="eventCheck">
-                                        <button type="submit" class="btn btn-secondary btn-primary-custom w-50 ms-2" onclick="huCheck()" id="huCheck">후원하기</button>                                   
+                                        <button type="submit" class="btn btn-secondary btn-primary-custom w-50 ms-2" onclick="huCheck()" id="huCheck">후원하기</button>  
                                     </form>
                                 </div>
                                 <div class="col text-center">
-                                    <c:choose>
-                                        <c:when test="${wishListCheck}">
-                                            <button class="btn btn-secondary w-50 ms-2" id ="wishButton" data-project-no=${data.projectNo} onclick="toggleWishList(this)" data-user-id=${sessionScope.loginUser.userId}>찜해제</button>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <button class="btn btn-success w-50 ms-2" id="wishButton" data-project-no="${data.projectNo}" onclick="toggleWishList(this)" data-user-id="${sessionScope.loginUser.userId}">찜하기</button>
-                                        </c:otherwise>
-                                    </c:choose>
+                                <c:choose>
+                                    <c:when test="${wishListCheck}">
+                                        <button class="btn btn-secondary w-50 ms-2" id ="wishButton" data-project-no=${data.projectNo} onclick="toggleWishList(this)" data-user-id=${sessionScope.loginUser.userId}>찜해제</button>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button class="btn btn-success w-50 ms-2" id="wishButton" data-project-no="${data.projectNo}" onclick="toggleWishList(this)" data-user-id="${sessionScope.loginUser.userId}">찜하기</button>
+                                    </c:otherwise>
+                                </c:choose>
                                 </div>
                             </div>
                         </div>
@@ -525,10 +523,10 @@
         jsConfetti.addConfetti()
 
     }
-        
+    
      
     
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
 </body>
 </html>
