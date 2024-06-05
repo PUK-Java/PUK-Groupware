@@ -11,7 +11,10 @@ import lombok.extern.slf4j.Slf4j;
 import puk.groupware.model.project.Project_info;
 import puk.groupware.model.user.User_Info;
 import puk.groupware.service.user.UserPageService;
+import puk.groupware.service.wishList.WishListService;
+
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -21,11 +24,13 @@ public class UserPageController {
     
     private final UserPageService userPageService;
     private final HttpSession httpSession;
+    private final WishListService wishListService;
 
     @Autowired
-    UserPageController(UserPageService userPageService, HttpSession httpSession){
+    UserPageController(UserPageService userPageService, HttpSession httpSession, WishListService wishListService){
         this.userPageService = userPageService;
         this.httpSession = httpSession;
+        this.wishListService = wishListService;
     }
 
     @GetMapping("/userpage")
@@ -64,6 +69,7 @@ public class UserPageController {
     public String modifyCurrentUser(User_Info user) {
         userPageService.saveUser(user);
         httpSession.setAttribute("loginUser", user);
+        httpSession.removeAttribute("verify");
         return "userpage";
     }
     
@@ -74,7 +80,15 @@ public class UserPageController {
         String userId = user.getUserId();
         userPageService.deleteUser(userId);
         httpSession.removeAttribute("loginUser");
+        httpSession.removeAttribute("verify");
         return "redirect:";
+    }
+    
+    //메인 갈 때 세션 삭제
+    @GetMapping("/returnMain")
+    public String getMain() {
+        httpSession.removeAttribute("verify");
+        return "redirect:/";
     }
     
 }
