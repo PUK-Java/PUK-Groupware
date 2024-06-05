@@ -19,8 +19,6 @@ import puk.groupware.service.project.ProjectFindService;
 import puk.groupware.service.user.UserLoginService;
 import puk.groupware.service.wishList.WishListService;
 
-
-
 @RestController
 @RequiredArgsConstructor
 @Slf4j
@@ -36,7 +34,7 @@ public class wishListController {
         
         Long projectNo = Long.valueOf((String)body.get("projectNo"));
         String userId = (String) body.get("userId");
-        
+
         //프로젝트 객체 찾기
         Project_info project = projectFindService.findById(projectNo);
 
@@ -58,8 +56,5 @@ public class wishListController {
         response.put("isWished",isWished);
         return response;
     }
-
-  
-    
     
 }

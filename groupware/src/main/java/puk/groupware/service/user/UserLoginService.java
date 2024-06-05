@@ -20,8 +20,7 @@ public class UserLoginService {
         return uJpaRepository.findByUserIdAndUserPw(userId, userPw);
     }
 
-    //유저 아이디만으로 찾기
     public User_Info findById(String userId){
-        return uJpaRepository.findById(userId).orElseThrow();
+        return uJpaRepository.findByUserId(userId);
     }
 }

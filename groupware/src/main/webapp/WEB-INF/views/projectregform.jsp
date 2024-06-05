@@ -104,7 +104,7 @@
 
           <div class="mb-3">
             <label for="END_DATE">종료일자</label>
-            <input type="date" class="form-control" id="END_DATE"  name="strEndDate"required>
+            <input type="date" class="form-control" id="END_DATE"  name="strEndDate"required >
             <div class="invalid-feedback">
               종료일자를 선택해주세요.
             </div>
@@ -116,7 +116,7 @@
             <span class="text-muted"> *이미지 파일만 업로드 가능합니다.</span>
           </div>
           <div class="mb-4"></div>
-          <button class="btn btn-primary btn-lg btn-block" type="submit">등록 완료</button>
+          <button class="btn btn-primary btn-lg btn-block" type="submit" id="data11">등록완료</button>
         </form>
       </div>
     </div>
@@ -143,6 +143,13 @@
         }, false);
       });
     }, false);
+    const data10= document.getElementById("TITLE").value;
+    const data11= document.getElementById("data11").innerText;
+    console.log(data10);
+    console.log(data11);
+    if(data10 !=""){
+      document.getElementById("data11").innerText = "수정완료";
+    }
     
 
   </script>

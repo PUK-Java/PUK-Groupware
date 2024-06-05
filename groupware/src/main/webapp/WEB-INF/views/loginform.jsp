@@ -42,7 +42,7 @@
             <h2>로그인</h2>
             <!-- 메인페이지 -->
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button class="btn btn-outline-secondary btn-block" type="button" onclick="location.href='/'">메인으로</button>
+                <button class="btn btn-primary btn-lg btn-block " type="button" onclick="location.href='/'">메인으로</button>
             </div>
             <form action="/loginRequest" method="post">
                 <div class="mb-3">

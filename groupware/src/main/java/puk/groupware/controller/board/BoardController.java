@@ -15,7 +15,6 @@ import jakarta.servlet.http.HttpSession;
 import puk.groupware.model.board.BoardInfo;
 import puk.groupware.model.user.User_Info;
 import puk.groupware.repository.board.BoardInfoJpaRepository;
-
 import puk.groupware.service.board.BoardInfoService;
 
 
@@ -59,7 +58,7 @@ public class BoardController  {
 
         model.addAttribute("loginUser", loginUser);
         boardInfoService.getPagingBoard(page, model); // 페이징된 게시물 가져오기
-        return "/board/boardIndex"; 
+        return "/board/boardIndex";
     }
 
     @GetMapping("/write")
@@ -112,12 +111,6 @@ public class BoardController  {
     @PostMapping("/updateOnBoard")
     public String updateBoard(@RequestParam("boardNo") String strboardNo, @RequestParam("title") String title, @RequestParam("content") String content) {
         int boardNo = Integer.parseInt(strboardNo);
-        System.out.println("컨트롤러 출력 Start");
-        System.out.println(title);
-        System.out.println(content);
-        System.out.println("컨트롤러 출력 End");
-
-
         boardInfoService.saveBoardUpdate(boardNo, title, content);
 
         return "redirect:/boardmain";

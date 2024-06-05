@@ -1,6 +1,5 @@
 package puk.groupware.service.wishList;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -41,7 +40,6 @@ public class WishListService {
         return wishList_jpaRepository.findByJoinProjectInfo(userId);
     }
 
-
     //위시리스트가 존재하면 삭제하고 없으면 추가하는 메소드
     @Transactional
     public boolean toggleWishList(WishList wishList,WishListId wishListId){
@@ -74,6 +72,4 @@ public class WishListService {
             return false;
         }
     }
-
-  
 }
