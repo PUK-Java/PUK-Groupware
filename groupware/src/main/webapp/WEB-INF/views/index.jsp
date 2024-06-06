@@ -53,18 +53,29 @@
         text-decoration: none;
         color: black;
     }
+
+    /* nav-item (카테고리) 크기 동일하게 만들기*/
+    .nav-item{
+        width: 70px;
+    }
+
+    /* carousel-item(슬라이드 이미지) 높이 줄이기*/
+    .carousel-inner > .carousel-item > a > img{
+        top:0;
+        left:0;
+        min-width: 100%;
+        height: 400px;
+    }
     
 
     </style>
 </head>
 <body>
+
+    <!-- 헤더 영역 -->
 <div class="container d-flex align-items-center mb-1 mt-3">
     <a href="/">
-        <div class="mb-2 mb-md-0">
-            <h1>
-                로고 위치
-            </h1>
-        </div>
+         <img src="/images/logo/logo.jpg" width="100" height="100">
     </a>
     <div class="ms-auto me-auto col-4 col-md-4">
         <form role="search">
@@ -94,32 +105,119 @@
             <button type="button" class="btn btn-info text-white text-nowrap" onclick="location.href='/projectregform'" id="projectProduce">프로젝트 생성</button>
     </div>
 </div>
-<nav class="navbar border-bottom">
-    <div class="container justify-content-center">
-                <a class="nav-link" aria-current="page" href="/?projectCategory=굿즈">
-                    <img src="/images/icons/goods.svg" class="bi" width="32" height="23">
-                    <br>
-                    <strong style="text-transform:uppercase">굿즈</strong>
-                </a>
-                <a class="nav-link " aria-current="page" href="/?projectCategory=푸드">
-                    <img src="/images/icons/foodIcon.png" class="bi" width="32" height="23">
-                    <br>
-                    <strong style="text-transform:uppercase">푸드</strong></a>
-                <a class="nav-link" aria-current="page" href="/?projectCategory=전자제품">
-                    <img src="/images/icons/electricIcon.png" class="bi" width="32" height="23">
-                    <br>
-                    <strong style="text-transform:uppercase">전자제품</strong></a>    
+<!-- 헤더 영역 -->
 
+<!-- 카테고리 영역 시작-->
+<nav class="navbar border-bottom">
+    <div class="container justify-content-center text-center">
+        <ul class="d-flex list-unstyled">
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">
+                    <img src="/images/icons/gameIcon.png" class="bi" width="25" height="25">
+                    <br>
+                    <span>굿즈</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">
+                    <img src="/images/icons/fashionIcon.png" class="bi" width="25" height="25">
+                    <br>
+                    <span>패션</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">
+                    <img src="/images/icons/petIcon.png" class="bi" width="25" height="25">
+                    <br>
+                    <span>반려동물</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " aria-current="page" href="/?projectCategory=푸드">
+                    <img src="/images/icons/foodIcon.png" class="bi" width="25" height="25">
+                    <br>
+                    <span>푸드</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/?projectCategory=전자제품">
+                    <img src="/images/icons/electricIcon.png" class="bi" width="25" height="25">
+                    <br>
+                    <span class="text-wrap">전자제품</span></a>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/?projectCategory=굿즈">
+                    <img src="/images/icons/goodsIcon.png" class="bi" width="25" height="25">
+                    <br>
+                    <span>굿즈</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">
+                    <img src="/images/icons/musicIcon.png" class="bi" width="25" height="25">
+                    <br>
+                    <span>음악</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">
+                    <img src="/images/icons/homeIcon.png" class="bi" width="25" height="25">
+                    <br>
+                    <span>리빙</span>
+                </a>
+            </li>
+        </ul>
     </div>
 </nav>
+<!-- 카테고리 영역 끝-->
 
+<!-- 슬라이드 이미지 영역 시작-->
+<div id="carouselExampleIndicators" class="carousel slide container" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <a href="https://github.com/Koeyh">
+        <img src="/images/nameCard/Heo.png" class="d-block w-100" alt="이미지 준비중">
+      </div>
+        </a>
+      <div class="carousel-item">
+        <a href="https://github.com//simwh123">
+        <img src="/images/nameCard/Sim.png" class="d-block w-100" alt="이미지 준비중">
+        </a>
+      </div>
+      <div class="carousel-item">
+        <a href="https://github.com//vinca0224">
+        <img src="/images/nameCard/Im.png" class="d-block w-100" alt="이미지 준비중">
+        </a>
+      </div>
+      <div class="carousel-item">
+        <a href="https://github.com/KangJeongTaek">
+        <img src="/images/nameCard/Kang.png" class="d-block w-100" alt="이미지 준비중">
+        </a>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+<!-- 슬라이드 이미지 영역 끝-->
 
+<!-- 카드 영역 시작-->
 <div class="container">
 <div class="row row-cols-1 row-cols-md-3 g-10 mx-5 mt-5 mb-5">
 <c:forEach var="project" items="${projects}">
     <div class="col mb-5">
             <div class="card h-100 position-relative border-0">
-                <img src="images/projectThumbnails/${project.image}" class="card-img-top" alt="...">
+                <img src="images/projectThumbnails/${project.image}" class="card-img-top" alt="이미지 준비중">
                 <div class="card-body pb-0">
                     <p class="card-text">
                         <small><small>${project.category}</small></small>
@@ -155,6 +253,9 @@
     </div>
 </c:forEach>
 </div>
+<!-- 카드 영역 끝-->
+
+<!-- 페이지네이션 영역 시작 -->
 <div class="center text-center">
     <nav aria-label="Page navigation example">
        <ul class="pagination justify-content-center">
@@ -174,6 +275,8 @@
    </nav>
 </div>
 </div>
+<!-- 페이지네이션 영역 끝-->
+
 <footer class="bg-dark text-white p-3 mt-5">
     <div class="container">
         <div class="col">
