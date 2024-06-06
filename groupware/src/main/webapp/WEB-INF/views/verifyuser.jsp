@@ -42,4 +42,5 @@
         window.close();
         </script>
 </c:if>
+</body>
 </html>

@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-      <style>
+    <style>
         .container {
             padding: 32px;
             -webkit-border-radius: 10px;
@@ -20,20 +20,24 @@
             box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15) */
         }
         .card-img{
-            height: 20rem;
-            object-fit: cover;
+            height: 15rem;
+            object-fit: fill;
+            background-color: grey;
         }
-  </style>
+        /* .like:visited{
+            
+        } */
+    </style>
 </head>
 <body>
+    <!-- 회원 정보 수정 -->
     <div class="container">
-        <!-- 회원 정보 수정 -->
         <form class="validation-form" action="/updateUser" method="post" onsubmit="return confirm('회원정보를 수정하시겠습니까?')">
         <!-- 메인페이지 -->
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <button class="btn btn-primary btn-lg btn-block " type="button" onclick="location.href='returnMain'">메인으로</button>
         </div>
-            <h2>유저 페이지</h2><hr>
+            <h2>내 정보 수정</h2><hr>
                 <div class="row">
                     <!-- id -->
                     <div class="col-md-6 mb-3">
@@ -116,32 +120,38 @@
     </div>
     <!-- 위시리스트 --> 
     <div class="container">
-        <div style="margin-top: 32px;">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button class="btn btn-secondary btn-lg btn-block " type="button" onclick="location.href='/'">내 작품보기</button>
-        </div>
-            <h2 style="margin-bottom: 32px;">위시리스트</h2><hr>
-        </div>
-            <div class="container">
-                <div class="row row-cols-md-3 g-3">
-                    <c:forEach var="project" items="${projectLists}">
-                        <div class="col">
-                            <div class="card h-100">
-                                <a href="/projectDetail/${project.projectNo}" style="text-decoration : none">
-                                    <img class="card-img" src="/images/projectThumbnails/${project.image}" alt="${project.title}">
-                                    <div class="card-body row row-cols-md-2">
-                                        <div class="col"><p class="card-title">${project.title}</p></div>
-                                        <div class="col"><p class="card-text">${project.targetCost}</p></div>
-                                    </div>
-                                </a>
+        <h2>위시리스트</h2><hr>
+        <div class="container">
+            <div class="row row-cols-md-3 g-3">
+                <c:forEach var="project" items="${projectLists}">
+                    <div class="col">
+                        <div class="card h-100 position-relative">
+                            <a href="/projectDetail/${project.projectNo}" style="text-decoration : none;">
+                                <img class="card-img" src="/images/projectThumbnails/${project.image}">
+                            </a>
+                            <div class="card-body row row-cols-md-2">
+                                <div class="col-9">
+                                    <a href="/projectDetail/${project.projectNo}" style="text-decoration : none;">
+                                        <p class="card-title"><b>${project.title}</b></p>
+                                        <p class="card-text">${project.startDate} ~ ${project.endDate}</p>
+                                    </a>
+                                </div>
+                                <div class="col-3">
+                                    <button class="btn like" name="${project.projectNo}" style="width: 100%; height: 100%;" onclick='deleteWishlist(this)'>🤍</button>
+                                </div>
                             </div>
                         </div>
-                    </c:forEach>
-                </div>
+                    </div>
+                </c:forEach>
             </div>
         </div>
     </div>
-</body>
+    <!-- 내 작품  -->
+    <div class="container">
+        <h2 style="margin-top: 16px;">내 작품보기</h2><hr>
+        <!-- <button onclick="location.href='getMyProjects'"></button> -->
+    </div>
+
 <!-- 삭제 시 확인 메시지 -->
 <script>
     function deleteUser(){
@@ -161,11 +171,18 @@
         var top = (windowHeight - 150) / 2 + window.screenTop || window.screenY;
         
         window.open("/verifyUser","__blank", 'width=' + 400 + ', height=' + 150 + ', left=' + left + ', top=' + top, "resizeable=noresizable=no, toolbars=no, menubar=no");
+    }
 
+    //위시리스트 삭제
+    function deleteWishlist(button){
+        projectNo = button.name;
+        // alert(projectNo);
+        return location.href = "/deleteWishlist?projectNo=" + projectNo;
     }
 </script>
 <!-- 로그인 전에는 사용할 수 없도록 메인으로 리다이렉트 -->
 <c:if test="${loginUser == null}">
     <c:redirect url="/"></c:redirect>
 </c:if>
+</body>
 </html>

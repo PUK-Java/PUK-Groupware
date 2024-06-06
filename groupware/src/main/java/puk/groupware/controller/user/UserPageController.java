@@ -10,11 +10,17 @@ import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import puk.groupware.model.project.Project_info;
 import puk.groupware.model.user.User_Info;
+import puk.groupware.model.wishlist.WishList;
+import puk.groupware.model.wishlist.WishListId;
+import puk.groupware.service.project.ProjectFindService;
 import puk.groupware.service.user.UserPageService;
 import puk.groupware.service.wishList.WishListService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 
 
 
@@ -25,12 +31,14 @@ public class UserPageController {
     private final UserPageService userPageService;
     private final HttpSession httpSession;
     private final WishListService wishListService;
+    private final ProjectFindService projectFindService;
 
     @Autowired
-    UserPageController(UserPageService userPageService, HttpSession httpSession, WishListService wishListService){
+    UserPageController(UserPageService userPageService, HttpSession httpSession, WishListService wishListService, ProjectFindService projectFindService){
         this.userPageService = userPageService;
         this.httpSession = httpSession;
         this.wishListService = wishListService;
+        this.projectFindService = projectFindService;
     }
 
     @GetMapping("/userpage")
@@ -89,6 +97,13 @@ public class UserPageController {
     public String getMain() {
         httpSession.removeAttribute("verify");
         return "redirect:/";
+    }
+    
+    //위시리스트 삭제
+    @GetMapping("/deleteWishlist")
+    public String deleteWishlist(@RequestParam("projectNo") String projectNo, Model model) {
+
+        return "redirect:/userpage";
     }
     
 }
