@@ -123,15 +123,15 @@
             <h2 style="margin-bottom: 32px;">위시리스트</h2><hr>
         </div>
             <div class="container">
-                <div class="row row-cols-1 row-cols-md-3 g-3">
+                <div class="row row-cols-md-3 g-3">
                     <c:forEach var="project" items="${projectLists}">
                         <div class="col">
                             <div class="card h-100">
-                                <a href="/projectDetail/${project.projectNo}">
+                                <a href="/projectDetail/${project.projectNo}" style="text-decoration : none">
                                     <img class="card-img" src="/images/projectThumbnails/${project.image}" alt="${project.title}">
-                                    <div class="card-body">
-                                        <h5 class="card-title">${project.title}</h5>
-                                        <p class="card-text">가격 ${project.targetCost}</p>
+                                    <div class="card-body row row-cols-md-2">
+                                        <div class="col"><p class="card-title">${project.title}</p></div>
+                                        <div class="col"><p class="card-text">${project.targetCost}</p></div>
                                     </div>
                                 </a>
                             </div>
@@ -157,9 +157,11 @@
         var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
         // 팝업 창의 위치를 계산
-        var left = (windowWidth - 250) / 2 + window.screenLeft || window.screenX;
-        var top = (windowHeight - 100) / 2 + window.screenTop || window.screenY;
-        window.open("/verifyUser","__blank", 'width=' + 250 + ', height=' + 100 + ', left=' + left + ', top=' + top);
+        var left = (windowWidth - 400) / 2 + window.screenLeft || window.screenX;
+        var top = (windowHeight - 150) / 2 + window.screenTop || window.screenY;
+        
+        window.open("/verifyUser","__blank", 'width=' + 400 + ', height=' + 150 + ', left=' + left + ', top=' + top, "resizeable=noresizable=no, toolbars=no, menubar=no");
+
     }
 </script>
 <!-- 로그인 전에는 사용할 수 없도록 메인으로 리다이렉트 -->
