@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -111,6 +110,7 @@
             max-height: 500px;
             overflow-y: auto;
         }
+
         .btn-primary {
             white-space: nowrap; /* 텍스트 줄바꿈 방지 */
         }
@@ -128,6 +128,7 @@
     background-color: red;
     border-radius: 25px;
 }
+
     </style>
 </head>
 <body>
@@ -217,9 +218,11 @@
 
                         <div class="container mt-5">
                             <div class="card-footer row">
+
                                 <a href="/projectModify/${data.projectNo}">
                                     <button class="btn btn-primary btn-primary-custom w-100" id="checkId">수정</button>
                                 </a>
+
                             </div>
                         </div>
                     </div>
@@ -598,6 +601,7 @@
     const jsConfetti = new JSConfetti({canvas});
         jsConfetti.addConfetti()     
     }
+
     function updateProgressBar() {
     var progressBar = document.getElementById('progressBar');
     var targetCost = document.getElementById('end123').dataset.targetCost;
@@ -609,10 +613,11 @@
 
 // Call the function to update the progress bar on page load
 updateProgressBar();
+
     
      
     
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
 </body>
 </html>
