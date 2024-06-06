@@ -21,7 +21,7 @@
         }
         .card-img{
             height: 20rem;
-            object-fit: fill;
+            object-fit: cover;
         }
   </style>
 </head>
@@ -123,14 +123,18 @@
             <h2 style="margin-bottom: 32px;">위시리스트</h2><hr>
         </div>
             <div class="container">
-                <div class="row row-cols-3 gap-1">
+                <div class="row row-cols-1 row-cols-md-3 g-3">
                     <c:forEach var="project" items="${projectLists}">
-                        <div class="col card d-block">
-                            <a href="/projectDetail/${project.projectNo}">
-                                <div class="card-title"><h2>${project.title}</h2></div>
-                                <img class="card-img" src="/images/projectThumbnails/${project.image}">
-                                <p>가격 ${project.targetCost}</p>
-                            </a>
+                        <div class="col">
+                            <div class="card h-100">
+                                <a href="/projectDetail/${project.projectNo}">
+                                    <img class="card-img" src="/images/projectThumbnails/${project.image}" alt="${project.title}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${project.title}</h5>
+                                        <p class="card-text">가격 ${project.targetCost}</p>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </c:forEach>
                 </div>
