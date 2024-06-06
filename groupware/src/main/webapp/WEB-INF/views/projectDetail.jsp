@@ -111,9 +111,6 @@
             max-height: 500px;
             overflow-y: auto;
         }
-<<<<<<< Updated upstream
-        
-=======
         .btn-primary {
             white-space: nowrap; /* 텍스트 줄바꿈 방지 */
         }
@@ -131,7 +128,6 @@
     background-color: red;
     border-radius: 25px;
 }
->>>>>>> Stashed changes
     </style>
 </head>
 <body>
@@ -221,27 +217,9 @@
 
                         <div class="container mt-5">
                             <div class="card-footer row">
-<<<<<<< Updated upstream
-                                <div class="col text-center">
-                                    <form action="/sponTable/${data.projectNo}" method="post" id="eventCheck">
-                                        <button type="submit" class="btn btn-secondary btn-primary-custom w-50 ms-2" onclick="huCheck()" id="huCheck">후원하기</button>                                   
-                                    </form>
-                                </div>
-                                <div class="col text-center">
-                                    <c:choose>
-                                        <c:when test="${wishListCheck}">
-                                            <button class="btn btn-secondary w-50 ms-2" id ="wishButton" data-project-no=${data.projectNo} onclick="toggleWishList(this)" data-user-id=${sessionScope.loginUser.userId}>찜해제</button>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <button class="btn btn-success w-50 ms-2" id="wishButton" data-project-no="${data.projectNo}" onclick="toggleWishList(this)" data-user-id="${sessionScope.loginUser.userId}">찜하기</button>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </div>
-=======
                                 <a href="/projectModify/${data.projectNo}">
                                     <button class="btn btn-primary btn-primary-custom w-100" id="checkId">수정</button>
                                 </a>
->>>>>>> Stashed changes
                             </div>
                         </div>
                     </div>
@@ -620,9 +598,6 @@
     const jsConfetti = new JSConfetti({canvas});
         jsConfetti.addConfetti()     
     }
-<<<<<<< Updated upstream
-        
-=======
     function updateProgressBar() {
     var progressBar = document.getElementById('progressBar');
     var targetCost = document.getElementById('end123').dataset.targetCost;
@@ -635,7 +610,6 @@
 // Call the function to update the progress bar on page load
 updateProgressBar();
     
->>>>>>> Stashed changes
      
     
 </script>
