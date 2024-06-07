@@ -576,7 +576,6 @@
     //세션에 저장된 로그인된 id와 프로젝트테이블에있는 id를 비교하여 같으면 프로젝트 상세페이지에 수정하기 출력
     const loginUserIdCheck = "${loginUser.userId}";
     var projectUserId = '${checkId}';
-    console.log(loginUserIdCheck);
     if(loginUserIdCheck == ''){
         document.getElementById("checkId").style.display='none';
     }else if(loginUserIdCheck != projectUserId){
@@ -613,6 +612,11 @@
 
 // Call the function to update the progress bar on page load
 updateProgressBar();
+if("${loginUser.userId}"==''){
+    const button = document.getElementById('huCheck')
+        button.disabled=true;
+}
+
 
     
      
