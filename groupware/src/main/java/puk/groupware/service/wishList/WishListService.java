@@ -73,4 +73,9 @@ public class WishListService {
             return false;
         }
     }
+
+    @Transactional
+    public void deleteByWishListIdUserInfoAndWishListIdProjectInfoProjectNo(User_Info user_Info, Long projectNo){
+        wishList_jpaRepository.deleteByWishListIdUserInfoAndWishListIdProjectInfoProjectNo(user_Info, projectNo);
+    }
 }

@@ -133,6 +133,7 @@
                                 <div class="col-9">
                                     <a href="/projectDetail/${project.projectNo}" style="text-decoration : none;">
                                         <p class="card-title"><b>${project.title}</b></p>
+                                        <p class="card-text">${project.cost}원</p>
                                         <p class="card-text">${project.startDate} ~ ${project.endDate}</p>
                                     </a>
                                 </div>
@@ -149,7 +150,28 @@
     <!-- 내 작품  -->
     <div class="container">
         <h2 style="margin-top: 16px;">내 작품보기</h2><hr>
-        <!-- <button onclick="location.href='getMyProjects'"></button> -->
+        <!-- <button onclick="location.href='/getMyProjects'"></button> -->
+        <div class="container">
+            <div class="row row-cols-md-3 g-3">
+                <c:forEach var="myproject" items="${myProjects}">
+                    <div class="col">
+                        <div class="card h-100 position-relative">
+                            <a href="/projectDetail/${myproject.projectNo}" style="text-decoration : none;">
+                                <img class="card-img" src="/images/projectThumbnails/${myproject.image}">
+                            </a>
+                            <div class="card-body row row-cols-md-2">
+                                <div class="col-9">
+                                    <a href="/projectDetail/${myproject.projectNo}" style="text-decoration : none;">
+                                        <p class="card-title"><b>${myproject.title}</b></p>
+                                        <p class="card-text">${myproject.startDate} ~ ${myproject.endDate}</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
     </div>
 
 <!-- 삭제 시 확인 메시지 -->
@@ -174,10 +196,13 @@
     }
 
     //위시리스트 삭제
-    function deleteWishlist(button){
-        projectNo = button.name;
-        // alert(projectNo);
-        return location.href = "/deleteWishlist?projectNo=" + projectNo;
+    async function deleteWishlist(button){
+        const projectNo = button.getAttribute("name");
+        const response = await fetch('/deleteWishlist/' + projectNo,{
+            method : "DELETE"});
+        if(response.ok){
+            location.reload();
+        }
     }
 </script>
 <!-- 로그인 전에는 사용할 수 없도록 메인으로 리다이렉트 -->
