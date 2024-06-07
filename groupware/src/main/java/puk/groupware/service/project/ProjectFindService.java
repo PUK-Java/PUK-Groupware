@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import puk.groupware.model.project.Project_info;
+import puk.groupware.model.user.User_Info;
 import puk.groupware.repository.project.Project_info_jpaRepository;
 
 @Service
@@ -28,6 +29,9 @@ public class ProjectFindService {
         this.supportService = supportService;
     }
 
+    public List<Project_info> findByUserId(User_Info user){
+        return pRepository.findByUserId(user);
+    }
 
     //조건 없이 기본키로 찾기
     public Project_info findById(Long projectNo){
