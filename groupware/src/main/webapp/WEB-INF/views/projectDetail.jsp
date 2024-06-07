@@ -110,27 +110,106 @@
             max-height: 500px;
             overflow-y: auto;
         }
+
+        .btn-primary {
+            white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+        }
+        .progress-container {
+    width: 80%;
+    background-color: #e0e0e0;
+    border-radius: 25px;
+    overflow: hidden;
+    margin: 20px auto; /* Center align */
+}
+
+.progress-bar {
+    width: 0;
+    height: 8px;
+    background-color: red;
+    border-radius: 25px;
+}
+
     </style>
 </head>
 <body>
-    <header>
-        <h1></h1>
-    </header>
-    <main>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <div class="container">
-                <a class="navbar-brand href="#">프로젝트 상세 페이지</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active"  href="http://localhost:8080/">홈</a></li>
-                        <li class="nav-item"><a class="nav-link"  href="http://localhost:8080/boardmain">문의</a></li>
-                    </ul>
-                </div>
+    <div class="container d-flex flex-wrap align-items-center justify-content-center justify-content-md-between mb-1 mt-3">
+        <h1 class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            로고 위치
+        </h1>
+        <div class="col text-end">
+            <c:choose>
+                <c:when test="${loginUser == null}">
+                    <button type="button" class="btn btn-outline-primary" onclick="location.href='/login'">로그인</button>
+                    <button type="button" class="btn btn-primary" onclick="location.href='/signupform'">회원가입</button>
+                    </c:when>
+                <c:when test="${loginUser != null}">
+                    <span class="text-primary">${loginUser.userName}</span>
+                    <small>님 반갑습니다!</small>
+                    <button type="button" class="btn btn-outline-primary" onclick="location.href='/logout'">로그아웃</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="location.href='/userpage'">내 정보</button>
+                    
+                </c:when>
+            </c:choose>
+                <button type="button" class="btn btn-info" onclick="location.href='/projectregform'" id="projectProduce">프로젝트 생성</button>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg border-bottom">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/"><strong>홈</strong></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#categoryCollapse" aria-expanded="false" id="categoryLink"><strong>카테고리</strong></a>
+                        <div class="collapse position-fixed overlay bg-light border" id="categoryCollapse">
+                            <div class="row justify-content-center text-center">
+                                <div class="col-1">
+                                    <a class="nav-link" aria-current="page" href="/?projectCategory=굿즈">
+                                        <img src="/images/icons/goods.svg" class="bi" width="32" height="23">
+                                        <br>
+                                        <strong style="text-transform:uppercase">굿즈</strong>
+                                    </a>
+                                </div>
+                                <div class="col-1">
+                                    <a class="nav-link " aria-current="page" href="/?projectCategory=푸드">
+                                        <img src="/images/icons/food.svg" class="bi" width="32" height="23">
+                                        <br>
+                                        <strong style="text-transform:uppercase">푸드</strong></a>
+                                </div>
+                                <div class="col-1">
+                                    <a class="nav-link" aria-current="page" href="/?projectCategory=전자제품">
+                                        <img src="/images/icons/electric.svg" clas="bi" width="32" height="23">
+                                        <br>
+                                        <strong style="text-transform:uppercase">전자제품</strong></a>    
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            더보기
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/boardmain">공지사항</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/qnamain">QnA</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="검색어를 입력해주세요" aria-label="Search" name="projectName">
+    
+                    <button class="btn btn-primary" type="submit">검색</button>
+                </form>
             </div>
-        </nav> 
+        </div>
+    </nav>
+    <main>
+
         <div class="container mt-5">
             <div class="row align-items-stretch">
                 <div class="col-md-6 d-flex">
@@ -139,29 +218,34 @@
 
                         <div class="container mt-5">
                             <div class="card-footer row">
-                                <div class="col text-center">
-                                    <form action="/sponTable/${data.projectNo}" method="post" id="eventCheck">
-                                        <button type="submit" class="btn btn-secondary btn-primary-custom w-50 ms-2" onclick="huCheck()" id="huCheck">후원하기</button>  
-                                    </form>
-                                </div>
-                                <div class="col text-center">
-                                <c:choose>
-                                    <c:when test="${wishListCheck}">
-                                        <button class="btn btn-secondary w-50 ms-2" id ="wishButton" data-project-no=${data.projectNo} onclick="toggleWishList(this)" data-user-id=${sessionScope.loginUser.userId}>찜해제</button>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <button class="btn btn-success w-50 ms-2" id="wishButton" data-project-no="${data.projectNo}" onclick="toggleWishList(this)" data-user-id="${sessionScope.loginUser.userId}">찜하기</button>
-                                    </c:otherwise>
-                                </c:choose>
-                                </div>
+
+                                <a href="/projectModify/${data.projectNo}">
+                                    <button class="btn btn-primary btn-primary-custom w-100" id="checkId">수정</button>
+                                </a>
+
                             </div>
                         </div>
                     </div>
                 </div>
+                
                 <div class="col-md-6 d-flex">
-                    <div class="card w-100">
-                        <div class="card-body">
-                            <h5 class="card-title" style="text-align: center; line-height: 5vh;">${data.title}</h5>
+                    <div class="card w-100" >
+                        
+                        <div class="d-flex justify-content-between">
+                            <h6 style="font-size: small; margin-top: 10px; padding-left: 10px;">카테고리 > ${data.category}</h6>                                                  
+                            <c:choose>
+                                <c:when test="${wishListCheck}">
+                                    <button class="btn" id ="wishButton" data-project-no=${data.projectNo} onclick="toggleWishList(this)" style="font-size: 32px;" data-user-id=${sessionScope.loginUser.userId}>❤️</button>
+                                </c:when>
+                                <c:otherwise>
+                                    <button class="btn" id="wishButton" data-project-no="${data.projectNo}" onclick="toggleWishList(this)" style="font-size: 32px;" data-user-id="${sessionScope.loginUser.userId}">🤍</button>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                           
+                        <div style="padding-left: 10px; width: 9%; background-color: tomato; border-radius: 30px; color: white; margin-left: 10px;">D-${daysBetween}</div>
+                        <div class="card-body" >
+                            <h4 class="card-title" style="text-align: center; line-height: 5vh; margin-top: -30px;">${data.title}</h4>
                             <table class="table">
                                 <tr>
                                     <td>후원가격</td>
@@ -184,28 +268,22 @@
                                     <td>${data.endDate}</td>
                                 </tr>
                                 <tr>
-                                    <td>프로젝트 남은 일수</td>
-                                    <td>${daysBetween}일</td>
-                                </tr>
-                                <tr>
                                     <td>프로젝트 상태</td>
                                     <td id="state"></td>
                                 </tr>
-                                <tr>
-                                    <td>프로젝트 카테고리</td>
-                                    <td>${data.category}</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" id="stateP" class="text-center"></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <a href="/projectModify/${data.projectNo}">
-                                            <button class="btn btn-primary btn-primary-custom w-100" id="checkId">수정</button>
-                                        </a>
-                                    </td>
-                                </tr>
                             </table>
+                            <p id="stateP" class="text-center"></p>
+                            <div class="progress-container">
+                                <div class="progress-bar" id="progressBar"></div>
+                            </div>
+                            <div class="card-footer row">
+                                <div class="col text-center">
+                                    <form action="/sponTable/${data.projectNo}" method="post" id="eventCheck">
+                                        <button type="submit" class="btn btn-secondary btn-primary-custom w-50 ms-2" onclick="huCheck()" id="huCheck">후원하기</button>  
+                                    </form>
+                                </div>
+                                
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -395,14 +473,15 @@
                 const data = await response.json();
                 if(data.isWished){
                     //조건에 따라 버튼의 색, 텍스트를 변화시킵니다.
-                    button.innerText = '찜해제';
+                    
+                    button.innerText = '❤️';
                     button.classList.replace('btn-success','btn-secondary');
-                    alert('목록에 추가 됐습니다.');
+                    
                 }else{
                     //조건에 따라 버튼의 색, 텍스트를 변화시킵니다.
-                    button.innerText= '찜하기';
+                    button.innerText= '🤍';
                     button.classList.replace('btn-secondary','btn-success');
-                    alert('목록에서 제거 됐습니다.');
+                    
                 }
             }else{
                 alert("서버 오류가 발생했습니다.");
@@ -520,9 +599,21 @@
     const button = document.getElementById('huCheck');
 
     const jsConfetti = new JSConfetti({canvas});
-        jsConfetti.addConfetti()
-
+        jsConfetti.addConfetti()     
     }
+
+    function updateProgressBar() {
+    var progressBar = document.getElementById('progressBar');
+    var targetCost = document.getElementById('end123').dataset.targetCost;
+    var currentCost = document.getElementById('state123').dataset.stateCost;
+    var progress = (currentCost / targetCost) * 100;
+
+    progressBar.style.width = progress + '%';
+}
+
+// Call the function to update the progress bar on page load
+updateProgressBar();
+
     
      
     
