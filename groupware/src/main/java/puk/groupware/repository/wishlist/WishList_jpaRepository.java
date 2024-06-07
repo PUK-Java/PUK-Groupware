@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import puk.groupware.model.project.Project_info;
+import puk.groupware.model.user.User_Info;
 import puk.groupware.model.wishlist.WishList;
 import puk.groupware.model.wishlist.WishListId;
 
@@ -26,4 +27,6 @@ public interface WishList_jpaRepository extends JpaRepository<WishList, WishList
 
     @Query("SELECT w.wishListId.projectInfo FROM WishList w WHERE w.wishListId.userInfo.userId = :userId")
     List<Project_info> findByJoinProjectInfo(@Param(value="userId") String userId);
+
+    void deleteByWishListIdUserInfoAndWishListIdProjectInfoProjectNo(User_Info user_Info, Long projectNo);
 }
