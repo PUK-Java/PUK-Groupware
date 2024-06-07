@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>부울경 펀딩 사이트</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
         .card-img-top{
@@ -54,99 +54,176 @@
         color: black;
     }
 
+    /* nav-item (카테고리) 크기 동일하게 만들기*/
+    .nav-item{
+        width: 70px;
+    }
+
+    /* carousel-item(슬라이드 이미지) 높이 줄이기*/
+    .carousel-inner > .carousel-item > a > img{
+        top:0;
+        left:0;
+        min-width: 100%;
+        height: 400px;
+    }
+    
+
     </style>
 </head>
 <body>
-<div class="container d-flex flex-wrap align-items-center justify-content-center justify-content-md-between mb-1 mt-3">
-    <h1 class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        로고 위치
-    </h1>
-    <div class="col text-end">
+
+    <!-- 헤더 영역 -->
+<div class="container d-flex align-items-center mb-1 mt-3">
+    <a href="/">
+         <img src="/images/logo/logo.jpg" width="100" height="100">
+    </a>
+    <div class="ms-auto me-auto col-4 col-md-4">
+        <form role="search">
+            <div class="input-group border border-1 rounded-pill border-info">
+                <input class="form-control border-0 rounded-pill" type="search" placeholder="검색어를 입력해주세요" aria-label="Search" name="projectName">
+                <span class="border-0">
+                    <button class="btn btn-out-line-secondary" type="submit"><img src="/images/icons/search.svg" alt="Search"></button>
+                </span>
+            </div>
+        </form>
+    </div>
+    <div class="d-flex">
         <c:choose>
             <c:when test="${loginUser == null}">
-                <button type="button" class="btn btn-outline-primary" onclick="location.href='/login'">로그인</button>
-                <button type="button" class="btn btn-primary" onclick="location.href='/signupform'">회원가입</button>
+                <button type="button" class="btn border-0 text-nowrap" onclick="location.href='/login'">로그인</button>
+                <button type="button" class="btn border-0 text-nowrap" onclick="location.href='/signupform'">회원가입</button>
                 </c:when>
             <c:when test="${loginUser != null}">
-                <span class="text-primary">${loginUser.userName}</span>
-                <small>님 반갑습니다!</small>
-                <button type="button" class="btn btn-outline-primary" onclick="location.href='/logout'">로그아웃</button>
-                <button type="button" class="btn btn-outline-primary" onclick="location.href='/userpage'">내 정보</button>
+                <div class="d-flex justify-content-center align-items-center text-white bg-primary rounded-circle fs-5" style="width: 40px; height: 40px;">
+                        <span>${loginUser.userName.charAt(0)}</span>
+                </div>
+                <button type="button" class="btn border-0 text-nowrap" onclick="location.href='/logout'">로그아웃</button>
+                <button type="button" class="btn border-0 text-nowrap" onclick="location.href='/userpage'">내 정보</button>
                 
             </c:when>
         </c:choose>
-            <button type="button" class="btn btn-info" onclick="location.href='/projectregform'" id="projectProduce">프로젝트 생성</button>
+            <button type="button" class="btn btn-info text-white text-nowrap" onclick="location.href='/projectregform'" id="projectProduce">프로젝트 생성</button>
     </div>
 </div>
-<nav class="navbar navbar-expand-lg border-bottom">
-    <div class="container">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/"><strong>홈</strong></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#categoryCollapse" aria-expanded="false" id="categoryLink"><strong>카테고리</strong></a>
-                    <div class="collapse position-fixed overlay bg-light border" id="categoryCollapse">
-                        <div class="row justify-content-center text-center">
-                            <div class="col-1">
-                                <a class="nav-link" aria-current="page" href="/?projectCategory=굿즈">
-                                    <img src="/images/icons/goods.svg" class="bi" width="32" height="23">
-                                    <br>
-                                    <strong style="text-transform:uppercase">굿즈</strong>
-                                </a>
-                            </div>
-                            <div class="col-1">
-                                <a class="nav-link " aria-current="page" href="/?projectCategory=푸드">
-                                    <img src="/images/icons/food.svg" class="bi" width="32" height="23">
-                                    <br>
-                                    <strong style="text-transform:uppercase">푸드</strong></a>
-                            </div>
-                            <div class="col-1">
-                                <a class="nav-link" aria-current="page" href="/?projectCategory=전자제품">
-                                    <img src="/images/icons/electric.svg" clas="bi" width="32" height="23">
-                                    <br>
-                                    <strong style="text-transform:uppercase">전자제품</strong></a>    
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        더보기
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/boardmain">공지사항</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="/qnamain">QnA</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="검색어를 입력해주세요" aria-label="Search" name="projectName">
+<!-- 헤더 영역 -->
 
-                <button class="btn btn-primary" type="submit">검색</button>
-            </form>
-        </div>
+<!-- 카테고리 영역 시작-->
+<nav class="navbar border-bottom">
+    <div class="container justify-content-center text-center">
+        <ul class="d-flex list-unstyled">
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">
+                    <img src="/images/icons/gameIcon.png" class="bi" width="25" height="25">
+                    <br>
+                    <span>굿즈</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">
+                    <img src="/images/icons/fashionIcon.png" class="bi" width="25" height="25">
+                    <br>
+                    <span>패션</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">
+                    <img src="/images/icons/petIcon.png" class="bi" width="25" height="25">
+                    <br>
+                    <span>반려동물</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " aria-current="page" href="/?projectCategory=푸드">
+                    <img src="/images/icons/foodIcon.png" class="bi" width="25" height="25">
+                    <br>
+                    <span>푸드</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/?projectCategory=전자제품">
+                    <img src="/images/icons/electricIcon.png" class="bi" width="25" height="25">
+                    <br>
+                    <span class="text-wrap">전자제품</span></a>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/?projectCategory=굿즈">
+                    <img src="/images/icons/goodsIcon.png" class="bi" width="25" height="25">
+                    <br>
+                    <span>굿즈</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">
+                    <img src="/images/icons/musicIcon.png" class="bi" width="25" height="25">
+                    <br>
+                    <span>음악</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">
+                    <img src="/images/icons/homeIcon.png" class="bi" width="25" height="25">
+                    <br>
+                    <span>리빙</span>
+                </a>
+            </li>
+        </ul>
     </div>
 </nav>
+<!-- 카테고리 영역 끝-->
 
+<!-- 슬라이드 이미지 영역 시작-->
+<div id="carouselExampleIndicators" class="carousel slide container" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <a href="https://github.com/Koeyh">
+        <img src="/images/nameCard/Heo.png" class="d-block w-100" alt="이미지 준비중">
+      </div>
+        </a>
+      <div class="carousel-item">
+        <a href="https://github.com//simwh123">
+        <img src="/images/nameCard/Sim.png" class="d-block w-100" alt="이미지 준비중">
+        </a>
+      </div>
+      <div class="carousel-item">
+        <a href="https://github.com//vinca0224">
+        <img src="/images/nameCard/Im.png" class="d-block w-100" alt="이미지 준비중">
+        </a>
+      </div>
+      <div class="carousel-item">
+        <a href="https://github.com/KangJeongTaek">
+        <img src="/images/nameCard/Kang.png" class="d-block w-100" alt="이미지 준비중">
+        </a>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+<!-- 슬라이드 이미지 영역 끝-->
 
+<!-- 카드 영역 시작-->
 <div class="container">
 <div class="row row-cols-1 row-cols-md-3 g-10 mx-5 mt-5 mb-5">
 <c:forEach var="project" items="${projects}">
     <div class="col mb-5">
-            <div class="card h-100 position-relative">
-                <img src="images/projectThumbnails/${project.image}" class="card-img-top" alt="...">
+            <div class="card h-100 position-relative border-0">
+                <img src="images/projectThumbnails/${project.image}" class="card-img-top" alt="이미지 준비중">
                 <div class="card-body pb-0">
                     <p class="card-text">
                         <small><small>${project.category}</small></small>
                     </p>
-                    <div class="text-center mb-4">
-                        <a href ="/projectDetail/${project.projectNo}" class="h4 card-title stretched-link link-dark">${project.title}</a>
+                    <div class="card-text text-center mb-4">
+                        <a href ="/projectDetail/${project.projectNo}" class="fs-4 card-title stretched-link link-dark">${project.title}</a>
                     </div>
                     <p class="card-text text-center"><small>${project.description}</small></p>
                     <p class="d-flex justify-content-center card-text text-muted">
@@ -176,6 +253,9 @@
     </div>
 </c:forEach>
 </div>
+<!-- 카드 영역 끝-->
+
+<!-- 페이지네이션 영역 시작 -->
 <div class="center text-center">
     <nav aria-label="Page navigation example">
        <ul class="pagination justify-content-center">
@@ -186,7 +266,7 @@
                     </c:if>
                 </form>
                 <form action="/" method="get">
-                    <c:if test="${projectPage != projectTotalPage}">
+                    <c:if test="${projectPage < projectTotalPage-1}">
                         <li class="page-item"><a class="page-link" href="/?page=${projectPage +1}&projectCategory=${param.projectCategory}&projectName=${param.projectName}">다음</a></li>
                     </c:if>
                 </form>
@@ -195,14 +275,24 @@
    </nav>
 </div>
 </div>
+<!-- 페이지네이션 영역 끝-->
+
+<footer class="bg-dark text-white p-3 mt-5">
+    <div class="container">
+        <div class="col">
+            <a class="text-white"href="/boardmain" style="text-decoration: none;">공지사항</a></li>
+        </div>
+        <div class="col">
+            <a class="text-white" href="/qnamain" style="text-decoration: none;">QnA</a></li>
+        </div>
+    </div>
+    <div class="container text-center">
+        <p>© 2024 부울경</p>
+    </div>
+</footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script>
-    document.querySelectorAll(".nav-link").forEach((link) => {
-    if (link.href === window.location.href) {
-        link.classList.add("active");
-        link.setAttribute("aria-current", "page");
-    }
-});
+
 
 
 //collapse가 마우스 클릭이 아니라 hover일 때 처리하기

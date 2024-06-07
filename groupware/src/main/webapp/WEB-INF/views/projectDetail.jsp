@@ -133,9 +133,9 @@
 </head>
 <body>
     <div class="container d-flex flex-wrap align-items-center justify-content-center justify-content-md-between mb-1 mt-3">
-        <h1 class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            로고 위치
-        </h1>
+        <a href="/">
+            <img src="/images/logo/logo.jpg" width="100" height="100">
+        </a>
         <div class="col text-end">
             <c:choose>
                 <c:when test="${loginUser == null}">
