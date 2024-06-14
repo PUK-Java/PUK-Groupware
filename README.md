@@ -1,5 +1,26 @@
 # PUK-Groupware
-자바 웹 개발자 과정 2차 팀 프로젝트 - 크라우드 펀딩 웹 어플리케이션 제작
+ - 부경대 빅데이터를 이용한 자바 개발자 양성 과정 2차 팀 프로젝트 - 크라우드 펀딩 웹 어플리케이션 제작
+ - Spring Boot 3.3.0 ver, JPA 사용
+
+## 개발 환경
+### Languages
+<div style="display:flex; flex-direction:column; align-items:flex-start;">
+    <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white">
+    <img src="https://img.shields.io/badge/javascript-F7DF1E?style=flat-square&logo=javascript&logoColor=black">
+    <img src="https://img.shields.io/badge/html5-E34F26?style=flat-square&logo=html5&logoColor=white">
+    <img src="https://img.shields.io/badge/css-1572B6?style=flat-square&logo=css3&logoColor=white">
+</div>
+
+### Database
+<div style="display:flex; flex-direction:column; align-items:flex-start;">
+    <img src="https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white"> 
+</div>
+
+### Tools
+<div style="display:flex; flex-direction:column; align-items:flex-start;">
+    <img height="30" src="https://img.icons8.com/?size=100&id=9OGIyU8hrxW5&format=png&color=000000" title="vscode">
+    <img height="30" src="https://img.icons8.com/?size=100&id=OkBCty7GwbXX&format=png&color=000000" title="dbeaver">
+</div>
 
 
 ## 구현 목표
