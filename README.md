@@ -40,9 +40,6 @@
   - 프로젝트 상세 화면에서 하트로 찜하기, 해제 가능
   - 내정보 탭에서 찜한 상품 해제 가능
 - 공지사항 페이지(https://github.com/PUK-Java/PUK-Groupware/blob/main/notice.md)
-  - ![공지사항 관리자 시점](https://github.com/PUK-Java/PUK-Groupware/assets/156414715/bbb34987-f357-45b6-a75d-e3b488d61b1b)
-  - 관리자 계정만 CRUD 기능 모두 사용 가능
-  - 일반 회원 계정은 조회 기능만 가능함
 - [QnA 페이지](https://github.com/PUK-Java/PUK-Groupware/blob/main/qnaBoard.md)
   - 모든 회원이 QnA 게시물 작성 가능
   - QnA 게시물의 댓글 작성은 관리자 계정만 가능
