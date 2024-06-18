@@ -24,7 +24,7 @@
 
 
 ## 시연 영상(기능별)
-- [회원가입]
+- [회원가입](https://github.com/PUK-Java/PUK-Groupware/blob/main/singup.md)
 - [로그인]
 - [프로젝트 생성]
 - [프로젝트 상세 정보 조회]
