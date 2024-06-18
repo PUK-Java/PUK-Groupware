@@ -25,25 +25,25 @@
 
 ## 시연 영상(기능별)
 - [회원가입](https://github.com/PUK-Java/PUK-Groupware/blob/main/singup.md)
-- [로그인]
-- [프로젝트 생성]
-- [프로젝트 상세 정보 조회]
+- [로그인](https://github.com/PUK-Java/PUK-Groupware/blob/main/signin.md)
+- [프로젝트 생성](https://github.com/PUK-Java/PUK-Groupware/blob/main/createProject.md)
+- [프로젝트 상세 정보 조회](https://github.com/PUK-Java/PUK-Groupware/blob/main/showProjectDetail.md)
    - 본인이 펀딩한 제품만 수정 가능
-- [회원정보 확인,수정,삭제 및 본인이 펀딩한 프로젝트 삭제]
+- [회원정보 확인,수정,삭제 및 본인이 펀딩한 프로젝트 삭제](https://github.com/PUK-Java/PUK-Groupware/blob/main/handlingUserInfo.md)
   - 사용자 정보 수정 전 비밀번호 재확인
   - 제작자 계정이 삭제되면 생성한 프로젝트도 삭제
-- [찜, 후원, 댓글]
+- [찜, 후원, 댓글](https://github.com/PUK-Java/PUK-Groupware/blob/main/wishList.md)
   - 하트 버튼 클릭 시 후원됨
   - 후원 버튼 클릭 시 댓글 기능 접근 가능
   - 본인이 작성한 댓글 삭제 가능
-- [찜하기, 해제]
+- [찜하기, 해제](https://github.com/PUK-Java/PUK-Groupware/blob/main/wishList.md)
   - 프로젝트 상세 화면에서 하트로 찜하기, 해제 가능
   - 내정보 탭에서 찜한 상품 해제 가능
-- 공지사항 페이지
+- 공지사항 페이지(https://github.com/PUK-Java/PUK-Groupware/blob/main/notice.md)
   - ![공지사항 관리자 시점](https://github.com/PUK-Java/PUK-Groupware/assets/156414715/bbb34987-f357-45b6-a75d-e3b488d61b1b)
   - 관리자 계정만 CRUD 기능 모두 사용 가능
   - 일반 회원 계정은 조회 기능만 가능함
-- [QnA 페이지]
+- [QnA 페이지](https://github.com/PUK-Java/PUK-Groupware/blob/main/qnaBoard.md)
   - 모든 회원이 QnA 게시물 작성 가능
   - QnA 게시물의 댓글 작성은 관리자 계정만 가능
 
@@ -72,6 +72,14 @@
             - 본인이 작성한 게시물에 한해 수정, 삭제 가능
             - 게시물 제목을 클릭하면 게시물 상세 페이지로 이동, 상세 페이지에서 댓글 기능 구현
             - 상세 페이지의 댓글 기능은 관리자 계정만 사용 가능하도록 구현
+
+## 업무 분담
+|조원|역할|
+|:---:|:---|
+|허재혁|Team Leader, 공지사항, QnA 게시판, 프로젝트 전반 흐름 정립 및 통합관리|
+|강정택|메인 페이지 구성, 찜 목록, 프로젝트 댓글 등 구현, 전반적 기술 관리|
+|심우현|회원가입, 프로젝트 상세 페이지, 디자인 및 구조 아이디어 제공|
+|임경세|로그인, 마이페이지, 회원 관련 기능 전반 관리, 사이트 기능 요소 조사|
 
 ## 난관
 - Servlet, JSP의 기본 개념만을 토대로 시작한 프로젝트였기에 계획 초반부 다소 무리라는 생각이 전반적
