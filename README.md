@@ -2,6 +2,29 @@
  - 부경대 빅데이터를 이용한 자바 개발자 양성 과정 2차 팀 프로젝트 - 크라우드 펀딩 웹 어플리케이션 제작
  - Spring Boot 3.3.0 ver, JPA 사용
 
+## 💡 시연 영상(기능별)
+***🙋‍♂️ 링크를 통해 시연 영상 확인이 가능합니다 🙋‍♂️***
+
+- [회원가입](https://github.com/PUK-Java/PUK-Groupware/blob/main/singup.md)
+- [로그인](https://github.com/PUK-Java/PUK-Groupware/blob/main/signin.md)
+- [프로젝트 생성](https://github.com/PUK-Java/PUK-Groupware/blob/main/createProject.md)
+- [프로젝트 상세 정보 조회](https://github.com/PUK-Java/PUK-Groupware/blob/main/showProjectDetail.md)
+   - 본인이 펀딩한 제품만 수정 가능
+- [회원정보 확인,수정,삭제 및 본인이 펀딩한 프로젝트 삭제](https://github.com/PUK-Java/PUK-Groupware/blob/main/handlingUserInfo.md)
+  - 사용자 정보 수정 전 비밀번호 재확인
+  - 제작자 계정이 삭제되면 생성한 프로젝트도 삭제
+- [찜, 후원, 댓글](https://github.com/PUK-Java/PUK-Groupware/blob/main/wishList.md)
+  - 하트 버튼 클릭 시 후원됨
+  - 후원 버튼 클릭 시 댓글 기능 접근 가능
+  - 본인이 작성한 댓글 삭제 가능
+- [찜하기, 해제](https://github.com/PUK-Java/PUK-Groupware/blob/main/wishList.md)
+  - 프로젝트 상세 화면에서 하트로 찜하기, 해제 가능
+  - 내정보 탭에서 찜한 상품 해제 가능
+- [공지사항 페이지](https://github.com/PUK-Java/PUK-Groupware/blob/main/notice.md)
+- [QnA 페이지](https://github.com/PUK-Java/PUK-Groupware/blob/main/qnaBoard.md)
+  - 모든 회원이 QnA 게시물 작성 가능
+  - QnA 게시물의 댓글 작성은 관리자 계정만 가능
+
 ## 개발 환경
 ### Languages
 <div style="display:flex; flex-direction:column; align-items:flex-start;">
@@ -22,27 +45,6 @@
     <img height="30" src="https://img.icons8.com/?size=100&id=OkBCty7GwbXX&format=png&color=000000" title="dbeaver">
 </div>
 
-
-## 시연 영상(기능별)
-- [회원가입](https://github.com/PUK-Java/PUK-Groupware/blob/main/singup.md)
-- [로그인](https://github.com/PUK-Java/PUK-Groupware/blob/main/signin.md)
-- [프로젝트 생성](https://github.com/PUK-Java/PUK-Groupware/blob/main/createProject.md)
-- [프로젝트 상세 정보 조회](https://github.com/PUK-Java/PUK-Groupware/blob/main/showProjectDetail.md)
-   - 본인이 펀딩한 제품만 수정 가능
-- [회원정보 확인,수정,삭제 및 본인이 펀딩한 프로젝트 삭제](https://github.com/PUK-Java/PUK-Groupware/blob/main/handlingUserInfo.md)
-  - 사용자 정보 수정 전 비밀번호 재확인
-  - 제작자 계정이 삭제되면 생성한 프로젝트도 삭제
-- [찜, 후원, 댓글](https://github.com/PUK-Java/PUK-Groupware/blob/main/wishList.md)
-  - 하트 버튼 클릭 시 후원됨
-  - 후원 버튼 클릭 시 댓글 기능 접근 가능
-  - 본인이 작성한 댓글 삭제 가능
-- [찜하기, 해제](https://github.com/PUK-Java/PUK-Groupware/blob/main/wishList.md)
-  - 프로젝트 상세 화면에서 하트로 찜하기, 해제 가능
-  - 내정보 탭에서 찜한 상품 해제 가능
-- [공지사항 페이지](https://github.com/PUK-Java/PUK-Groupware/blob/main/notice.md)
-- [QnA 페이지](https://github.com/PUK-Java/PUK-Groupware/blob/main/qnaBoard.md)
-  - 모든 회원이 QnA 게시물 작성 가능
-  - QnA 게시물의 댓글 작성은 관리자 계정만 가능
 
 ## 구현 목표
 - 회원관리
